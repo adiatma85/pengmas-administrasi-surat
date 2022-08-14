@@ -6,8 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "doctrine/dbal": "^3.0",
+        "fideloper/proxy": "^4.4",
+        "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
+        "laravel/dusk": "^6.11",
         "laravel/framework": "^9.19",
+        "yajra/laravel-datatables-oracle": "^9.18",
+        "laravel/ui": "^3.3",
+        "spatie/laravel-medialibrary": "^9.11.2",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7"
     },
