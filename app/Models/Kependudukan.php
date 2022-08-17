@@ -13,35 +13,35 @@ class Kependudukan extends Model
     use SoftDeletes;
     use HasFactory;
 
-    public const GENDER_RADIO = [
-        'LAKI_LAKI' => 'Laki-Laki',
+    public const GENDER_SELECT = [
+        'LAKI_LAKI' => 'Laki Laki',
         'PEREMPUAN' => 'Perempuan',
     ];
 
-    public const MARITAL_STATUS_RADIO = [
-        'KAWIN'       => 'KAWIN',
-        'BELUM_KAWIN' => 'BELUM KAWIN',
+    public const MARITAL_STATUS_SELECT = [
+        'KAWIN'       => 'Kawin',
+        'BELUM_KAWIN' => 'Belum Kawin',
     ];
 
-    public const RELIGION_RADIO = [
-        'ISLAM'             => 'ISLAM',
-        'KRISTEN_PROTESTAN' => 'KRISTEN PROTESTAN',
-        'KRISTEN_KATHOLIK'  => 'KRISTEN KATHOLIK',
-        'HINDHU'            => 'HINDHU',
-        'BUDHA'             => 'BUDHA',
-        'KONGHUCU'          => 'KONGHUCU',
-        'KEPERTCAYAAN_LAIN' => 'KEPERCAYAAN LAIN',
+    public const RELIGION_SELECT = [
+        'ISLAM'             => 'Islam',
+        'KRISTEN_PROTESTAN' => 'Kristen Protestan',
+        'KRISTEN_KATHOLIK'  => 'Kristen Katholik',
+        'HINDHU'            => 'Hindhu',
+        'BUDHA'             => 'Budha',
+        'KONGHUCU'          => 'Konghucu',
+        'KEPERCAYAAN_LAIN'  => 'Kepercayaan Lain',
     ];
 
-    public const LATEST_EDUCATION_RADIO = [
-        'SD'                  => 'SD/Sederajat',
-        'SLTP'                => 'SMP/SLTP Sederajat',
-        'SLTA'                => 'SMA/SLTA Sederajat',
-        'D3'                  => 'Diploma III',
-        'S1'                  => 'D IV / S1 Sederajat',
-        'S2'                  => 'S2',
-        'S3'                  => 'S3',
-        'TIDAK_BERPENDIDIKAN' => 'Tidak Berpendidikan',
+    public const LATEST_EDUCATION_SELECT = [
+        'SD'               => 'SD/Sederajat',
+        'SLTP'             => 'SMP/SLTP Sederajat',
+        'SLTA'             => 'SMA/SLTA Sederajat',
+        'D3'               => 'Diploma III',
+        'S1'               => 'Diploma IV / S1 Sederajat',
+        'S2'               => 'S2',
+        'S3'               => 'S3',
+        'TIDAK_BERSEKOLAH' => 'Tidak Bersekolah',
     ];
 
     public $table = 'kependudukans';

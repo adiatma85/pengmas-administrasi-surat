@@ -44,12 +44,12 @@
             </div>
             <div class="form-group">
                 <label class="required">{{ trans('cruds.kependudukan.fields.gender') }}</label>
-                @foreach(App\Models\Kependudukan::GENDER_RADIO as $key => $label)
-                    <div class="form-check {{ $errors->has('gender') ? 'is-invalid' : '' }}">
-                        <input class="form-check-input" type="radio" id="gender_{{ $key }}" name="gender" value="{{ $key }}" {{ old('gender', $kependudukan->gender) === (string) $key ? 'checked' : '' }} required>
-                        <label class="form-check-label" for="gender_{{ $key }}">{{ $label }}</label>
-                    </div>
-                @endforeach
+                <select class="form-control {{ $errors->has('gender') ? 'is-invalid' : '' }}" name="gender" id="gender" required>
+                    <option value disabled {{ old('gender', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\Kependudukan::GENDER_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('gender', $kependudukan->gender) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
                 @if($errors->has('gender'))
                     <span class="text-danger">{{ $errors->first('gender') }}</span>
                 @endif
@@ -57,12 +57,12 @@
             </div>
             <div class="form-group">
                 <label class="required">{{ trans('cruds.kependudukan.fields.religion') }}</label>
-                @foreach(App\Models\Kependudukan::RELIGION_RADIO as $key => $label)
-                    <div class="form-check {{ $errors->has('religion') ? 'is-invalid' : '' }}">
-                        <input class="form-check-input" type="radio" id="religion_{{ $key }}" name="religion" value="{{ $key }}" {{ old('religion', $kependudukan->religion) === (string) $key ? 'checked' : '' }} required>
-                        <label class="form-check-label" for="religion_{{ $key }}">{{ $label }}</label>
-                    </div>
-                @endforeach
+                <select class="form-control {{ $errors->has('religion') ? 'is-invalid' : '' }}" name="religion" id="religion" required>
+                    <option value disabled {{ old('religion', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\Kependudukan::RELIGION_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('religion', $kependudukan->religion) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
                 @if($errors->has('religion'))
                     <span class="text-danger">{{ $errors->first('religion') }}</span>
                 @endif
@@ -70,12 +70,12 @@
             </div>
             <div class="form-group">
                 <label class="required">{{ trans('cruds.kependudukan.fields.marital_status') }}</label>
-                @foreach(App\Models\Kependudukan::MARITAL_STATUS_RADIO as $key => $label)
-                    <div class="form-check {{ $errors->has('marital_status') ? 'is-invalid' : '' }}">
-                        <input class="form-check-input" type="radio" id="marital_status_{{ $key }}" name="marital_status" value="{{ $key }}" {{ old('marital_status', $kependudukan->marital_status) === (string) $key ? 'checked' : '' }} required>
-                        <label class="form-check-label" for="marital_status_{{ $key }}">{{ $label }}</label>
-                    </div>
-                @endforeach
+                <select class="form-control {{ $errors->has('marital_status') ? 'is-invalid' : '' }}" name="marital_status" id="marital_status" required>
+                    <option value disabled {{ old('marital_status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\Kependudukan::MARITAL_STATUS_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('marital_status', $kependudukan->marital_status) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
                 @if($errors->has('marital_status'))
                     <span class="text-danger">{{ $errors->first('marital_status') }}</span>
                 @endif
@@ -83,12 +83,12 @@
             </div>
             <div class="form-group">
                 <label class="required">{{ trans('cruds.kependudukan.fields.latest_education') }}</label>
-                @foreach(App\Models\Kependudukan::LATEST_EDUCATION_RADIO as $key => $label)
-                    <div class="form-check {{ $errors->has('latest_education') ? 'is-invalid' : '' }}">
-                        <input class="form-check-input" type="radio" id="latest_education_{{ $key }}" name="latest_education" value="{{ $key }}" {{ old('latest_education', $kependudukan->latest_education) === (string) $key ? 'checked' : '' }} required>
-                        <label class="form-check-label" for="latest_education_{{ $key }}">{{ $label }}</label>
-                    </div>
-                @endforeach
+                <select class="form-control {{ $errors->has('latest_education') ? 'is-invalid' : '' }}" name="latest_education" id="latest_education" required>
+                    <option value disabled {{ old('latest_education', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\Kependudukan::LATEST_EDUCATION_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('latest_education', $kependudukan->latest_education) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
                 @if($errors->has('latest_education'))
                     <span class="text-danger">{{ $errors->first('latest_education') }}</span>
                 @endif

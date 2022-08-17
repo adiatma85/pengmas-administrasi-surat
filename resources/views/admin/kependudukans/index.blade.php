@@ -65,7 +65,7 @@
                         <td>
                             <select class="search" strict="true">
                                 <option value>{{ trans('global.all') }}</option>
-                                @foreach(App\Models\Kependudukan::GENDER_RADIO as $key => $item)
+                                @foreach(App\Models\Kependudukan::GENDER_SELECT as $key => $item)
                                     <option value="{{ $item }}">{{ $item }}</option>
                                 @endforeach
                             </select>
@@ -73,7 +73,7 @@
                         <td>
                             <select class="search" strict="true">
                                 <option value>{{ trans('global.all') }}</option>
-                                @foreach(App\Models\Kependudukan::RELIGION_RADIO as $key => $item)
+                                @foreach(App\Models\Kependudukan::RELIGION_SELECT as $key => $item)
                                     <option value="{{ $item }}">{{ $item }}</option>
                                 @endforeach
                             </select>
@@ -81,7 +81,7 @@
                         <td>
                             <select class="search" strict="true">
                                 <option value>{{ trans('global.all') }}</option>
-                                @foreach(App\Models\Kependudukan::MARITAL_STATUS_RADIO as $key => $item)
+                                @foreach(App\Models\Kependudukan::MARITAL_STATUS_SELECT as $key => $item)
                                     <option value="{{ $item }}">{{ $item }}</option>
                                 @endforeach
                             </select>
@@ -112,13 +112,13 @@
                                 {{ $kependudukan->nik ?? '' }}
                             </td>
                             <td>
-                                {{ App\Models\Kependudukan::GENDER_RADIO[$kependudukan->gender] ?? '' }}
+                                {{ App\Models\Kependudukan::GENDER_SELECT[$kependudukan->gender] ?? '' }}
                             </td>
                             <td>
-                                {{ App\Models\Kependudukan::RELIGION_RADIO[$kependudukan->religion] ?? '' }}
+                                {{ App\Models\Kependudukan::RELIGION_SELECT[$kependudukan->religion] ?? '' }}
                             </td>
                             <td>
-                                {{ App\Models\Kependudukan::MARITAL_STATUS_RADIO[$kependudukan->marital_status] ?? '' }}
+                                {{ App\Models\Kependudukan::MARITAL_STATUS_SELECT[$kependudukan->marital_status] ?? '' }}
                             </td>
                             <td>
                                 {{ $kependudukan->occupation ?? '' }}

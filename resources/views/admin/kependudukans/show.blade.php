@@ -60,7 +60,7 @@
                             {{ trans('cruds.kependudukan.fields.gender') }}
                         </th>
                         <td>
-                            {{ App\Models\Kependudukan::GENDER_RADIO[$kependudukan->gender] ?? '' }}
+                            {{ App\Models\Kependudukan::GENDER_SELECT[$kependudukan->gender] ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -68,7 +68,7 @@
                             {{ trans('cruds.kependudukan.fields.religion') }}
                         </th>
                         <td>
-                            {{ App\Models\Kependudukan::RELIGION_RADIO[$kependudukan->religion] ?? '' }}
+                            {{ App\Models\Kependudukan::RELIGION_SELECT[$kependudukan->religion] ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -76,7 +76,7 @@
                             {{ trans('cruds.kependudukan.fields.marital_status') }}
                         </th>
                         <td>
-                            {{ App\Models\Kependudukan::MARITAL_STATUS_RADIO[$kependudukan->marital_status] ?? '' }}
+                            {{ App\Models\Kependudukan::MARITAL_STATUS_SELECT[$kependudukan->marital_status] ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -84,7 +84,7 @@
                             {{ trans('cruds.kependudukan.fields.latest_education') }}
                         </th>
                         <td>
-                            {{ App\Models\Kependudukan::LATEST_EDUCATION_RADIO[$kependudukan->latest_education] ?? '' }}
+                            {{ App\Models\Kependudukan::LATEST_EDUCATION_SELECT[$kependudukan->latest_education] ?? '' }}
                         </td>
                     </tr>
                     <tr>
