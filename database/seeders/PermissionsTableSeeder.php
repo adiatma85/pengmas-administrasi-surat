@@ -9,6 +9,7 @@ class PermissionsTableSeeder extends Seeder
 {
     public function run()
     {
+        
         $permissions = [
             [
                 'id'    => 1,
@@ -76,90 +77,30 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 17,
-                'title' => 'content_access',
+                'title' => 'data_kependudukan_access',
             ],
             [
                 'id'    => 18,
-                'title' => 'tag_create',
+                'title' => 'kependudukan_create',
             ],
             [
                 'id'    => 19,
-                'title' => 'tag_edit',
+                'title' => 'kependudukan_edit',
             ],
             [
                 'id'    => 20,
-                'title' => 'tag_show',
+                'title' => 'kependudukan_show',
             ],
             [
                 'id'    => 21,
-                'title' => 'tag_delete',
+                'title' => 'kependudukan_delete',
             ],
             [
                 'id'    => 22,
-                'title' => 'tag_access',
+                'title' => 'kependudukan_access',
             ],
             [
                 'id'    => 23,
-                'title' => 'review_create',
-            ],
-            [
-                'id'    => 24,
-                'title' => 'review_edit',
-            ],
-            [
-                'id'    => 25,
-                'title' => 'review_show',
-            ],
-            [
-                'id'    => 26,
-                'title' => 'review_delete',
-            ],
-            [
-                'id'    => 27,
-                'title' => 'review_access',
-            ],
-            [
-                'id'    => 28,
-                'title' => 'recommendation_create',
-            ],
-            [
-                'id'    => 29,
-                'title' => 'recommendation_edit',
-            ],
-            [
-                'id'    => 30,
-                'title' => 'recommendation_show',
-            ],
-            [
-                'id'    => 31,
-                'title' => 'recommendation_delete',
-            ],
-            [
-                'id'    => 32,
-                'title' => 'recommendation_access',
-            ],
-            [
-                'id'    => 33,
-                'title' => 'brand_create',
-            ],
-            [
-                'id'    => 34,
-                'title' => 'brand_edit',
-            ],
-            [
-                'id'    => 35,
-                'title' => 'brand_show',
-            ],
-            [
-                'id'    => 36,
-                'title' => 'brand_delete',
-            ],
-            [
-                'id'    => 37,
-                'title' => 'brand_access',
-            ],
-            [
-                'id'    => 38,
                 'title' => 'profile_password_edit',
             ],
         ];

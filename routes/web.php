@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\PermissionsController as AdminPermissionController;
 use App\Http\Controllers\Admin\RolesController as AdminRolesController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
+use App\Http\Controllers\Admin\KependudukanController as AdminKependudukanController;
 
 
 Route::redirect('/', '/login');
@@ -45,6 +46,10 @@ Route::prefix("admin")->as("admin.")->middleware('auth')->group(function (){
     // Users
     Route::delete('users/destroy', [AdminUsersController::class, 'massDestroy'])->name('users.massDestroy');
     Route::resource('users', AdminUsersController::class);
+
+     // Kependudukan
+     Route::delete('kependudukans/destroy', [AdminKependudukanController::class, 'massDestroy'])->name('kependudukans.massDestroy');
+     Route::resource('kependudukans', AdminKependudukanController::class);
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
