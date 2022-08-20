@@ -40,14 +40,14 @@ return [
         ],
     ],
     'user' => [
-        'title'          => 'Users',
-        'title_singular' => 'User',
+        'title'          => 'Pengguna',
+        'title_singular' => 'Pengguna',
         'fields'         => [
             'id'                       => 'ID',
             'id_helper'                => ' ',
-            'name'                     => 'Name',
+            'name'                     => 'Nama',
             'name_helper'              => ' ',
-            'email'                    => 'Email',
+            'email'                    => 'Alamat Surel',
             'email_helper'             => ' ',
             'email_verified_at'        => 'Email verified at',
             'email_verified_at_helper' => ' ',

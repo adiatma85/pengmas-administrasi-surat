@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
 use Gate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,7 +19,14 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::with(['roles'])->get();
+        $userRoleId = Auth::user()->roles[0]->id;
+
+        if ($userRoleId != 1) {
+            $users = User::where('name', '!=', 'Admin')->with(['roles'])->get();
+        } else {            
+            $users = User::with(['roles'])->get();
+        }
+
 
         return view('admin.users.index', compact('users'));
     }
@@ -27,7 +35,14 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $roles = Role::pluck('title', 'id');
+        $userRoleId = Auth::user()->roles[0]->id;
+
+        if ($userRoleId != 1) {
+            $roles = Role::where('title', '!=', 'Admin')->pluck('title', 'id');
+        } else {            
+            $roles = Role::pluck('title', 'id');
+        }
+
 
         return view('admin.users.create', compact('roles'));
     }
@@ -44,7 +59,13 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $roles = Role::pluck('title', 'id');
+        $userRoleId = Auth::user()->roles[0]->id;
+
+        if ($userRoleId != 1) {
+            $roles = Role::where('title', '!=', 'Admin')->pluck('title', 'id');
+        } else {            
+            $roles = Role::pluck('title', 'id');
+        }
 
         $user->load('roles');
 

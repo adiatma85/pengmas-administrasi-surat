@@ -69,7 +69,7 @@
                     @can('kependudukan_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.kependudukans.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/kependudukans") || request()->is("admin/kependudukans/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-unlock-alt c-sidebar-nav-icon">
+                                <i class="fa-fw fas fa-user c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.kependudukan.title') }}
