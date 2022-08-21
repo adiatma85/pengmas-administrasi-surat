@@ -13,5 +13,8 @@ class RoleUserTableSeeder extends Seeder
 
         // Role Bapak RT 1
         User::findOrFail(2)->roles()->sync(3);
+
+        // Role Masyarakat 1
+        User::findOrFail(3)->roles()->sync(4);
     }
 }

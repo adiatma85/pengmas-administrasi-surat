@@ -21,7 +21,8 @@ class UsersController extends Controller
 
         $userRoleId = Auth::user()->roles[0]->id;
 
-        if ($userRoleId != 1) {
+        // If super admin, then fetches all
+        if ($this->isSuperAdmin($userRoleId)) {
             $users = User::where('name', '!=', 'Admin')->with(['roles'])->get();
         } else {            
             $users = User::with(['roles'])->get();
@@ -37,7 +38,8 @@ class UsersController extends Controller
 
         $userRoleId = Auth::user()->roles[0]->id;
 
-        if ($userRoleId != 1) {
+        // If super admin, then fetches all
+        if ($this->isSuperAdmin($userRoleId)) {
             $roles = Role::where('title', '!=', 'Admin')->pluck('title', 'id');
         } else {            
             $roles = Role::pluck('title', 'id');
@@ -61,7 +63,8 @@ class UsersController extends Controller
 
         $userRoleId = Auth::user()->roles[0]->id;
 
-        if ($userRoleId != 1) {
+        // If super admin, then fetches all
+        if ($this->isSuperAdmin($userRoleId)) {
             $roles = Role::where('title', '!=', 'Admin')->pluck('title', 'id');
         } else {            
             $roles = Role::pluck('title', 'id');

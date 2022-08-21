@@ -79,4 +79,10 @@ class User extends Authenticatable
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    // Referensi for "Data Kependudukan"
+    // Will return null if it data kependudukan does not exist
+    public function kependudukan(){
+        return $this->hasOne(Kependudukan::class, 'user_id');
+    }
 }

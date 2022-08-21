@@ -14,13 +14,16 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Controller Import
+// Controller Import (Admin)
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\PermissionsController as AdminPermissionController;
 use App\Http\Controllers\Admin\RolesController as AdminRolesController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\Admin\KependudukanController as AdminKependudukanController;
 use App\Http\Controllers\Admin\EntryMailController as AdminEntryMailController;
+
+// Controller Import (User)
+use App\Http\Controllers\User\MailController as UserMailController;
 
 
 Route::redirect('/', '/login');
@@ -58,6 +61,12 @@ Route::prefix("admin")->as("admin.")->middleware('auth')->group(function (){
     Route::post('entry-mails/media', [AdminEntryMailController::class, 'storeMedia'])->name('entry-mails.storeMedia');
     Route::post('entry-mails/ckmedia', [AdminEntryMailController::class, 'storeCKEditorImages'])->name('entry-mails.storeCKEditorImages');
     Route::resource('entry-mails', AdminEntryMailController::class);
+});
+
+// This is for user
+Route::prefix("portal")->as("portal.")->middleware('auth')->group( function (){
+    // Pengajuan Surat
+    Route::resource('pengajuan-surat', UserMailController::class);
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

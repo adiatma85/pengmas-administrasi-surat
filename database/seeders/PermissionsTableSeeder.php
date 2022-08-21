@@ -127,6 +127,26 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 29,
                 'title' => 'entry_mail_access',
             ],
+            [
+                'id'    => 30,
+                'title' => 'pengajuan_surat_access',
+            ],
+            [
+                'id'    => 31,
+                'title' => 'pengajuan_surat_create',
+            ],
+            [
+                'id'    => 32,
+                'title' => 'pengajuan_surat_edit',
+            ],
+            [
+                'id'    => 33,
+                'title' => 'pengajuan_surat_show',
+            ],
+            [
+                'id'    => 34,
+                'title' => 'pengajuan_surat_delete',
+            ],
         ];
 
         Permission::insert($permissions);

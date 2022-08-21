@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Kependudukan extends Model
+class MailData extends Model
 {
     use SoftDeletes;
     use HasFactory;
@@ -33,25 +33,7 @@ class Kependudukan extends Model
         'KEPERCAYAAN_LAIN'  => 'Kepercayaan Lain',
     ];
 
-    public const LATEST_EDUCATION_SELECT = [
-        'SD'               => 'SD/Sederajat',
-        'SLTP'             => 'SMP/SLTP Sederajat',
-        'SLTA'             => 'SMA/SLTA Sederajat',
-        'D3'               => 'Diploma III',
-        'S1'               => 'Diploma IV / S1 Sederajat',
-        'S2'               => 'S2',
-        'S3'               => 'S3',
-        'TIDAK_BERSEKOLAH' => 'Tidak Bersekolah',
-    ];
-
-    public $table = 'kependudukans';
-
-    protected $dates = [
-        'birthdate',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    protected $table = 'mail_data';
 
     protected $fillable = [
         'fullname',
@@ -64,15 +46,30 @@ class Kependudukan extends Model
         'latest_education',
         'occupation',
         'father_name',
+        'father_religion',
+        'father_occupation',
+        'father_marital_status',
+        'father_address',
         'mother_name',
+        'mother_religion',
+        'mother_occupation',
+        'mother_marital_status',
+        'mother_address',
         'disease',
+        'keterangan_surat',
         'created_at',
         'updated_at',
         'deleted_at',
 
-
         // Add on
-        'user_id',
+        'entry_mail_id',
+    ];
+
+    protected $dates = [
+        'birthdate',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     public function getBirthdateAttribute($value)
@@ -90,8 +87,8 @@ class Kependudukan extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    // Return an insatance of user if 'user_id' is not null, otherwise return null
-    public function user(){
-        return $this->belongsTo(User::class, 'user_id');
+    // Return an instance of EntryMail when 'entry_mail_id' is not null, otherwise return null
+    public function entryMail(){
+        return $this->belongsTo(EntryMail::class, 'entry_mail_id');
     }
 }
