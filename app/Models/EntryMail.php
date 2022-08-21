@@ -23,9 +23,9 @@ class EntryMail extends Model implements HasMedia
     ];
 
     public const TYPE_SELECT = [
-        'PENGANTAR_SURAT_NIKAH'  => 'Pengantar Surat Nikah',
+        'PENGANTAR_SURAT_NIKAH'  => 'Pengantar Surat Menikah',
         'KETERANGAN_DOMISILI'    => 'Keterangan Domisili',
-        'KERANGAN_BELUM_MENIKAH' => 'Keterangan Belum Menikah',
+        'KETERANGAN_BELUM_MENIKAH' => 'Keterangan Belum Menikah',
         'PERSETUJUAN_TETANGGA'   => 'Persetujuan Tetangga',
     ];
 

@@ -36,7 +36,7 @@ class MailController extends Controller
         $mailType = $request->post('mail_type');
         if(!$mailType){
             // Change this to return route or return view instead
-            return response()->json("masukan tidak valid");
+            return response()->json("masukan tidak valid (mail_type)");
         }
 
         switch ($mailType){
@@ -46,7 +46,7 @@ class MailController extends Controller
             case 'PENGANTAR_SURAT_NIKAH':
                 return $this->storeSuratPengantarNikah($request, $user, $dataKependudukan);
                 break;
-            case 'KERANGAN_BELUM_MENIKAH':
+            case 'KETERANGAN_BELUM_MENIKAH':
                 return $this->storeKeteranganBelumMenikah($request, $user, $dataKependudukan);
                 break;
             case 'PERSETUJUAN_TETANGGA':
@@ -62,7 +62,7 @@ class MailController extends Controller
 
         if(!$request->post('keterangan_surat')){
             // Change this to return route or return view instead
-            return response()->json("masukan tidak valid");
+            return response()->json("masukan tidak valid (keterangan_surat)");
         }
 
         // Dimasukan dulu ke entry_mail terlebih dahulu
@@ -78,7 +78,7 @@ class MailController extends Controller
             'fullname' => $dataKependudukan->fullname,
             'nik' => $dataKependudukan->nik,
             'birthdate' => $dataKependudukan->birthdate,
-            'birthplave' => $dataKependudukan->birthplace,
+            'birthplace' => $dataKependudukan->birthplace,
             'gender' => $dataKependudukan->gender,
             'religion' => $dataKependudukan->religion,
             'marital_status' => $dataKependudukan->marital_status,
@@ -117,7 +117,7 @@ class MailController extends Controller
             'fullname' => $dataKependudukan->fullname,
             'nik' => $dataKependudukan->nik,
             'birthdate' => $dataKependudukan->birthdate,
-            'birthplave' => $dataKependudukan->birthplace,
+            'birthplace' => $dataKependudukan->birthplace,
             'gender' => $dataKependudukan->gender,
             'religion' => $dataKependudukan->religion,
             'marital_status' => $dataKependudukan->marital_status,
@@ -134,9 +134,6 @@ class MailController extends Controller
             'mother_address' => $request->post('mother_address'),
             'mother_name' => $dataKependudukan->mother_name,
             'disease' => $dataKependudukan->disease,
-
-            // Keterangan surat
-            'keterangan_surat' => $request->post('keterangan_surat'),
 
             // Add on
             'entry_mail_id' => $insertedEntryMail->id,
@@ -168,7 +165,7 @@ class MailController extends Controller
             'fullname' => $dataKependudukan->fullname,
             'nik' => $dataKependudukan->nik,
             'birthdate' => $dataKependudukan->birthdate,
-            'birthplave' => $dataKependudukan->birthplace,
+            'birthplace' => $dataKependudukan->birthplace,
             'gender' => $dataKependudukan->gender,
             'religion' => $dataKependudukan->religion,
             'marital_status' => $dataKependudukan->marital_status,
