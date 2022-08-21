@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ use App\Http\Controllers\Admin\PermissionsController as AdminPermissionControlle
 use App\Http\Controllers\Admin\RolesController as AdminRolesController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\Admin\KependudukanController as AdminKependudukanController;
+use App\Http\Controllers\Admin\EntryMailController as AdminEntryMailController;
 
 
 Route::redirect('/', '/login');
@@ -50,6 +52,12 @@ Route::prefix("admin")->as("admin.")->middleware('auth')->group(function (){
      // Kependudukan
      Route::delete('kependudukans/destroy', [AdminKependudukanController::class, 'massDestroy'])->name('kependudukans.massDestroy');
      Route::resource('kependudukans', AdminKependudukanController::class);
+
+    // Entry Mail
+    Route::delete('entry-mails/destroy', [AdminEntryMailController::class, 'massDestroy'])->name('entry-mails.massDestroy');
+    Route::post('entry-mails/media', [AdminEntryMailController::class, 'storeMedia'])->name('entry-mails.storeMedia');
+    Route::post('entry-mails/ckmedia', [AdminEntryMailController::class, 'storeCKEditorImages'])->name('entry-mails.storeCKEditorImages');
+    Route::resource('entry-mails', AdminEntryMailController::class);
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

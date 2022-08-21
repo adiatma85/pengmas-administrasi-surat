@@ -58,7 +58,7 @@
             </li>
         @endcan
         @can('data_kependudukan_access')
-            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/kependudukans*") ? "c-show" : "" }} {{ request()->is("admin/roles*") ? "c-show" : "" }} {{ request()->is("admin/users*") ? "c-show" : "" }}">
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/kependudukans*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
                     <i class="fa-fw fas fa-users c-sidebar-nav-icon">
 
@@ -73,6 +73,28 @@
 
                                 </i>
                                 {{ trans('cruds.kependudukan.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
+        @can('surat_menyurat_access')
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/entry-mails*") ? "menu-open" : "" }}">
+                <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                    <i class="fa-fw fas fa-envelope c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.suratMenyurat.title') }}
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    @can('entry_mail_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.entry-mails.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/entry-mails") || request()->is("admin/entry-mails/*") ? "active" : "" }}">
+                                <i class="fa-fw fas fa-envelope c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.entryMail.title') }}
                             </a>
                         </li>
                     @endcan
