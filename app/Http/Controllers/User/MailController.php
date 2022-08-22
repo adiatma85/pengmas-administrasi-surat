@@ -14,7 +14,13 @@ class MailController extends Controller
 
     // Di sini akan menampilkan dia sudah mengirim surat apa saja selama ini
     public function index(Request $request){
-        return view('user.mail.index');
+
+        $user = Auth::user();
+
+        $entryMails = EntryMail::where('user_id', '=', $user->id)
+            ->with(['media'])->get();
+
+        return view('user.mail.index', compact('entryMails'));
     }
 
     // Di sini dia akan mengembalikan view ketika dia ingin membuat surat
@@ -67,7 +73,7 @@ class MailController extends Controller
 
         // Dimasukan dulu ke entry_mail terlebih dahulu
         $entryMailInsert = [
-            'title' => $this->generateTitle($request, $user->fullname),
+            'title' => $this->generateTitle($request, $dataKependudukan->fullname),
             'type' => $request->post('mail_type'),
             'user_id' => $user->id,
         ];
@@ -106,7 +112,7 @@ class MailController extends Controller
 
         // Dimasukan dulu ke entry_mail terlebih dahulu
         $entryMailInsert = [
-            'title' => $this->generateTitle($request, $user->fullname),
+            'title' => $this->generateTitle($request, $dataKependudukan->fullname),
             'type' => $request->post('mail_type'),
             'user_id' => $user->id,
         ];
@@ -154,7 +160,7 @@ class MailController extends Controller
 
         // Dimasukan dulu ke entry_mail terlebih dahulu
         $entryMailInsert = [
-            'title' => $this->generateTitle($request, $user->fullname),
+            'title' => $this->generateTitle($request, $dataKependudukan->fullname),
             'type' => $request->post('mail_type'),
             'user_id' => $user->id,
         ];

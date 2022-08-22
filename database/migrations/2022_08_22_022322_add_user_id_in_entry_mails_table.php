@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('entry_mails', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('title')->nullable();
-            $table->string('type');
-            $table->string('status')->nullable()->default("PROSES");
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('entry_mails', function (Blueprint $table) {
+            // Optional foreign key
+            $table->unsignedBigInteger('user_id')->after('id')->nullable();
         });
     }
 
@@ -30,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entry_mails');
+        Schema::table('entry_mails', function (Blueprint $table) {
+            $table->removeColumn('user_id');
+        });
     }
 };
