@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\EntryMail;
 use App\Models\MailData;
+use App\Models\Kependudukan;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 
 class MailController extends Controller
 {
@@ -19,6 +22,12 @@ class MailController extends Controller
 
         $entryMails = EntryMail::where('user_id', '=', $user->id)
             ->with(['media'])->get();
+        
+        foreach ($entryMails as $entryMail) {
+            // Prefix
+            $prefixPath = 'storage/pdf/';
+            $entryMail['file_link'] = asset($prefixPath . $entryMail->title . '-' . $entryMail->id . '.pdf');
+        }
 
         return view('user.mail.index', compact('entryMails'));
     }
@@ -132,7 +141,7 @@ class MailController extends Controller
             'father_name' => $dataKependudukan->father_name,
             'father_religion' => $request->post('father_religion'),
             'father_occupation' => $request->post('father_occupation'),
-            'father_marital_status' => $request->post('father_marital_status'),
+            'father_marital_status' => $request->post('marital_status'),
             'father_address' => $request->post('father_address'),
             'mother_religion' => $request->post('mother_religion'),
             'mother_occupation' => $request->post('mother_occupation'),
@@ -189,7 +198,36 @@ class MailController extends Controller
         ];
         $insertedMailData = MailData::create($mailDataInsert);
 
+
+        // Generate data for pdf here
+        $pdfData = [
+            'fullname' => $dataKependudukan->fullname,
+            'nik' => $dataKependudukan->nik,
+            'birthdate' => $dataKependudukan->birthdate,
+            'birthplace' => $dataKependudukan->birthplace,
+            'gender' => Kependudukan::GENDER_SELECT[$dataKependudukan->gender],
+            'religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->religion],
+            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$dataKependudukan->marital_status],
+            'latest_education' => Kependudukan::LATEST_EDUCATION_SELECT[$dataKependudukan->latest_education],
+            'occupation' => $dataKependudukan->occupation,
+            'father_name' => $dataKependudukan->father_name,
+            'mother_name' => $dataKependudukan->mother_name,
+
+            // Keterangan surat
+            'keterangan_surat' => $request->post('keterangan_surat'),
+
+            // Alamat Orang Tua
+            'alamat_orang_tua' => $request->post('alamat_orang_tua'),
+        ];
+
         // Generate PDf here
+        $pdf = Pdf::loadView('pdf/surat-keterangan-belum-menikah', $pdfData);
+
+        // Storing the data
+        $fileName = $entryMailInsert['title'] . '-' . $insertedMailData->id . '.pdf';
+        Storage::put('public/pdf/' . $fileName, $pdf->output());
+
+        return redirect()->route('portal.pengajuan-surat.index');
     }
 
     // Handle surat keterangan persetujuan tetangga

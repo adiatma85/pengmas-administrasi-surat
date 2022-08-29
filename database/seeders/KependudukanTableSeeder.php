@@ -17,8 +17,8 @@ class KependudukanTableSeeder extends Seeder
     {
         $kependudukans = [
             [
-                'fullname' => 'Masyarat 1 testing',
-                'nik' => 'NIK yang panjang dan lebar',
+                'fullname' => 'Syafiq Faray',
+                'nik' => '195150701111008',
                 'birthdate' => '2001-09-27',
                 'birthplace' => 'Subaraya',
                 'gender' => 'LAKI_LAKI',
@@ -26,8 +26,8 @@ class KependudukanTableSeeder extends Seeder
                 'marital_status' => 'KAWIN',
                 'latest_education' => 'SLTA',
                 'occupation' => 'Mahasiswa',
-                'father_name' => 'Ini nama ayah',
-                'mother_name' => 'Ini nama ibu',
+                'father_name' => 'Faray Muhammad',
+                'mother_name' => 'Ibu Faray Muhammad',
                 'disease' => 'Tidak ada penyakit',
 
                 // Add on

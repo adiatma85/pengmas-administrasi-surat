@@ -35,6 +35,9 @@
                             {{ trans('cruds.entryMail.fields.status') }}
                         </th>
                         <th>
+                            Tautan File
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -64,6 +67,9 @@
                             </select>
                         </td>
                         <td>
+                            {{-- <input class="search" type="text" placeholder="{{ trans('global.search') }}"> --}}
+                        </td>
+                        <td>
                         </td>
                     </tr>
                 </thead>
@@ -86,6 +92,13 @@
                                 <span class="badge {{ $entryMail->status == "PROSES" ? "badge-warning" : ""}} {{ $entryMail->status == "DISETUJUI" ? "badge-success" : ""}} {{ $entryMail->status == "DITOLAK" ? "badge-danger" : ""}}">
                                     {{ App\Models\EntryMail::STATUS_SELECT[$entryMail->status] ?? '' }}
                                 </span>
+                            </td>
+                            <td>
+                                <a href="{{$entryMail->file_link ?? "#"}}">
+                                    <span class="badge badge-info">
+                                        File
+                                    </span>
+                                </a>
                             </td>
                             <td>
                                 @can('entry_mail_show')

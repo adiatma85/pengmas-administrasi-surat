@@ -12,6 +12,8 @@
             {{-- Di sini kita masukin beberapa field yang memang dibutuhkan --}}
             {{-- Tipe surat itu sudah pasti dibutuhkan --> 'mail_type'  --}}
             {{-- Keterangan Surat juga Aku rasa dibutuhkan --> 'keterangan_surat' --}}
+
+            {{-- Fokus pada surat keterangan belum menikah --}}
             <div class="form-group">
                 <label class="required">{{ trans('cruds.entryMail.fields.type') }}</label>
                 <select class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}" name="mail_type" id="type" required>
@@ -70,6 +72,15 @@
                     },
                 ];
 
+                switch (value) {
+                    case 'KETERANGAN_BELUM_MENIKAH':
+                        arrayAppendElement.push(appendForSuratBelumMenikah());
+                        break;
+                
+                    default:
+                        break;
+                }
+
                 $append = "<div id='appendFields'>";
                 arrayAppendElement.forEach(element => {
                     $append += appendOptionEvent(element);
@@ -86,6 +97,16 @@
                     ;
 
                 return returnValue;
+            }
+
+            // Surat Keterangan belum menikah
+            function appendForSuratBelumMenikah(){
+                let arrayAppendElement = {
+                        label: "Alamat Orang Tua",
+                        valueName: "alamat_orang_tua",
+                        htmlId: "alamat_orang_tua"
+                    };
+                return arrayAppendElement;
             }
         });
     </script>
