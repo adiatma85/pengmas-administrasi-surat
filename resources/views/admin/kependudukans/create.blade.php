@@ -9,6 +9,19 @@
         <form method="POST" action="{{ route("admin.kependudukans.store") }}" enctype="multipart/form-data">
             @csrf
 
+            <div class="form-group">
+                <label class="required">Status Kependudukan</label>
+                <select class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}" name="status_kependudukan" id="status_kependudukan" required>
+                    <option value disabled {{ old('status_kependudukan', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\Kependudukan::STATUS_KEPENDUDUKAN_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('status_kependudukan', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('status_kependudukan'))
+                    <span class="text-danger">{{ $errors->first('status_kependudukan') }}</span>
+                @endif
+            </div>
+
             <div class="accordion" id="accordionExample">
                 {{-- Informasi Kartu Keluarga --}}
                 <div class="card">
@@ -454,6 +467,35 @@
   
             return returnValue;
         }
+
+        // Change field to disabled and or value
+        // At home, karena di sini gk fokus
+        // Reference --> https://learn.jquery.com/using-jquery-core/faq/how-do-i-disable-enable-a-form-element/
+        $("#status_kependudukan").change( function (event) {
+
+            let asliArray = [
+
+            ];
+
+            let pendatangArray = [];
+
+            let value = this.value
+
+            
+            
+            switch (value) {
+                case 'ASLI':
+                    
+                    break;
+
+                case 'PENDATANG':
+                    
+                    break;
+            
+                default:
+                    break;
+            }
+        });
     });
   </script>
 @endsection

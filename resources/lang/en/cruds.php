@@ -115,6 +115,7 @@ return [
             'kecamatan' => 'Kecamatan',
             'city' => 'Kota/Kabupaten',
             'province' => 'Provinsi',
+            'status_kependudukan' => "Status Kependudukan"
         ],
     ],
     'suratMenyurat' => [

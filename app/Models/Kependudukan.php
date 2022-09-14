@@ -44,6 +44,11 @@ class Kependudukan extends Model
         'TIDAK_BERSEKOLAH' => 'Tidak Bersekolah',
     ];
 
+    public const STATUS_KEPENDUDUKAN_SELECT = [
+        'ASLI'      => 'Penduduk Asli',
+        'PENDATANG' => 'Penduduk Pendatang',
+    ];
+
     public $table = 'kependudukans';
 
     protected $dates = [
@@ -80,12 +85,6 @@ class Kependudukan extends Model
     {
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
     }
-
-    // Deactivated due unknown error in blade
-    // public function setBirthdateAttribute($value)
-    // {
-    //     $this->attributes['birthdate'] = $value ? Carbon::parse($value)->format(config('Y-m-d')) : null;
-    // }
 
     protected function serializeDate(DateTimeInterface $date)
     {

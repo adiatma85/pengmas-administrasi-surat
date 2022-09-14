@@ -33,17 +33,6 @@ class KependudukanController extends Controller
 
     public function store(StoreKependudukanRequest $request)
     {
-        // $kependudukan = Kependudukan::create($request->all());
-
-        // $dataReq = [
-        //     // 'address' => $request->address[1],
-        //     'birthdate' => $request->birthdate,
-        //     'fullname1' => $request->fullname1
-
-        // ];
-
-        // return response()->json($dataReq, 200);
-
         // Insert data kk kepada family terlebih dahulu
         $family = [
             'no_kk' => $request->no_kk,
@@ -55,13 +44,14 @@ class KependudukanController extends Controller
             'kecamatan' => $request->kecamatan,
             'city' => $request->city,
             'province' => $request->province,
+            'status_kependudukan' => $request->status_kependudukan,
         ];
 
         $insertedFamily = Family::create($family);
 
         $headFamUser = [
             'name' => $request->fullname,
-            'email' => $request->fullname . '@admin.com',
+            'email' => $request->fullname . '@admin.com', // will refix this
             'password' => $request->nik . '-' . $request->birthplace, // kombinasi dari NIK dan tanggal lahir di bcrypt
         ];
 
