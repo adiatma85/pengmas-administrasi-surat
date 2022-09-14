@@ -73,6 +73,7 @@ class Kependudukan extends Model
 
         // Add on
         'user_id',
+        'family_id',
     ];
 
     public function getBirthdateAttribute($value)
@@ -80,10 +81,11 @@ class Kependudukan extends Model
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
     }
 
-    public function setBirthdateAttribute($value)
-    {
-        $this->attributes['birthdate'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    }
+    // Deactivated due unknown error in blade
+    // public function setBirthdateAttribute($value)
+    // {
+    //     $this->attributes['birthdate'] = $value ? Carbon::parse($value)->format(config('Y-m-d')) : null;
+    // }
 
     protected function serializeDate(DateTimeInterface $date)
     {
@@ -93,5 +95,10 @@ class Kependudukan extends Model
     // Return an insatance of user if 'user_id' is not null, otherwise return null
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    // Return an instance of family
+    public function family(){
+        return $this->belongsTo(Family::class, 'family_id');
     }
 }

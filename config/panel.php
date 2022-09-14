@@ -7,4 +7,5 @@ return [
     'available_languages' => [
         'en' => 'English',
     ],
+    'input_date_format' => 'mm / dd / yyyy',
 ];

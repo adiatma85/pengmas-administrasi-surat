@@ -105,6 +105,16 @@ return [
             'updated_at_helper'       => ' ',
             'deleted_at'              => 'Deleted at',
             'deleted_at_helper'       => ' ',
+
+            // Add on
+            'no_kk' => 'Nomor Kartu Keluarga',
+            'address' => 'Alamat lengkap',
+            'rt_rw' => 'RT/RW',
+            'postal_code' => 'Kode Pos',
+            'kelurahan' => 'Desa/Kelurahan',
+            'kecamatan' => 'Kecamatan',
+            'city' => 'Kota/Kabupaten',
+            'province' => 'Provinsi',
         ],
     ],
     'suratMenyurat' => [

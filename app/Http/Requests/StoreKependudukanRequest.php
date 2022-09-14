@@ -27,7 +27,7 @@ class StoreKependudukanRequest extends FormRequest
             ],
             'birthdate' => [
                 'required',
-                'date_format:' . config('panel.date_format'),
+                // 'date_format:' . config('panel.input_date_format'),
             ],
             'birthplace' => [
                 'string',

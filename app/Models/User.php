@@ -20,6 +20,10 @@ class User extends Authenticatable
 
     public $table = 'users';
 
+    public const ADMIN_ROLE_ID = 1;
+    public const BAPAK_RT_ROLE_ID = 3;
+    public const MASAYARAKAT_ROLE_ID = 4;
+
     protected $hidden = [
         'remember_token',
         'password',
