@@ -107,7 +107,6 @@
                     <i class="fa-fw fas fa-envelope c-sidebar-nav-icon">
 
                     </i>
-                    {{-- {{ trans('cruds.suratMenyurat.title') }} --}}
                     Pengjuan Surat
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
@@ -117,8 +116,46 @@
                                 <i class="fa-fw fas fa-envelope c-sidebar-nav-icon">
 
                                 </i>
-                                {{-- {{ trans('cruds.entryMail.title') }} --}}
                                 Pengajuan Surat
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
+        @endcan
+        @can('pengumuman_dan_beritum_access')
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/berita*") ? "menu-open" : "" }} {{ request()->is("admin/pengumuman*") ? "menu-open" : "" }}">
+                <a class="c-sidebar-nav-dropdown-toggle {{ request()->is("admin/berita*") ? "active" : "" }} {{ request()->is("admin/pengumuman*") ? "active" : "" }}" href="#">
+                    <i class="fa-fw c-sidebar-nav-icon fas fa-newspaper">
+
+                    </i>
+                    <p>
+                        {{ trans('cruds.pengumumanDanBeritum.title') }}
+                        <i class="right fa fa-fw fa-angle-left c-sidebar-nav-icon"></i>
+                    </p>
+                </a>
+                <ul class="c-sidebar-nav-dropdown-items">
+                    @can('beritum_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.berita.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/berita") || request()->is("admin/berita/*") ? "active" : "" }}">
+                                <i class="fa-fw c-sidebar-nav-icon fab fa-hacker-news">
+
+                                </i>
+                                <p>
+                                    {{ trans('cruds.beritum.title') }}
+                                </p>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('pengumuman_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.pengumuman.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/pengumuman") || request()->is("admin/pengumuman/*") ? "active" : "" }}">
+                                <i class="fa-fw c-sidebar-nav-icon fas fa-volume-up">
+
+                                </i>
+                                <p>
+                                    {{ trans('cruds.pengumuman.title') }}
+                                </p>
                             </a>
                         </li>
                     @endcan

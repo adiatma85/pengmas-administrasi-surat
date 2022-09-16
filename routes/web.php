@@ -21,6 +21,8 @@ use App\Http\Controllers\Admin\RolesController as AdminRolesController;
 use App\Http\Controllers\Admin\UsersController as AdminUsersController;
 use App\Http\Controllers\Admin\KependudukanController as AdminKependudukanController;
 use App\Http\Controllers\Admin\EntryMailController as AdminEntryMailController;
+use App\Http\Controllers\Admin\BeritaController as AdminBeritaController;
+use App\Http\Controllers\Admin\PengumumanController as AdminPengumumanController;
 
 // Controller Import (User)
 use App\Http\Controllers\User\MailController as UserMailController;
@@ -61,6 +63,18 @@ Route::prefix("admin")->as("admin.")->middleware('auth')->group(function (){
     Route::post('entry-mails/media', [AdminEntryMailController::class, 'storeMedia'])->name('entry-mails.storeMedia');
     Route::post('entry-mails/ckmedia', [AdminEntryMailController::class, 'storeCKEditorImages'])->name('entry-mails.storeCKEditorImages');
     Route::resource('entry-mails', AdminEntryMailController::class);
+
+    // Berita
+    Route::delete('berita/destroy', [AdminBeritaController::class, 'massDestroy'])->name('berita.massDestroy');
+    Route::post('berita/media', [AdminBeritaController::class, 'storeMedia'])->name('berita.storeMedia');
+    Route::post('berita/ckmedia', [AdminBeritaController::class, 'storeCKEditorImages'])->name('berita.storeCKEditorImages');
+    Route::resource('berita', AdminBeritaController::class);
+
+    // Pengumuman
+    Route::delete('pengumuman/destroy', [AdminPengumumanController::class, 'massDestroy'])->name('pengumuman.massDestroy');
+    Route::post('pengumuman/media', [AdminPengumumanController::class, 'storeMedia'])->name('pengumuman.storeMedia');
+    Route::post('pengumuman/ckmedia', [AdminPengumumanController::class, 'storeCKEditorImages'])->name('pengumuman.storeCKEditorImages');
+    Route::resource('pengumuman', AdminPengumumanController::class);
 });
 
 // This is for user

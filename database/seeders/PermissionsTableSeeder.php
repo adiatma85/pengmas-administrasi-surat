@@ -147,6 +147,50 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 34,
                 'title' => 'pengajuan_surat_delete',
             ],
+            [
+                'id'    => 35,
+                'title' => 'pengumuman_dan_beritum_access',
+            ],
+            [
+                'id'    => 36,
+                'title' => 'beritum_create',
+            ],
+            [
+                'id'    => 37,
+                'title' => 'beritum_edit',
+            ],
+            [
+                'id'    => 38,
+                'title' => 'beritum_show',
+            ],
+            [
+                'id'    => 39,
+                'title' => 'beritum_delete',
+            ],
+            [
+                'id'    => 40,
+                'title' => 'beritum_access',
+            ],
+            [
+                'id'    => 41,
+                'title' => 'pengumuman_create',
+            ],
+            [
+                'id'    => 42,
+                'title' => 'pengumuman_edit',
+            ],
+            [
+                'id'    => 43,
+                'title' => 'pengumuman_show',
+            ],
+            [
+                'id'    => 44,
+                'title' => 'pengumuman_delete',
+            ],
+            [
+                'id'    => 45,
+                'title' => 'pengumuman_access',
+            ],
         ];
 
         Permission::insert($permissions);
