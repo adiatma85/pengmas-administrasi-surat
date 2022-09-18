@@ -98,18 +98,6 @@
                             </a>
                         </li>
                     @endcan
-                </ul>
-            </li>
-        @endcan
-        @can('pengajuan_surat_access')
-            <li class="c-sidebar-nav-dropdown {{ request()->is("portal/pengajuan-surat*") ? "menu-open" : "" }}">
-                <a class="c-sidebar-nav-dropdown-toggle" href="#">
-                    <i class="fa-fw fas fa-envelope c-sidebar-nav-icon">
-
-                    </i>
-                    Pengjuan Surat
-                </a>
-                <ul class="c-sidebar-nav-dropdown-items">
                     @can('pengajuan_surat_access')
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("portal.pengajuan-surat.index") }}" class="c-sidebar-nav-link {{ request()->is("portal/pengajuan-surat") || request()->is("portal/pengajuan-surat/*") ? "active" : "" }}">

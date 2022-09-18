@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pengumuman', function (Blueprint $table) {
+        Schema::create('pengumumans', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
             $table->longText('content')->nullable();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pengumuman');
+        Schema::dropIfExists('pengumumans');
     }
 };

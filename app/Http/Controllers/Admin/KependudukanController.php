@@ -52,7 +52,8 @@ class KependudukanController extends Controller
         $headFamUser = [
             'name' => $request->fullname,
             'email' => $request->fullname . '@admin.com', // will refix this
-            'password' => $request->nik . '-' . $request->birthplace, // kombinasi dari NIK dan tanggal lahir di bcrypt
+            // 'password' => $request->nik . '-' . $request->birthplace, // kombinasi dari NIK dan tanggal lahir di bcrypt
+            'password' => $request->nik,
         ];
 
         $registeredUser = User::create($headFamUser);

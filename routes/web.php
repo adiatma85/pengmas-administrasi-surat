@@ -24,6 +24,9 @@ use App\Http\Controllers\Admin\EntryMailController as AdminEntryMailController;
 use App\Http\Controllers\Admin\BeritaController as AdminBeritaController;
 use App\Http\Controllers\Admin\PengumumanController as AdminPengumumanController;
 
+// Controller Import (Auth)
+use App\Http\Controllers\Auth\ChangePasswordController as AuthChangePassworController;
+
 // Controller Import (User)
 use App\Http\Controllers\User\MailController as UserMailController;
 
@@ -83,12 +86,12 @@ Route::prefix("portal")->as("portal.")->middleware('auth')->group( function (){
     Route::resource('pengajuan-surat', UserMailController::class);
 });
 
-Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
+Route::prefix('profile')->as('profile.')->middleware('auth')->group( function(){
     // Change password
     if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {
-        Route::get('password', 'ChangePasswordController@edit')->name('password.edit');
-        Route::post('password', 'ChangePasswordController@update')->name('password.update');
-        Route::post('profile', 'ChangePasswordController@updateProfile')->name('password.updateProfile');
-        Route::post('profile/destroy', 'ChangePasswordController@destroy')->name('password.destroyProfile');
+        Route::get('password', [AuthChangePassworController::class, 'edit'])->name('password.edit');
+        Route::post('password', [AuthChangePassworController::class, 'update'])->name('password.update');
+        Route::post('profile', [AuthChangePassworController::class, 'updateProfile'])->name('password.updateProfile');
+        Route::post('profile/destroy', [AuthChangePassworController::class, 'destroy'])->name('password.destroyProfile');
     }
 });

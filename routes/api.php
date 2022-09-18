@@ -14,6 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Controller Import (User)
+use App\Http\Controllers\Api\V1\User\BeritaApiController as ApiUserBeritaController;
+use App\Http\Controllers\Api\V1\User\PengumumanApiController as ApiUserPengumumanController;
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+Route::prefix('v1')->as('v1.')->group(function (){
+    // Berita
+    Route::apiResource('berita', ApiUserBeritaController::class);
+
+    // Pengumuman
+    Route::apiResource('pengumuman', ApiUserPengumumanController::class);
+
+    // Peraturan
 });
