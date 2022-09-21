@@ -83,7 +83,7 @@
                         break;
                     
                     case 'PENGANTAR_SURAT_NIKAH':
-
+                        arrayAppendElement = arrayAppendElement.concat(appendSuratPengantarNikah());
                         break;
                     
                     case `PERSETUJUAN_TETANGGA`:
@@ -276,6 +276,12 @@
                     },
                 ];
 
+                return arrayAppendElement;
+            }
+
+            // Surat pengantar nikah
+            function appendSuratPengantarNikah() {
+                let arrayAppendElement = [];
                 return arrayAppendElement;
             }
         });
