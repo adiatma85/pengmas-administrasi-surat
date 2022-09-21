@@ -101,7 +101,15 @@ class MailController extends Controller
             'occupation' => $dataKependudukan->occupation,
             'father_name' => $dataKependudukan->father_name,
             'mother_name' => $dataKependudukan->mother_name,
-            'disease' => $dataKependudukan->disease,
+            'disease' => $dataKependudukan->disease,'father_religion' => $request->post('father_religion'),
+            // MUST ADD NEW FIELD IN HERE
+            // 'father_occupation' => $request->post('father_occupation'),
+            // 'father_marital_status' => $request->post('marital_status'),
+            // 'father_address' => $request->post('father_address'),
+            // 'mother_religion' => $request->post('mother_religion'),
+            // 'mother_occupation' => $request->post('mother_occupation'),
+            // 'mother_marital_status' => $request->post('mother_marital_status'),
+            // 'mother_address' => $request->post('mother_address'),
 
             // Keterangan surat
             'keterangan_surat' => $request->post('keterangan_surat'),
@@ -111,7 +119,17 @@ class MailController extends Controller
         ];
         $insertedMailData = MailData::create($mailDataInsert);
 
+        // Generate data for pdf here
+        $pdfData = [];
+
         // Generate PDF here
+        $pdf = Pdf::loadView('pdf/surat-keterangan-domisili', $pdfData);
+
+        // Storing the data
+        $fileName = $entryMailInsert['title'] . '-' . $insertedMailData->id . '.pdf';
+        Storage::put('public/pdf/' . $fileName, $pdf->output());
+
+        return redirect()->route('portal.pengajuan-surat.index');
     }
 
     // Handle surat pengantar menikah
@@ -139,14 +157,16 @@ class MailController extends Controller
             'latest_education' => $dataKependudukan->latest_education,
             'occupation' => $dataKependudukan->occupation,
             'father_name' => $dataKependudukan->father_name,
-            'father_religion' => $request->post('father_religion'),
-            'father_occupation' => $request->post('father_occupation'),
-            'father_marital_status' => $request->post('marital_status'),
-            'father_address' => $request->post('father_address'),
-            'mother_religion' => $request->post('mother_religion'),
-            'mother_occupation' => $request->post('mother_occupation'),
-            'mother_marital_status' => $request->post('mother_marital_status'),
-            'mother_address' => $request->post('mother_address'),
+            // MUST ADD FIELD IN HERE
+            // 'father_religion' => $request->post('father_religion'),
+            // 'father_occupation' => $request->post('father_occupation'),
+            // 'father_marital_status' => $request->post('marital_status'),
+            // 'father_address' => $request->post('father_address'),
+            // 'mother_religion' => $request->post('mother_religion'),
+            // 'mother_occupation' => $request->post('mother_occupation'),
+            // 'mother_marital_status' => $request->post('mother_marital_status'),
+            // 'mother_address' => $request->post('mother_address'),
+            // MUST ADD FIELD IN HERE
             'mother_name' => $dataKependudukan->mother_name,
             'disease' => $dataKependudukan->disease,
 
@@ -155,7 +175,17 @@ class MailController extends Controller
         ];
         $insertedMailData = MailData::create($mailDataInsert);
 
+        // Generate data for pdf here
+        $pdfData = [];
+
         // Generate PDF here
+        $pdf = Pdf::loadView('pdf/surat-pengantar-nikah', $pdfData);
+
+        // Storing the data
+        $fileName = $entryMailInsert['title'] . '-' . $insertedMailData->id . '.pdf';
+        Storage::put('public/pdf/' . $fileName, $pdf->output());
+
+        return redirect()->route('portal.pengajuan-surat.index');
     }
 
     // Handle surat keterangan belum menikah

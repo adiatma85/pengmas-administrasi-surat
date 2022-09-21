@@ -79,7 +79,7 @@
                 </ul>
             </li>
         @endcan
-        @can('surat_menyurat_access')
+        {{-- @can('surat_menyurat_access') --}}
             <li class="c-sidebar-nav-dropdown {{ request()->is("admin/entry-mails*") ? "menu-open" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
                     <i class="fa-fw fas fa-envelope c-sidebar-nav-icon">
@@ -88,7 +88,7 @@
                     {{ trans('cruds.suratMenyurat.title') }}
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
-                    @can('entry_mail_access')
+                    {{-- @can('entry_mail_access') --}}
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.entry-mails.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/entry-mails") || request()->is("admin/entry-mails/*") ? "active" : "" }}">
                                 <i class="fa-fw fas fa-envelope c-sidebar-nav-icon">
@@ -97,8 +97,8 @@
                                 {{ trans('cruds.entryMail.title') }}
                             </a>
                         </li>
-                    @endcan
-                    @can('pengajuan_surat_access')
+                    {{-- @endcan --}}
+                    {{-- @can('pengajuan_surat_access') --}}
                         <li class="c-sidebar-nav-item">
                             <a href="{{ route("portal.pengajuan-surat.index") }}" class="c-sidebar-nav-link {{ request()->is("portal/pengajuan-surat") || request()->is("portal/pengajuan-surat/*") ? "active" : "" }}">
                                 <i class="fa-fw fas fa-envelope c-sidebar-nav-icon">
@@ -107,10 +107,10 @@
                                 Pengajuan Surat
                             </a>
                         </li>
-                    @endcan
+                    {{-- @endcan --}}
                 </ul>
             </li>
-        @endcan
+        {{-- @endcan --}}
         @can('pengumuman_dan_beritum_access')
             <li class="c-sidebar-nav-dropdown {{ request()->is("admin/berita*") ? "menu-open" : "" }} {{ request()->is("admin/pengumuman*") ? "menu-open" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle {{ request()->is("admin/berita*") ? "active" : "" }} {{ request()->is("admin/pengumuman*") ? "active" : "" }}" href="#">
