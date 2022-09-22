@@ -118,7 +118,7 @@
 
             function appendFieldText({label, valueName, htmlId}){
                 let returnValue = "<div class='form-group'>" + 
-                        `<label for="field${htmlId}">${label}</label>` +
+                        `<label class="required" for="field${htmlId}">${label}</label>` +
                         `<input class="form-control" type="text" name="${valueName}" id="field${htmlId}">` +
                         `</div>`
                     ;
@@ -179,77 +179,9 @@
                 let arrayAppendElement = 
                 [
                     {
-                        label: "Nama Lengkap",
-                        valueName: "fullname",
-                        htmlId: "fullname",
-                        fieldTyoe: "text",
-                    },
-                    {
-                        label: "NIK",
-                        valueName: "nik",
-                        htmlId: "nik",
-                        fieldTyoe: "text",
-                    },
-                    {
-                        label: "Tempat Lahir",
-                        valueName: "birthplace",
-                        htmlId: "birthplace",
-                        fieldTyoe: "text",
-                    },
-                    {
-                        label: "Tanggal Lahir",
-                        valueName: "birthdate",
-                        htmlId: "birthdate",
-                        fieldTyoe: "date",
-                    },
-                    {
-                        label: "Jenis Kelamin",
-                        valueName: "gender",
-                        htmlId: "gender",
-                        fieldTyoe: "select",
-                        optionValue: [
-                            "LAKI_LAKI",
-                            'PEREMPUAN',
-                        ],
-                        optionLabel: [
-                            "Laki Laki",
-                            "Perempuan",
-                        ],
-                    },
-                    {
-                        label: "Agama",
-                        valueName: "religion",
-                        htmlId: "religion",
-                        fieldTyoe: "select",
-                        optionValue: [
-                            "ISLAM",
-                            'KRISTEN_PROTESTAN',
-                            'KRISTEN_KATHOLIK',
-                            'HINDHU',
-                            'BUDHA',
-                            'KONGHUCU',
-                            'KEPERCAYAAN_LAIN',
-                        ],
-                        optionLabel: [
-                            "Islam",
-                            "Kristen Protestan",
-                            'Kristen Katholik',
-                            'Hindhu',
-                            'Budha',
-                            'Konghucu',
-                            'Kepercayaan Lain',
-                        ],
-                    },
-                    {
-                        label: "Profesi",
-                        valueName: "occupation",
-                        htmlId: "occupation",
-                        fieldTyoe: "text",
-                    },
-                    {
                         label: "Status Domisili",
-                        valueName: "status_domisili",
-                        htmlId: "status_domisili",
+                        valueName: "domicile_status",
+                        htmlId: "domicile_status",
                         fieldTyoe: "select",
                         optionValue: [
                             'KOST',
@@ -281,7 +213,110 @@
 
             // Surat pengantar nikah
             function appendSuratPengantarNikah() {
-                let arrayAppendElement = [];
+                let arrayAppendElement = [
+                    {
+                        label: "Agama Ayah",
+                        valueName: "father_religion",
+                        htmlId: "father_religion",
+                        fieldTyoe: "select",
+                        optionValue: [
+                            "ISLAM",
+                            'KRISTEN_PROTESTAN',
+                            'KRISTEN_KATHOLIK',
+                            'HINDHU',
+                            'BUDHA',
+                            'KONGHUCU',
+                            'KEPERCAYAAN_LAIN',
+                        ],
+                        optionLabel: [
+                            "Islam",
+                            "Kristen Protestan",
+                            'Kristen Katholik',
+                            'Hindhu',
+                            'Budha',
+                            'Konghucu',
+                            'Kepercayaan Lain',
+                        ],
+                    },
+                    {
+                        label: "Pekerjaan Ayah",
+                        valueName: "father_occupation",
+                        htmlId: "father_occupation",
+                        fieldTyoe: "text",
+                    },
+                    {
+                        label: "Status Perkawinan Ayah",
+                        valueName: "father_marital_status",
+                        htmlId: "father_marital_status",
+                        fieldTyoe: "select",
+                        optionValue: [
+                            "KAWIN",
+                            'BELUM_KAWIN',
+                        ],
+                        optionLabel: [
+                            "Kawin",
+                            "Belum Kawin",
+                        ],
+                    },
+                    {
+                        label: "Alamat Domisili Ayah",
+                        valueName: "father_address",
+                        htmlId: "father_address",
+                        fieldTyoe: "text",
+                    },
+
+                    // Ibu
+                    {
+                        label: "Agama Ibu",
+                        valueName: "mother_religion",
+                        htmlId: "mother_religion",
+                        fieldTyoe: "select",
+                        optionValue: [
+                            "ISLAM",
+                            'KRISTEN_PROTESTAN',
+                            'KRISTEN_KATHOLIK',
+                            'HINDHU',
+                            'BUDHA',
+                            'KONGHUCU',
+                            'KEPERCAYAAN_LAIN',
+                        ],
+                        optionLabel: [
+                            "Islam",
+                            "Kristen Protestan",
+                            'Kristen Katholik',
+                            'Hindhu',
+                            'Budha',
+                            'Konghucu',
+                            'Kepercayaan Lain',
+                        ],
+                    },
+                    {
+                        label: "Pekerjaan Ibu",
+                        valueName: "mother_occupation",
+                        htmlId: "mother_occupation",
+                        fieldTyoe: "text",
+                    },
+                    {
+                        label: "Status Perkawinan Ibu",
+                        valueName: "mother_marital_status",
+                        htmlId: "mother_marital_status",
+                        fieldTyoe: "select",
+                        optionValue: [
+                            "KAWIN",
+                            'BELUM_KAWIN',
+                        ],
+                        optionLabel: [
+                            "Kawin",
+                            "Belum Kawin",
+                        ],
+                    },
+                    {
+                        label: "Alamat Domisili Ibu",
+                        valueName: "mother_address",
+                        htmlId: "mother_address",
+                        fieldTyoe: "text",
+                    },
+                ];
                 return arrayAppendElement;
             }
         });

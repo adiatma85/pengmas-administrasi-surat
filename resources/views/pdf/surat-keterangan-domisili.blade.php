@@ -56,7 +56,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti nama lengkap
+                {{$fullname}}
             </td>
         </tr>
         <tr>
@@ -65,7 +65,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini Nanti NIK
+                {{$nik}}
             </td>
         </tr>
         <tr>
@@ -74,7 +74,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti ttl
+                {{$birthplace}}/{{$birthdate}}
             </td>
         </tr>
         <tr>
@@ -83,7 +83,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti jenis kelamin
+                {{$gender}}
             </td>
         </tr>
         <tr>
@@ -92,7 +92,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti agama
+                {{$religion}}
             </td>
         </tr>
         <tr>
@@ -101,7 +101,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti Kebangsaan
+                Indonesia
             </td>
         </tr>
         <tr>
@@ -110,7 +110,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti Status Perkawinan
+                {{$marital_status}}
             </td>
         </tr>
         <tr>
@@ -119,7 +119,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti Pekerjaan
+                {{$occupation}}
             </td>
         </tr>
         <tr>
@@ -156,7 +156,7 @@
                 :
             </td>
             <td width="350">
-                Ini nanti keterangan
+                {{$keterangan_surat}}
             </td>
         </tr>
     </table>
@@ -174,12 +174,19 @@
             <td align="center">KETUA RT 04</td>
         </tr>
         <tr>
-            <td height="100"></td>
+            <td height="100" align="center">
+                {{-- Tanda tangan Pemilik rumah --}}
+                @if ($signature)    
+                    <img src="{{$signature}}" alt="" height="175" width="175">
+                @endif
+            </td>
             <td width="25"></td>
-            <td height="100"></td>
+            <td height="100" align="center">
+                {{-- Tanda tangan Ketua RT --}}
+            </td>
         </tr>
         <tr>
-            <td align="center">Ini nama Pemohon</td>
+            <td align="center">{{$owner_house_name}}</td>
             <td width="25"></td>
             <td align="center">I Nyoman Suluh Wijaya</td>
         </tr>

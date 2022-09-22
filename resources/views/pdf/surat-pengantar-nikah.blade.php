@@ -55,7 +55,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti nama lengkap
+                {{$fullname}}
             </td>
         </tr>
         <tr>
@@ -64,7 +64,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti jenis kelamin
+                {{$gender}}
             </td>
         </tr>
         <tr>
@@ -73,7 +73,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti ttl
+                {{$birthplace}}/{{$birthdate}}
             </td>
         </tr>
         <tr>
@@ -82,7 +82,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti agama
+                {{$religion}}
             </td>
         </tr>
         <tr>
@@ -91,7 +91,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti Pekerjaan
+                {{$occupation}}
             </td>
         </tr>
         <tr>
@@ -100,7 +100,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti Status Perkawinan
+                {{$marital_status}}
             </td>
         </tr>
         <tr>
@@ -115,8 +115,6 @@
     </table>
 
     <br>
-
-    <!-- <p>Adalah Anak Kandung Dari</p> -->
 
 
     <table align="center" border="0">
@@ -133,7 +131,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti nama lengkap
+                {{$father_name}}
             </td>
         </tr>
         <tr>
@@ -142,7 +140,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti agama
+                {{$father_religion}}
             </td>
         </tr>
         <tr>
@@ -151,7 +149,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti Pekerjaan
+                {{$father_occupation}}
             </td>
         </tr>
         <tr>
@@ -160,7 +158,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti Status Perkawinan
+                {{$father_marital_status}}
             </td>
         </tr>
         <tr>
@@ -169,7 +167,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti Alamat
+                {{$father_address}}
             </td>
         </tr>
 
@@ -189,7 +187,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti nama lengkap
+                {{$mother_name}}
             </td>
         </tr>
         <tr>
@@ -198,7 +196,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti agama
+                {{$mother_religion}}
             </td>
         </tr>
         <tr>
@@ -207,7 +205,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti Pekerjaan
+                {{$mother_occupation}}
             </td>
         </tr>
         <tr>
@@ -216,7 +214,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti Status Perkawinan
+                {{$mother_marital_status}}
             </td>
         </tr>
         <tr>
@@ -225,7 +223,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini nanti Alamat
+                {{$mother_address}}
             </td>
         </tr>
     </table>
@@ -265,8 +263,12 @@
             <td align="center">KETUA RW 12</td>
         </tr>
         <tr>
-            <td height="100"></td>
-            <td height="100"></td>
+            <td height="100">
+                {{-- Tanda tangan Ketua RT 04 --}}
+            </td>
+            <td height="100">
+                {{-- Tanda tangan Ketua RW 12 --}}
+            </td>
         </tr>
         <tr>
             <td align="center">I Nyoman Suluh Wijaya</td>

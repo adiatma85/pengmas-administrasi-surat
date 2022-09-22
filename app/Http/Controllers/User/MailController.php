@@ -73,13 +73,6 @@ class MailController extends Controller
     // Handle surat keterangan domisili
     private function storeSuratDomisili(Request $request, $user, $dataKependudukan){
 
-        // Change validation logic in here
-
-        if(!$request->post('keterangan_surat')){
-            // Change this to return route or return view instead
-            return response()->json("masukan tidak valid (keterangan_surat)");
-        }
-
         // Dimasukan dulu ke entry_mail terlebih dahulu
         $entryMailInsert = [
             'title' => $this->generateTitle($request, $dataKependudukan->fullname),
@@ -102,25 +95,31 @@ class MailController extends Controller
             'father_name' => $dataKependudukan->father_name,
             'mother_name' => $dataKependudukan->mother_name,
             'disease' => $dataKependudukan->disease,'father_religion' => $request->post('father_religion'),
-            // MUST ADD NEW FIELD IN HERE
-            // 'father_occupation' => $request->post('father_occupation'),
-            // 'father_marital_status' => $request->post('marital_status'),
-            // 'father_address' => $request->post('father_address'),
-            // 'mother_religion' => $request->post('mother_religion'),
-            // 'mother_occupation' => $request->post('mother_occupation'),
-            // 'mother_marital_status' => $request->post('mother_marital_status'),
-            // 'mother_address' => $request->post('mother_address'),
-
-            // Keterangan surat
+            // Special Attribute
             'keterangan_surat' => $request->post('keterangan_surat'),
+            'domicile_status' => $request->post('domicile_status'),
 
             // Add on
             'entry_mail_id' => $insertedEntryMail->id,
         ];
         $insertedMailData = MailData::create($mailDataInsert);
 
+        $base64Signature = $this->toBase64($request->file('signature'));
+
         // Generate data for pdf here
-        $pdfData = [];
+        $pdfData = [
+            'fullname' => $dataKependudukan->fullname,
+            'nik' => $dataKependudukan->nik,
+            'birthdate' => $dataKependudukan->birthdate,
+            'birthplace' => $dataKependudukan->birthplace,
+            'gender' => Kependudukan::GENDER_SELECT[$dataKependudukan->gender],
+            'religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->religion],
+            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$dataKependudukan->marital_status],
+            'occupation' => $dataKependudukan->occupation,
+            'keterangan_surat' => $request->post('keterangan_surat'),
+            'signature' => $base64Signature,
+            'owner_house_name' => $request->post('owner_house_name'),
+        ];
 
         // Generate PDF here
         $pdf = Pdf::loadView('pdf/surat-keterangan-domisili', $pdfData);
@@ -156,18 +155,19 @@ class MailController extends Controller
             'marital_status' => $dataKependudukan->marital_status,
             'latest_education' => $dataKependudukan->latest_education,
             'occupation' => $dataKependudukan->occupation,
+            // Ayah
             'father_name' => $dataKependudukan->father_name,
-            // MUST ADD FIELD IN HERE
-            // 'father_religion' => $request->post('father_religion'),
-            // 'father_occupation' => $request->post('father_occupation'),
-            // 'father_marital_status' => $request->post('marital_status'),
-            // 'father_address' => $request->post('father_address'),
-            // 'mother_religion' => $request->post('mother_religion'),
-            // 'mother_occupation' => $request->post('mother_occupation'),
-            // 'mother_marital_status' => $request->post('mother_marital_status'),
-            // 'mother_address' => $request->post('mother_address'),
-            // MUST ADD FIELD IN HERE
+            'fahter_religion' => $request->post('fahter_religion'),
+            'father_occupation' => $request->post('father_occupation'),
+            'mother_marital_status' => $request->post('mother_marital_status'),
+            'father_address' => $request->post('father_address'),
+            // Ibu
             'mother_name' => $dataKependudukan->mother_name,
+            'mother_religion' => $request->post('mother_religion'),
+            'mother_occupation' => $request->post('mother_occupation'),
+            'mother_marital_status' => $request->post('mother_marital_status'),
+            'mother_address' => $request->post('mother_address'),
+            
             'disease' => $dataKependudukan->disease,
 
             // Add on
@@ -176,7 +176,27 @@ class MailController extends Controller
         $insertedMailData = MailData::create($mailDataInsert);
 
         // Generate data for pdf here
-        $pdfData = [];
+        $pdfData = [
+            'fullname' => $dataKependudukan->fullname,
+            'gender' => Kependudukan::GENDER_SELECT[$dataKependudukan->gender],
+            'birthdate' => $dataKependudukan->birthdate,
+            'birthplace' => $dataKependudukan->birthplace,
+            'religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->religion],
+            'occupation' => $dataKependudukan->occupation,
+            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$dataKependudukan->marital_status],
+            // Ayah
+            'father_name' => $dataKependudukan->father_name,
+            'father_religion' => Kependudukan::RELIGION_SELECT[$request->post('father_religion')],
+            'father_occupation' => $request->post('father_occupation'),
+            'father_marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$request->post('father_marital_status')],
+            'father_address' => $request->post('father_address'),
+            // Ibu
+            'mother_name' => $dataKependudukan->mother_name,
+            'mother_religion' => $request->post('mother_religion'),
+            'mother_occupation' => $request->post('mother_occupation'),
+            'mother_marital_status' => $request->post('mother_marital_status'),
+            'mother_address' => $request->post('mother_address'),
+        ];
 
         // Generate PDF here
         $pdf = Pdf::loadView('pdf/surat-pengantar-nikah', $pdfData);
@@ -275,5 +295,13 @@ class MailController extends Controller
         $generatedString = $mailType . " - " . $now . " - " . $userFullName;
         
         return $generatedString;
+    }
+
+    private function toBase64($image){
+
+            $imageContents = file_get_contents($image);
+            $base64ImgString = "data:image/jpeg;base64," . base64_encode($imageContents);
+            return $base64ImgString;
+            
     }
 }

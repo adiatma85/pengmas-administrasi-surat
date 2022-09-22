@@ -33,6 +33,12 @@ class MailData extends Model
         'KEPERCAYAAN_LAIN'  => 'Kepercayaan Lain',
     ];
 
+    public const STATUS_DOMICILE_SELECT = [
+        'KOST' => 'Kost',
+        'KONTRAK' => 'Kontrak',
+        'RUMAH_SAUDARA' => 'Rumah Saudara'
+    ];
+
     protected $table = 'mail_data';
 
     protected $fillable = [
@@ -63,6 +69,7 @@ class MailData extends Model
 
         // Add on
         'entry_mail_id',
+        'domicile_status',
     ];
 
     protected $dates = [
