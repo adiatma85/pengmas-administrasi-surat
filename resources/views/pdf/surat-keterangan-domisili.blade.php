@@ -176,7 +176,7 @@
         <tr>
             <td height="100" align="center">
                 {{-- Tanda tangan Pemilik rumah --}}
-                @if ($signature)    
+                @if ($signature ?? false)    
                     <img src="{{$signature}}" alt="" height="175" width="175">
                 @endif
             </td>
