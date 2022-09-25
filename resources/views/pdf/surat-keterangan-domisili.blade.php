@@ -183,8 +183,8 @@
             <td width="25"></td>
             <td height="100" align="center">
                 {{-- Tanda tangan ketua RT --}}
-                @if ($ketua_rt_signature)    
-                    <img src="{{$ketua_rt_signature}}" alt="" height="175" width="175">
+                @if ($ketua_rt_signature ?? false)    
+                    <img src="{{$ketua_rt_signature}}" alt="" height="125" width="125">
                 @endif
             </td>
         </tr>
