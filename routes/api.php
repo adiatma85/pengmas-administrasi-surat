@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 // Controller Import (User)
 use App\Http\Controllers\Api\V1\User\BeritaApiController as ApiUserBeritaController;
 use App\Http\Controllers\Api\V1\User\PengumumanApiController as ApiUserPengumumanController;
+use App\Http\Controllers\Api\V1\User\RuleApiController as ApiUserPeraturanController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -31,4 +32,5 @@ Route::prefix('v1')->as('v1.')->group(function (){
     Route::apiResource('pengumuman', ApiUserPengumumanController::class);
 
     // Peraturan
+    Route::apiResource('peraturan', ApiUserPeraturanController::class);
 });
