@@ -11,6 +11,21 @@ class BeritaApiController extends Controller
 
     use ResponseTrait;
 
+     /**
+     * @OA\Get(
+     *      path="/berita",
+     *      operationId="getProjectsList",
+     *      tags={"Berita"},
+     *      summary="Get list of Berita",
+     *      description="Returns list of Berita",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Berita")
+     *       ),
+     *     )
+     */
+
     public function index()
     {
         $beritas = Beritum::all();
