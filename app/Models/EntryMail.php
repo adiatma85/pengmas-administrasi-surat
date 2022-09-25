@@ -68,4 +68,8 @@ class EntryMail extends Model implements HasMedia
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function detail(){
+        return $this->hasOne(MailData::class, 'entry_mail_id');
+    }
 }

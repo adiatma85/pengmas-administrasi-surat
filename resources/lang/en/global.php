@@ -4,7 +4,7 @@ return [
     'actions'                        => 'Actions',
     'add'                            => 'Add',
     'allRightsReserved'              => 'All rights reserved.',
-    'areYouSure'                     => 'Are you sure?',
+    'areYouSure'                     => 'Apakah Anda yakin?',
     'clickHereToVerify'              => 'Click here to verify',
     'create'                         => 'Create',
     'dashboard'                      => 'Dashboard',

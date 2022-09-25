@@ -212,8 +212,15 @@
             <td align="center">KETUA RW 12</td>
         </tr>
         <tr>
-            <td height="100"></td>
-            <td height="100"></td>
+            <td height="100" align="center">
+                {{-- Tanda tangan ketua RT --}}
+                @if ($ketua_rt_signature)    
+                    <img src="{{$ketua_rt_signature}}" alt="" height="125" width="125">
+                @endif
+            </td>
+            <td height="100" align="center">
+                {{-- Tanda tangan ketua RW --}}
+            </td>
         </tr>
         <tr>
             <td align="center">I Nyoman Suluh Wijaya</td>

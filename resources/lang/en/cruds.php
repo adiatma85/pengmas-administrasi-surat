@@ -145,8 +145,8 @@ return [
         ],
     ],
     'pengumumanDanBeritum' => [
-        'title'          => 'Pengumuman Dan Berita',
-        'title_singular' => 'Pengumuman Dan Beritum',
+        'title'          => 'Konten',
+        'title_singular' => 'Konten',
     ],
     'beritum' => [
         'title'          => 'Berita',

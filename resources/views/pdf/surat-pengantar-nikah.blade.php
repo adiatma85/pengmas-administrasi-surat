@@ -263,10 +263,13 @@
             <td align="center">KETUA RW 12</td>
         </tr>
         <tr>
-            <td height="100">
-                {{-- Tanda tangan Ketua RT 04 --}}
+            <td height="100" align="center">
+                {{-- Tanda tangan ketua RT --}}
+                @if ($ketua_rt_signature)    
+                    <img src="{{$ketua_rt_signature}}" alt="" height="125" width="125">
+                @endif
             </td>
-            <td height="100">
+            <td height="100" align="center">
                 {{-- Tanda tangan Ketua RW 12 --}}
             </td>
         </tr>

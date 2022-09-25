@@ -45,6 +45,9 @@ class User extends Authenticatable
         'created_at',
         'updated_at',
         'deleted_at',
+
+        // Add on
+        'base_64_signature',
     ];
 
     public function getIsAdminAttribute()
@@ -88,5 +91,10 @@ class User extends Authenticatable
     // Will return null if it data kependudukan does not exist
     public function kependudukan(){
         return $this->hasOne(Kependudukan::class, 'user_id');
+    }
+
+    public function getImgSignatureAttribute(){
+        $string = 'data:image/jpeg;base64,' . $this->base_64_signature;
+        return $string;
     }
 }

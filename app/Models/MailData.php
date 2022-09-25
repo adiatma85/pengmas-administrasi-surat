@@ -70,6 +70,9 @@ class MailData extends Model
         // Add on
         'entry_mail_id',
         'domicile_status',
+        'owner_house_name',
+        'base_64_owner_house_signature',
+        'alamat_orang_tua',
     ];
 
     protected $dates = [

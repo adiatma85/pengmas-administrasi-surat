@@ -12,6 +12,10 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\Kependudukan;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class EntryMailController extends Controller
 {
@@ -22,6 +26,12 @@ class EntryMailController extends Controller
         abort_if(Gate::denies('entry_mail_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $entryMails = EntryMail::with(['media'])->get();
+
+        foreach ($entryMails as $entryMail) {
+            // Prefix
+            $prefixPath = 'storage/pdf/';
+            $entryMail['file_link'] = asset($prefixPath . $entryMail->title . '-' . $entryMail->id . '.pdf');
+        }
 
         return view('admin.entryMails.index', compact('entryMails'));
     }
@@ -106,5 +116,142 @@ class EntryMailController extends Controller
         $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
+    }
+
+    public function mailAccept(Request $request, $entryMailId){
+        $entryMail = EntryMail::where('id', $entryMailId);
+        $entryMail->update(['status' => 'DISETUJUI',]);
+
+        $entryMail = $entryMail->first();
+
+        // Get the type
+
+        switch ($entryMail->type) {
+            case "KETERANGAN_DOMISILI":
+                $this->generateSuratDomisili($entryMail);
+                break;
+            
+            case 'PENGANTAR_SURAT_NIKAH':
+                $this->generateSuratPengantarNikah($entryMail);
+                break;
+            case 'KETERANGAN_BELUM_MENIKAH':
+                $this->generateSuratBelumMenikah($entryMail);
+                break;
+        }
+        
+        return back();
+    }
+
+    private function generateSuratBelumMenikah($entryMail){
+
+        $mailData = $entryMail->detail;
+
+        // Generate data for pdf here
+        $pdfData = [
+            'fullname' => $mailData->fullname,
+            'nik' => $mailData->nik,
+            'birthdate' => $mailData->birthdate,
+            'birthplace' => $mailData->birthplace,
+            'gender' => Kependudukan::GENDER_SELECT[$mailData->gender],
+            'religion' => Kependudukan::RELIGION_SELECT[$mailData->religion],
+            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->marital_status],
+            'latest_education' => Kependudukan::LATEST_EDUCATION_SELECT[$mailData->latest_education],
+            'occupation' => $mailData->occupation,
+            'father_name' => $mailData->father_name,
+            'mother_name' => $mailData->mother_name,
+
+            // Keterangan surat
+            'keterangan_surat' => $mailData->keterangan_surat,
+
+            // Alamat Orang Tua
+            'alamat_orang_tua' => $mailData->alamat_orang_tua,
+
+            // Trigger for penandatanganan
+            'ketua_rt_signature' => Auth::user()->img_signature,
+        ];
+
+        // Generate PDf here
+        $pdf = Pdf::loadView('pdf/surat-keterangan-belum-menikah', $pdfData);
+
+        // Storing the data
+        $fileName = $entryMail->title . '-' . $mailData->id . '.pdf';
+        Storage::put('public/pdf/' . $fileName, $pdf->output());
+    }
+
+    private function generateSuratDomisili($entryMail){
+        $mailData = $entryMail->detail;
+
+        $base64Signature = "data:image/jpeg;base64," . $mailData->base_64_owner_house_signature;
+
+        // Generate data for pdf here
+        $pdfData = [
+            'fullname' => $mailData->fullname,
+            'nik' => $mailData->nik,
+            'birthdate' => $mailData->birthdate,
+            'birthplace' => $mailData->birthplace,
+            'gender' => Kependudukan::GENDER_SELECT[$mailData->gender],
+            'religion' => Kependudukan::RELIGION_SELECT[$mailData->religion],
+            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->marital_status],
+            'occupation' => $mailData->occupation,
+            'keterangan_surat' => $mailData->keterangan_surat,
+            'signature' => $base64Signature,
+            'owner_house_name' => $mailData->owner_house_name,
+
+            // Trigger for penandatanganan
+            'ketua_rt_signature' => Auth::user()->img_signature,
+        ];
+
+        // Generate PDF here
+        $pdf = Pdf::loadView('pdf/surat-keterangan-domisili', $pdfData);
+
+        // Storing the data
+        $fileName = $entryMail->title . '-' . $mailData->id . '.pdf';
+        Storage::put('public/pdf/' . $fileName, $pdf->output());
+    }
+
+    private function generateSuratPengantarNikah($entryMail){
+        $mailData = $entryMail->detail;
+
+        // Generate data for pdf here
+        $pdfData = [
+            'fullname' => $mailData->fullname,
+            'gender' => Kependudukan::GENDER_SELECT[$mailData->gender],
+            'birthdate' => $mailData->birthdate,
+            'birthplace' => $mailData->birthplace,
+            'religion' => Kependudukan::RELIGION_SELECT[$mailData->religion],
+            'occupation' => $mailData->occupation,
+            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->marital_status],
+            // Ayah
+            'father_name' => $mailData->father_name,
+            'father_religion' => Kependudukan::RELIGION_SELECT[$mailData->father_religion],
+            'father_occupation' => $mailData->father_occupation,
+            'father_marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->father_marital_status],
+            'father_address' => $mailData->father_address,
+            // Ibu
+            'mother_name' => $mailData->mother_name,
+            'mother_religion' => Kependudukan::RELIGION_SELECT[$mailData->mother_religion],
+            'mother_occupation' => $mailData->mother_occupation,
+            'mother_marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->mother_marital_status],
+            'mother_address' => $mailData->mother_address,
+
+            // Trigger for penandatanganan
+            'ketua_rt_signature' => Auth::user()->img_signature,
+        ];
+
+        // Generate PDF here
+        $pdf = Pdf::loadView('pdf/surat-pengantar-nikah', $pdfData);
+
+        // Storing the data
+        $fileName = $entryMail->title . '-' . $mailData->id . '.pdf';
+        Storage::put('public/pdf/' . $fileName, $pdf->output());
+    }
+
+    public function mailReject(Request $request, $entryMailId){
+        $entryMail = EntryMail::where('id', $entryMailId)
+            ->update([
+                'status' => 'DITOLAK',
+            ]);
+        
+        return back();
     }
 }

@@ -192,9 +192,9 @@ class MailController extends Controller
             'father_address' => $request->post('father_address'),
             // Ibu
             'mother_name' => $dataKependudukan->mother_name,
-            'mother_religion' => $request->post('mother_religion'),
+            'mother_religion' => Kependudukan::RELIGION_SELECT[$request->post('mother_religion')],
             'mother_occupation' => $request->post('mother_occupation'),
-            'mother_marital_status' => $request->post('mother_marital_status'),
+            'mother_marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$request->post('mother_marital_status')],
             'mother_address' => $request->post('mother_address'),
         ];
 

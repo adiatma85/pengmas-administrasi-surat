@@ -65,7 +65,10 @@ Route::prefix("admin")->as("admin.")->middleware('auth')->group(function (){
     Route::delete('entry-mails/destroy', [AdminEntryMailController::class, 'massDestroy'])->name('entry-mails.massDestroy');
     Route::post('entry-mails/media', [AdminEntryMailController::class, 'storeMedia'])->name('entry-mails.storeMedia');
     Route::post('entry-mails/ckmedia', [AdminEntryMailController::class, 'storeCKEditorImages'])->name('entry-mails.storeCKEditorImages');
+    Route::post('entry-mails/accept/{entryMailId}', [AdminEntryMailController::class, 'mailAccept'])->name('entry-mails.mailAccept');
+    Route::post('entry-mails/reject/{entryMailId}', [AdminEntryMailController::class, 'mailReject'])->name('entry-mails.mailReject');
     Route::resource('entry-mails', AdminEntryMailController::class);
+
 
     // Berita
     Route::delete('berita/destroy', [AdminBeritaController::class, 'massDestroy'])->name('berita.massDestroy');

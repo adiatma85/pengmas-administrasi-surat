@@ -35,6 +35,9 @@
                             {{ trans('cruds.entryMail.fields.status') }}
                         </th>
                         <th>
+                            File
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -64,6 +67,9 @@
                             </select>
                         </td>
                         <td>
+                            {{-- Memang kosongan --}}
+                        </td>
+                        <td>
                         </td>
                     </tr>
                 </thead>
@@ -86,6 +92,13 @@
                                 {{ App\Models\EntryMail::STATUS_SELECT[$entryMail->status] ?? '' }}
                             </td>
                             <td>
+                                <a href="{{$entryMail->file_link ?? "#"}}">
+                                    <span class="badge badge-info">
+                                        File
+                                    </span>
+                                </a>
+                            </td>
+                            <td>
                                 @can('entry_mail_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.entry-mails.show', $entryMail->id) }}">
                                         {{ trans('global.view') }}
@@ -105,7 +118,17 @@
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                     </form>
                                 @endcan
-
+                                {{-- Add on untuk menandatangani --}}
+                                {{-- Pasti di sini mengiriim id --}}
+                                <form action="{{ route('admin.entry-mails.mailAccept', $entryMail->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="submit" class="btn btn-xs btn-success" value="Setuju">
+                                </form>
+                                {{-- Add on untuk menolak tandatangan --}}
+                                <form action="{{ route('admin.entry-mails.mailReject', $entryMail->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="submit" class="btn btn-xs btn-danger" value="Tolak">
+                                </form>
                             </td>
 
                         </tr>
