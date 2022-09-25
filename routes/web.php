@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\KependudukanController as AdminKependudukanContro
 use App\Http\Controllers\Admin\EntryMailController as AdminEntryMailController;
 use App\Http\Controllers\Admin\BeritaController as AdminBeritaController;
 use App\Http\Controllers\Admin\PengumumanController as AdminPengumumanController;
+use App\Http\Controllers\Admin\RuleController as AdminRuleController;
 
 // Controller Import (Auth)
 use App\Http\Controllers\Auth\ChangePasswordController as AuthChangePassworController;
@@ -81,6 +82,10 @@ Route::prefix("admin")->as("admin.")->middleware('auth')->group(function (){
     Route::post('pengumuman/media', [AdminPengumumanController::class, 'storeMedia'])->name('pengumuman.storeMedia');
     Route::post('pengumuman/ckmedia', [AdminPengumumanController::class, 'storeCKEditorImages'])->name('pengumuman.storeCKEditorImages');
     Route::resource('pengumuman', AdminPengumumanController::class);
+
+     // Rule
+     Route::delete('rules/destroy', [AdminRuleController::class, 'massDestroy'])->name('rules.massDestroy');
+     Route::resource('rules', AdminRuleController::class);
 });
 
 // This is for user

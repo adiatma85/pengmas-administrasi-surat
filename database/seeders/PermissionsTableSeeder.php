@@ -191,6 +191,26 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 45,
                 'title' => 'pengumuman_access',
             ],
+            [
+                'id'    => 46,
+                'title' => 'rule_create',
+            ],
+            [
+                'id'    => 47,
+                'title' => 'rule_edit',
+            ],
+            [
+                'id'    => 48,
+                'title' => 'rule_show',
+            ],
+            [
+                'id'    => 49,
+                'title' => 'rule_delete',
+            ],
+            [
+                'id'    => 50,
+                'title' => 'rule_access',
+            ],
         ];
 
         Permission::insert($permissions);

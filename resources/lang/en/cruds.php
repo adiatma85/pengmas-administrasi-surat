@@ -188,4 +188,20 @@ return [
             'deleted_at_helper' => ' ',
         ],
     ],
+    'rule' => [
+        'title'          => 'Peraturan',
+        'title_singular' => 'Peraturan',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => ' ',
+            'content'           => 'Konten',
+            'content_helper'    => ' ',
+            'created_at'        => 'Created at',
+            'created_at_helper' => ' ',
+            'updated_at'        => 'Updated at',
+            'updated_at_helper' => ' ',
+            'deleted_at'        => 'Deleted at',
+            'deleted_at_helper' => ' ',
+        ],
+    ],
 ];

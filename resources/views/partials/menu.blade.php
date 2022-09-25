@@ -147,6 +147,18 @@
                             </a>
                         </li>
                     @endcan
+                    @can('rule_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.rules.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/rules") || request()->is("admin/rules/*") ? "active" : "" }}">
+                                <i class="fa-fw c-sidebar-nav-icon fas fa-volume-up">
+
+                                </i>
+                                <p>
+                                    {{ trans('cruds.rule.title') }}
+                                </p>
+                            </a>
+                        </li>
+                    @endcan
                 </ul>
             </li>
         @endcan
