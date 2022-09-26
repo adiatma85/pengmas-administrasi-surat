@@ -33,4 +33,17 @@ class PengumumanApiController extends Controller
         return $this->successResponse("success fetching data", $returnValue);
     }
 
+    public function show(Pengumuman $pengumuman){
+        $returnValue = [
+            'id' => $pengumuman->id,
+            'title' => $pengumuman->title,
+            'content' => $pengumuman->content,
+            'image_url' => $pengumuman->image ? $pengumuman->image->url : '',
+            'created_at' => $pengumuman->created_at,
+            'updated_at' => $pengumuman->updated_at,
+            'deleted_at' => $pengumuman->deleted_at,
+        ];
+
+        return $this->successResponse("success fetching data", $returnValue);
+    }
 }

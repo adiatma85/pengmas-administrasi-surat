@@ -48,4 +48,18 @@ class BeritaApiController extends Controller
         return $this->successResponse("success fetching data", $returnValue);
     }
 
+    public function show(Beritum $berita){
+        $returnValue = [
+            'id' => $berita->id,
+            'title' => $berita->title,
+            'content' => $berita->content,
+            'image_url' => $berita->image ? $berita->image->url : '',
+            'created_at' => $berita->created_at,
+            'updated_at' => $berita->updated_at,
+            'deleted_at' => $berita->deleted_at,
+        ];
+
+        return $this->successResponse("success fetching data", $returnValue);
+    }
+
 }
