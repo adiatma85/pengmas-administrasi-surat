@@ -33,11 +33,16 @@ class PengumumanApiController extends Controller
         return $this->successResponse("success fetching data", $returnValue);
     }
 
-    public function show(Pengumuman $pengumuman){
+    public function show($pengumumanId){
 
-        if (!$pengumuman) {
+        
+        $pengumuman = Pengumuman::where('id', $pengumumanId);
+
+        if (!$pengumuman->exists()) {
             return $this->notFoundFailResponse();
         }
+
+        $pengumuman = $pengumuman->first();
 
         $returnValue = [
             'id' => $pengumuman->id,

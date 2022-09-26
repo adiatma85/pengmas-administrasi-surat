@@ -48,11 +48,15 @@ class BeritaApiController extends Controller
         return $this->successResponse("success fetching data", $returnValue);
     }
 
-    public function show(Beritum $berita){
+    public function show($beritaId){
 
-        if (!$berita) {
+        $berita = Beritum::where('id', $beritaId);
+
+        if (!$berita->exists()) {
             return $this->notFoundFailResponse();
         }
+
+        $berita = $berita->first();
 
         $returnValue = [
             'id' => $berita->id,
