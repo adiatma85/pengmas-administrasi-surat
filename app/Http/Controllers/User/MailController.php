@@ -94,10 +94,11 @@ class MailController extends Controller
             'occupation' => $dataKependudukan->occupation,
             'father_name' => $dataKependudukan->father_name,
             'mother_name' => $dataKependudukan->mother_name,
-            'disease' => $dataKependudukan->disease,'father_religion' => $request->post('father_religion'),
+            'disease' => $dataKependudukan->disease,
             // Special Attribute
             'keterangan_surat' => $request->post('keterangan_surat'),
             'domicile_status' => $request->post('domicile_status'),
+            'owner_house_name' => $request->post('owner_house_name'),
 
             // Add on
             'entry_mail_id' => $insertedEntryMail->id,
@@ -298,7 +299,6 @@ class MailController extends Controller
     }
 
     private function toBase64($image){
-
             $imageContents = file_get_contents($image);
             $base64ImgString = "data:image/jpeg;base64," . base64_encode($imageContents);
             return $base64ImgString;

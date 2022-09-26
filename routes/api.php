@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\V1\User\AuthApiController as ApiAuthController;
 use App\Http\Controllers\Api\V1\User\BeritaApiController as ApiUserBeritaController;
 use App\Http\Controllers\Api\V1\User\PengumumanApiController as ApiUserPengumumanController;
 use App\Http\Controllers\Api\V1\User\RuleApiController as ApiUserPeraturanController;
+use App\Http\Controllers\Api\V1\User\GeneratePdfApiController as ApiUserGeneratePdf;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -40,4 +41,8 @@ Route::prefix('v1')->as('v1.')->group(function (){
     Route::apiResource('peraturan', ApiUserPeraturanController::class);
 
     // Group with sanctum
+    Route::middleware('auth:sanctum')->group(function () {
+        // Generate Surat Domisili
+        Route::post('/generate/surat-domisili', [ApiUserGeneratePdf::class, 'generateSuratDomisili']);
+    });
 });
