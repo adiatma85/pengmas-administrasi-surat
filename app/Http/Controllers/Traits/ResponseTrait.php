@@ -16,10 +16,15 @@ trait ResponseTrait
         ], $statusCode);
     }
 
+    // internal server error fail response
+    public function internalServerFailResponse(){
+        return $this->response(false, Response::HTTP_INTERNAL_SERVER_ERROR, "Internal Server Error", null);
+    }
+
     // bad request fail response
     public function badRequestFailResponse($validator)
     {
-        return $this->response(false, Response::HTTP_BAD_REQUEST, "Bad Request", ["details" => $validator]);
+        return $this->response(false, Response::HTTP_BAD_REQUEST, "Bad Request", ["details" => $validator ?? ""]);
     }
 
     // not found fail response
