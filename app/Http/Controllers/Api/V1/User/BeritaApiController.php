@@ -49,6 +49,11 @@ class BeritaApiController extends Controller
     }
 
     public function show(Beritum $berita){
+
+        if (!$berita) {
+            return $this->notFoundFailResponse();
+        }
+
         $returnValue = [
             'id' => $berita->id,
             'title' => $berita->title,

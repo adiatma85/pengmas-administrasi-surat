@@ -34,6 +34,11 @@ class PengumumanApiController extends Controller
     }
 
     public function show(Pengumuman $pengumuman){
+
+        if (!$pengumuman) {
+            return $this->notFoundFailResponse();
+        }
+
         $returnValue = [
             'id' => $pengumuman->id,
             'title' => $pengumuman->title,
