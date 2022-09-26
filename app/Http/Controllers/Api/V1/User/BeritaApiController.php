@@ -33,9 +33,13 @@ class BeritaApiController extends Controller
 
         foreach ($beritas as $berita) {
             $item = [
+                'id' => $berita->id,
                 'title' => $berita->title,
                 'content' => $berita->content,
                 'image_url' => $berita->image ? $berita->image->url : '',
+                'created_at' => $berita->created_at,
+                'updated_at' => $berita->updated_at,
+                'deleted_at' => $berita->deleted_at,
             ];
 
             array_push($returnValue, $item);

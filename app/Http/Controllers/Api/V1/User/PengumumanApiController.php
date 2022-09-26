@@ -16,11 +16,15 @@ class PengumumanApiController extends Controller
         $pengumuans = Pengumuman::all();
         $returnValue = [];
 
-        foreach ($pengumuans as $berita) {
+        foreach ($pengumuans as $pengumuman) {
             $item = [
-                'title' => $berita->title,
-                'content' => $berita->content,
-                'image_url' => $berita->image ? $berita->image->url : '',
+                'id' => $pengumuman->id,
+                'title' => $pengumuman->title,
+                'content' => $pengumuman->content,
+                'image_url' => $pengumuman->image ? $pengumuman->image->url : '',
+                'created_at' => $pengumuman->created_at,
+                'updated_at' => $pengumuman->updated_at,
+                'deleted_at' => $pengumuman->deleted_at,
             ];
 
             array_push($returnValue, $item);
