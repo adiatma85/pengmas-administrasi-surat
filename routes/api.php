@@ -44,5 +44,11 @@ Route::prefix('v1')->as('v1.')->group(function (){
     Route::middleware('auth:sanctum')->group(function () {
         // Generate Surat Domisili
         Route::post('/generate/surat-domisili', [ApiUserGeneratePdf::class, 'generateSuratDomisili']);
+
+        // Generate Surat Pengantar Nikah
+        Route::post('/generate/surat-pengantar-nikah', [ApiUserGeneratePdf::class, 'generateSuratPengantarNikah']);
+
+        // Generate Surat Keterangan Belum Menikah
+        Route::post('/generate/surat-keterangan-belum-nikah', [ApiUserGeneratePdf::class, 'generateSuratKeteranganBelumMenikah']);
     });
 });

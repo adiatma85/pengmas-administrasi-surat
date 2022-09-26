@@ -158,9 +158,9 @@ class MailController extends Controller
             'occupation' => $dataKependudukan->occupation,
             // Ayah
             'father_name' => $dataKependudukan->father_name,
-            'fahter_religion' => $request->post('fahter_religion'),
+            'father_religion' => $request->post('father_religion'),
             'father_occupation' => $request->post('father_occupation'),
-            'mother_marital_status' => $request->post('mother_marital_status'),
+            'father_marital_status' => $request->post('father_marital_status'),
             'father_address' => $request->post('father_address'),
             // Ibu
             'mother_name' => $dataKependudukan->mother_name,
@@ -243,6 +243,7 @@ class MailController extends Controller
 
             // Keterangan surat
             'keterangan_surat' => $request->post('keterangan_surat'),
+            'alamat_orang_tua' => $request->post('alamat_orang_tua'),
 
             // Add on
             'entry_mail_id' => $insertedEntryMail->id,
