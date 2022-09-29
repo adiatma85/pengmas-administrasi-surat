@@ -80,7 +80,8 @@ class EntryMailController extends Controller
             $entryMail->mail->delete();
         }
 
-        return redirect()->route('admin.entry-mails.index');
+        // return redirect()->route('admin.entry-mails.index');
+        return redirect()->route('portal.pengajuan-surat.index');
     }
 
     public function show(EntryMail $entryMail)
@@ -137,7 +138,7 @@ class EntryMailController extends Controller
                 $this->generateSuratBelumMenikah($entryMail);
                 break;
             case 'PERSETUJUAN_TETANGGA':
-                
+                // Kalau ini cukup ganti file nya saja terus ganti statusnya saja
                 break;
         }
         

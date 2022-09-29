@@ -30,8 +30,14 @@ class MailController extends Controller
 
         foreach ($entryMails as $entryMail) {
             // Prefix
-            $prefixPath = 'storage/pdf/';
-            $entryMail['file_link'] = asset($prefixPath . $entryMail->title . '-' . $entryMail->id . '.pdf');
+            if ($entryMail->mail) {
+                $entryMail['file_link'] = $entryMail->mail->original_url;
+            } elseif($entryMail->file_path) {
+                $prefixPath = 'storage/pdf/';
+                $entryMail['file_link'] = asset($prefixPath . $entryMail->title . '-' . $entryMail->id . '.pdf');
+            } else {
+                $entryMail = '#';
+            }
         }
 
         return view('user.mail.index', compact('entryMails'));
@@ -55,7 +61,8 @@ class MailController extends Controller
         // Jika pengguna yang masuk ke sini adalah RT
         $user = Auth::user();
         if ($this->isBapakRT($user->roles[0]->id)) {
-            $user = User::find($request->users);  
+            $reqUser = $request->post('user');
+            $user = User::find($reqUser);
         } 
         
         $dataKependudukan = $user->kependudukan;
@@ -146,6 +153,8 @@ class MailController extends Controller
         // Storing the data
         $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
         Storage::put('public/pdf/' . $fileName, $pdf->output());
+        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName . '.pdf');
+        $insertedEntryMail->save();
 
         return redirect()->route('portal.pengajuan-surat.index');
     }
@@ -160,6 +169,7 @@ class MailController extends Controller
             'title' => $this->generateTitle($request, $dataKependudukan->fullname),
             'type' => $request->post('mail_type'),
             'user_id' => $user->id,
+            'file_path' => $this->generateTitle($request, $dataKependudukan->fullname),
         ];
         $insertedEntryMail = EntryMail::create($entryMailInsert);
         
@@ -223,6 +233,8 @@ class MailController extends Controller
         // Storing the data
         $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
         Storage::put('public/pdf/' . $fileName, $pdf->output());
+        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName . '.pdf');
+        $insertedEntryMail->save();
 
         return redirect()->route('portal.pengajuan-surat.index');
     }
@@ -241,6 +253,7 @@ class MailController extends Controller
             'title' => $this->generateTitle($request, $dataKependudukan->fullname),
             'type' => $request->post('mail_type'),
             'user_id' => $user->id,
+            'file_path' => $this->generateTitle($request, $dataKependudukan->fullname),
         ];
         $insertedEntryMail = EntryMail::create($entryMailInsert);
 
@@ -296,6 +309,8 @@ class MailController extends Controller
         // Storing the data
         $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
         Storage::put('public/pdf/' . $fileName, $pdf->output());
+        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName . '.pdf');
+        $insertedEntryMail->save();
 
         return redirect()->route('portal.pengajuan-surat.index');
     }
@@ -303,10 +318,7 @@ class MailController extends Controller
     // Handle surat keterangan persetujuan tetangga
     private function storePersetujuanTetangga(Request $request, $user, $dataKependudukan){
         // Dicek ada file atau tidak
-        if(!$request->file('document')){
-            return redirect()->route('portal.pengajuan-surat.index');    
-        }
-
+        
         // Dimasukan dulu ke entry_mail terlebih dahulu
         $entryMailInsert = [
             'title' => $this->generateTitle($request, $dataKependudukan->fullname),
@@ -314,23 +326,15 @@ class MailController extends Controller
             'user_id' => $user->id,
         ];
         $insertedEntryMail = EntryMail::create($entryMailInsert);
-        // Storing the data
-        $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
-        Storage::put('public/pdf/' . $fileName, $request->file('document'));
 
-        return redirect()->route('portal.pengajuan-surat.index');
-    }
-
-    // NOTE UNTUK PAGI
-    // - Selesain Back end buat nge-resolve file
-    // - Nge-resolve masalah dashboard agar bisa upload file
-
-    // Edit entry mail untuk mengedit surat persetujuan tetangga dan surat domisili
-    public function editEntryMail(Request $request, $entryMailId){
-        // Dicek ada file atau tidak
         if(!$request->file('document')){
             return redirect()->route('portal.pengajuan-surat.index');    
         }
+        // Storing the data
+        $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
+        Storage::put('public/pdf/' . $fileName, $request->file('document'));
+        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName . '.pdf');
+        $insertedEntryMail->save();
 
         return redirect()->route('portal.pengajuan-surat.index');
     }

@@ -97,6 +97,7 @@
                         break;
                     
                     case `PERSETUJUAN_TETANGGA`:
+                        arrayAppendElement = arrayAppendElement.concat(appendSuratPersetujuanWarga());
                         break;
 
                     default:

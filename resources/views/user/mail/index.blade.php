@@ -101,25 +101,45 @@
                                 </a>
                             </td>
                             <td>
-                                @can('entry_mail_show')
+                                {{-- @can('entry_mail_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.entry-mails.show', $entryMail->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
-                                @endcan
+                                @endcan --}}
 
                                 @can('entry_mail_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.entry-mails.edit', $entryMail->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
+                                    @if ($entryMail->status == "PROSES")
+                                        <a class="btn btn-xs btn-info" href="{{ route('admin.entry-mails.edit', $entryMail->id) }}">
+                                            {{ trans('global.edit') }}
+                                        </a>
+                                    @endif
                                 @endcan
 
-                                @can('entry_mail_delete')
+                                @can('accept_mail_entry')
+                                    @if ($entryMail->status == "PROSES")
+                                        <form action="{{ route('admin.entry-mails.mailAccept', $entryMail->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="submit" class="btn btn-xs btn-success" value="Setuju">
+                                        </form>
+                                    @endif
+                                @endcan
+
+                                @can('reject_mail_entry')
+                                    @if ($entryMail->status == "PROSES")
+                                        <form action="{{ route('admin.entry-mails.mailReject', $entryMail->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="submit" class="btn btn-xs btn-danger" value="Tolak">
+                                        </form>
+                                    @endif
+                                @endcan
+
+                                {{-- @can('entry_mail_delete')
                                     <form action="{{ route('admin.entry-mails.destroy', $entryMail->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                     </form>
-                                @endcan
+                                @endcan --}}
 
                             </td>
 

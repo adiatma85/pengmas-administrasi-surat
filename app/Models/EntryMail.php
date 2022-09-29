@@ -51,6 +51,7 @@ class EntryMail extends Model implements HasMedia
 
         // Add on
         'user_id',
+        'file_path',
     ];
 
     public function registerMediaConversions(Media $media = null): void
@@ -71,5 +72,10 @@ class EntryMail extends Model implements HasMedia
 
     public function detail(){
         return $this->hasOne(MailData::class, 'entry_mail_id');
+    }
+
+    public function setFilePathAttribute($value){
+        $filePath = "public/pdf/" . $value;
+        $this->attributes['file_path'] = $filePath;
     }
 }

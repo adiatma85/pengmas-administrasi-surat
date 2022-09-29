@@ -211,6 +211,14 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 50,
                 'title' => 'rule_access',
             ],
+            [
+                'id' => 51,
+                'title' => 'accept_mail_entry'
+            ],
+            [
+                'id' => 52,
+                'title' => 'reject_mail_entry'
+            ],
         ];
 
         Permission::insert($permissions);
