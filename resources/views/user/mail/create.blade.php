@@ -9,11 +9,21 @@
     <div class="card-body">
         <form method="POST" action="{{ route("portal.pengajuan-surat.store") }}" enctype="multipart/form-data">
             @csrf
-            {{-- Di sini kita masukin beberapa field yang memang dibutuhkan --}}
-            {{-- Tipe surat itu sudah pasti dibutuhkan --> 'mail_type'  --}}
-            {{-- Keterangan Surat juga Aku rasa dibutuhkan --> 'keterangan_surat' --}}
-
-            {{-- Fokus pada surat keterangan belum menikah --}}
+            @if ($users)    
+                <div class="form-group">
+                    <label class="required">Pengguna</label>
+                    <select class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}" name="user" id="user_type" required>
+                        <option value disabled {{ old('type', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                        @foreach($users as $user)
+                            <option value="{{ $user->id }}" {{ old('type', '') === (string) $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has('user'))
+                        <span class="text-danger">{{ $errors->first('type') }}</span>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.entryMail.fields.type_helper') }}</span>
+                </div>
+            @endif
             <div class="form-group">
                 <label class="required">{{ trans('cruds.entryMail.fields.type') }}</label>
                 <select class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}" name="mail_type" id="type" required>
@@ -96,20 +106,24 @@
                 $append = "<div id='appendFields'>";
                 arrayAppendElement.forEach(element => {
 
-                    if (element.fieldTyoe == "text") {
-                        $append += appendFieldText(element);
-                    }
-
-                    if (element.fieldTyoe == "date") {
-                        $append += appendFieldDate(element);
-                    }
-
-                    if (element.fieldTyoe == "select") {
-                        $append += appendFieldOption(element);
-                    }
-
-                    if (element.fieldTyoe == "file") {
-                        $append += appendFieldFile(element);
+                    switch (element.fieldTyoe) {
+                        case "text":
+                            $append += appendFieldText(element);
+                            break;
+                        case "date":
+                            $append += appendFieldDate(element);
+                            break;
+                        case "select":
+                            $append += appendFieldOption(element);
+                            break;
+                        case "file":
+                            $append += appendFieldFile(element);
+                            break;
+                        case "etc_text":
+                            $append += appendEtcText(element);
+                            break;
+                        default:
+                            break;
                     }
                 });
                 $append += "</div>"
@@ -161,6 +175,16 @@
                 return returnValue;
             }
 
+            function appendEtcText({label, valueName, htmlId, src}){
+                let returnValue = "<div class='form-group'>" + 
+                    `<label for="field${htmlId}">${label}</label> <br/>` +
+                    `<a href="${src}">` +
+                        `<button class="btn btn-primary" type="button"> File </button>` +
+                    `</a>` + 
+                    `</div>`
+                return returnValue;
+            }
+
             // Surat Keterangan belum menikah
             function appendForSuratBelumMenikah(){
                 let arrayAppendElement = [
@@ -178,6 +202,13 @@
             function appendSuratKeteranganDomisili(){
                 let arrayAppendElement = 
                 [
+                    {
+                        label: "Tautan File Surat Keterangan Domisili",
+                        valueName: "src_docs",
+                        htmlId: "src_docs",
+                        fieldTyoe: "etc_text",
+                        src: "https://google.com",
+                    },
                     {
                         label: "Status Domisili",
                         valueName: "domicile_status",
@@ -200,12 +231,12 @@
                         htmlId: "owner_house_name",
                         fieldTyoe: "text",
                     },
-                    {
-                        label: "Foto/Scan Tanda Tangan Pemilik Rumah",
-                        valueName: "signature",
-                        htmlId: "signature",
-                        fieldTyoe: "file",
-                    },
+                    // {
+                    //     label: "Scan Surat Keterangan Domisili",
+                    //     valueName: "document",
+                    //     htmlId: "document",
+                    //     fieldTyoe: "file",
+                    // },
                 ];
 
                 return arrayAppendElement;
@@ -318,6 +349,28 @@
                     },
                 ];
                 return arrayAppendElement;
+            }
+
+            // Surat persetujuan warga
+            function appendSuratPersetujuanWarga(){
+                let arrayAppendElement = 
+                [
+                    {
+                        label: "Tautan File Surat Persetujuan Warga",
+                        valueName: "src_docs",
+                        htmlId: "src_docs",
+                        fieldTyoe: "etc_text",
+                        src: "https://google.com",
+                    },
+                    {
+                        label: "Scan Surat Persetujuan Warga",
+                        valueName: "document",
+                        htmlId: "document",
+                        fieldTyoe: "file",
+                    },
+                ];
+
+                return arrayAppendElement;   
             }
         });
     </script>

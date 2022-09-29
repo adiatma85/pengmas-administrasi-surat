@@ -21,7 +21,7 @@ class PermissionRoleTableSeeder extends Seeder
 
         // Bapak RT Permission
         $bapakRtPermission = $admin_permissions->filter(function ($permission) {
-            return substr($permission->title, 0, 5) != 'role_' && substr($permission->title, 0, 11) != 'permission_' && substr($permission->title, 0, 10) != 'pengajuan_';
+            return substr($permission->title, 0, 5) != 'role_' && substr($permission->title, 0, 11) != 'permission_';
         });
         Role::findOrFail(3)->permissions()->sync($bapakRtPermission);
 

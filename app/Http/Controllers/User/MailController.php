@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\EntryMail;
 use App\Models\MailData;
 use App\Models\Kependudukan;
+use App\Models\User;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
@@ -20,9 +21,13 @@ class MailController extends Controller
 
         $user = Auth::user();
 
-        $entryMails = EntryMail::where('user_id', '=', $user->id)
-            ->with(['media'])->get();
-        
+        if ($this->isBapakRT($user->roles[0]->id)) {
+            $entryMails = EntryMail::with(['media'])->get();
+        } else {
+            $entryMails = EntryMail::where('user_id', '=', $user->id)
+                ->with(['media'])->get();
+        }
+
         foreach ($entryMails as $entryMail) {
             // Prefix
             $prefixPath = 'storage/pdf/';
@@ -34,12 +39,25 @@ class MailController extends Controller
 
     // Di sini dia akan mengembalikan view ketika dia ingin membuat surat
     public function create(Request $request){
-        return view('user.mail.create');
+
+        // Jika pengguna aplikasi yang masuk ke sini adalah bapak rt, maka bisa dipake buat listing data orang-orang
+        if ($this->isBapakRT(Auth::user()->roles[0]->id)) {
+            $users = User::all();
+        } else {
+            $users = null;
+        }
+
+        return view('user.mail.create', compact('users'));
     }
 
     // Di sini dia akan melakukan storing
     public function store(Request $request){
+        // Jika pengguna yang masuk ke sini adalah RT
         $user = Auth::user();
+        if ($this->isBapakRT($user->roles[0]->id)) {
+            $user = User::find($request->users);  
+        } 
+        
         $dataKependudukan = $user->kependudukan;
         
         if(!$dataKependudukan){
@@ -126,7 +144,7 @@ class MailController extends Controller
         $pdf = Pdf::loadView('pdf/surat-keterangan-domisili', $pdfData);
 
         // Storing the data
-        $fileName = $entryMailInsert['title'] . '-' . $insertedMailData->id . '.pdf';
+        $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
         Storage::put('public/pdf/' . $fileName, $pdf->output());
 
         return redirect()->route('portal.pengajuan-surat.index');
@@ -203,7 +221,7 @@ class MailController extends Controller
         $pdf = Pdf::loadView('pdf/surat-pengantar-nikah', $pdfData);
 
         // Storing the data
-        $fileName = $entryMailInsert['title'] . '-' . $insertedMailData->id . '.pdf';
+        $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
         Storage::put('public/pdf/' . $fileName, $pdf->output());
 
         return redirect()->route('portal.pengajuan-surat.index');
@@ -276,7 +294,7 @@ class MailController extends Controller
         $pdf = Pdf::loadView('pdf/surat-keterangan-belum-menikah', $pdfData);
 
         // Storing the data
-        $fileName = $entryMailInsert['title'] . '-' . $insertedMailData->id . '.pdf';
+        $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
         Storage::put('public/pdf/' . $fileName, $pdf->output());
 
         return redirect()->route('portal.pengajuan-surat.index');
@@ -284,7 +302,37 @@ class MailController extends Controller
 
     // Handle surat keterangan persetujuan tetangga
     private function storePersetujuanTetangga(Request $request, $user, $dataKependudukan){
-        // Ini kayaknya upload saja deh....
+        // Dicek ada file atau tidak
+        if(!$request->file('document')){
+            return redirect()->route('portal.pengajuan-surat.index');    
+        }
+
+        // Dimasukan dulu ke entry_mail terlebih dahulu
+        $entryMailInsert = [
+            'title' => $this->generateTitle($request, $dataKependudukan->fullname),
+            'type' => $request->post('mail_type'),
+            'user_id' => $user->id,
+        ];
+        $insertedEntryMail = EntryMail::create($entryMailInsert);
+        // Storing the data
+        $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
+        Storage::put('public/pdf/' . $fileName, $request->file('document'));
+
+        return redirect()->route('portal.pengajuan-surat.index');
+    }
+
+    // NOTE UNTUK PAGI
+    // - Selesain Back end buat nge-resolve file
+    // - Nge-resolve masalah dashboard agar bisa upload file
+
+    // Edit entry mail untuk mengedit surat persetujuan tetangga dan surat domisili
+    public function editEntryMail(Request $request, $entryMailId){
+        // Dicek ada file atau tidak
+        if(!$request->file('document')){
+            return redirect()->route('portal.pengajuan-surat.index');    
+        }
+
+        return redirect()->route('portal.pengajuan-surat.index');
     }
 
     // Handle generated name for storeSuratHandler

@@ -130,12 +130,14 @@ class EntryMailController extends Controller
             case "KETERANGAN_DOMISILI":
                 $this->generateSuratDomisili($entryMail);
                 break;
-            
             case 'PENGANTAR_SURAT_NIKAH':
                 $this->generateSuratPengantarNikah($entryMail);
                 break;
             case 'KETERANGAN_BELUM_MENIKAH':
                 $this->generateSuratBelumMenikah($entryMail);
+                break;
+            case 'PERSETUJUAN_TETANGGA':
+                
                 break;
         }
         
