@@ -4,14 +4,16 @@
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('admin.pengumuman.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.pengumuman.title_singular') }}
+                {{-- {{ trans('global.add') }} {{ trans('cruds.pengumuman.title_singular') }} --}}
+                Tambah Data Pengumuman
             </a>
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.pengumuman.title_singular') }} {{ trans('global.list') }}
+        {{-- {{ trans('cruds.pengumuman.title_singular') }} {{ trans('global.list') }} --}}
+        Daftar Pengumuman
     </div>
 
     <div class="card-body">

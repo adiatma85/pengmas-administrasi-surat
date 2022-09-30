@@ -4,14 +4,16 @@
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('admin.kependudukans.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.kependudukan.title_singular') }}
+                {{-- {{ trans('global.add') }} {{ trans('cruds.kependudukan.title_singular') }} --}}
+                Tambah Data Kependudukan
             </a>
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.kependudukan.title_singular') }} {{ trans('global.list') }}
+        {{-- {{ trans('cruds.kependudukan.title_singular') }} {{ trans('global.list') }} --}}
+        Daftar Data Kependudukan
     </div>
 
     <div class="card-body">

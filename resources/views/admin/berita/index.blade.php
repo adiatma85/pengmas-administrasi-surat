@@ -4,14 +4,16 @@
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('admin.berita.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.beritum.title_singular') }}
+                {{-- {{ trans('global.add') }} {{ trans('cruds.beritum.title_singular') }} --}}
+                Tambah Berita
             </a>
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.beritum.title_singular') }} {{ trans('global.list') }}
+        {{-- {{ trans('cruds.beritum.title_singular') }} {{ trans('global.list') }} --}}
+        Daftar Berita
     </div>
 
     <div class="card-body">

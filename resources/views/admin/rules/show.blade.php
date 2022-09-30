@@ -3,7 +3,8 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.rule.title') }}
+        {{-- {{ trans('global.show') }} {{ trans('cruds.rule.title') }} --}}
+        Data Detail Peraturan
     </div>
 
     <div class="card-body">
