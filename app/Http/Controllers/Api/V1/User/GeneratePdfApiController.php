@@ -60,7 +60,7 @@ class GeneratePdfApiController extends Controller
 
         $insertedMailData = MailData::create($mailDataInsert);
 
-        $base64Signature = $this->toBase64($request->file('signature'));
+        // $base64Signature = $this->toBase64($request->file('signature'));
 
         // Generate data for pdf here
         $pdfData = [
@@ -73,7 +73,7 @@ class GeneratePdfApiController extends Controller
             'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$dataKependudukan->marital_status],
             'occupation' => $dataKependudukan->occupation,
             'keterangan_surat' => $request->post('keterangan_surat'),
-            'signature' => $base64Signature,
+            // 'signature' => $base64Signature,
             'owner_house_name' => $request->post('owner_house_name'),
         ];
 
@@ -83,12 +83,18 @@ class GeneratePdfApiController extends Controller
         // Storing the data
         $fileName = $entryMailInsert['title'] . '-' . $insertedMailData->id . '.pdf';
         Storage::put('public/pdf/' . $fileName, $pdf->output());
+        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName);
+        $insertedEntryMail->save();
 
         $data = [
-            'url_link' => asset('storage/pdf/' . $insertedEntryMail->title . '-' . $insertedEntryMail->id . '.pdf'),
+             'url_link' => asset('storage/pdf/' . $insertedEntryMail->title . '-' . $insertedEntryMail->id . '.pdf'),
         ];
 
         return $this->successResponse('success generate pdf', $data);
+    }
+
+    public function editSuratDomisili(Request $request){
+
     }
 
     public function generateSuratKeteranganBelumMenikah(Request $request){
@@ -161,7 +167,7 @@ class GeneratePdfApiController extends Controller
         Storage::put('public/pdf/' . $fileName, $pdf->output());
 
         $data = [
-            'url_link' => asset('storage/pdf/' . $insertedEntryMail->title . '-' . $insertedEntryMail->id . '.pdf'),
+             'url_link' => asset('storage/pdf/' . $insertedEntryMail->title . '-' . $insertedEntryMail->id . '.pdf'),
         ];
 
         return $this->successResponse('success generate pdf', $data);
@@ -246,10 +252,46 @@ class GeneratePdfApiController extends Controller
         Storage::put('public/pdf/' . $fileName, $pdf->output());
 
         $data = [
-            'url_link' => asset('storage/pdf/' . $insertedEntryMail->title . '-' . $insertedEntryMail->id . '.pdf'),
+             'url_link' => asset('storage/pdf/' . $insertedEntryMail->title . '-' . $insertedEntryMail->id . '.pdf'),
         ];
 
         return $this->successResponse('success generate pdf', $data);
+    }
+
+    public function generateSuratPersetujuanTetangga(Request $request){
+        $user = User::find($this->extractUserIdFromToken());
+        $dataKependudukan = $user->kependudukan;
+
+        if(!$dataKependudukan){
+            // Change this to return route or return view instead
+            return $this->notFoundFailResponse();
+        }
+
+        // Dimasukan dulu ke entry_mail terlebih dahulu
+        $entryMailInsert = [
+            'title' => $this->generateTitle('PERSETUJUAN_TETANGGA', $dataKependudukan->fullname),
+            'type' => 'PERSETUJUAN_TETANGGA',
+            'user_id' => $user->id,
+        ];
+        $insertedEntryMail = EntryMail::create($entryMailInsert);
+
+        // Ini nerima file langsung gk sih
+        $document = $request->file('document');
+        if (!$document) {
+            return $this->badRequestFailResponse(null);
+        }
+
+        // Storing the data
+        $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
+        $request->file('document')->storeAs('public/pdf', $fileName);
+        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName);
+        $insertedEntryMail->save();
+
+        $data = [
+             'url_link' => asset('storage/pdf/' . $insertedEntryMail->title . '-' . $insertedEntryMail->id . '.pdf'),
+        ];
+
+        return $this->successResponse('success storing pdf', $data);
     }
 
     private function extractUserIdFromToken(){

@@ -50,5 +50,8 @@ Route::prefix('v1')->as('v1.')->group(function (){
 
         // Generate Surat Keterangan Belum Menikah
         Route::post('/generate/surat-keterangan-belum-nikah', [ApiUserGeneratePdf::class, 'generateSuratKeteranganBelumMenikah']);
+
+        // Generate Surat Persetujuan Tetangga
+        Route::post('/generate/surat-persetujuan-tetangga', [ApiUserGeneratePdf::class, 'generateSuratPersetujuanTetangga']);
     });
 });

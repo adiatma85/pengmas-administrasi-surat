@@ -130,7 +130,7 @@ class MailController extends Controller
         ];
         $insertedMailData = MailData::create($mailDataInsert);
 
-        $base64Signature = $this->toBase64($request->file('signature'));
+        // $base64Signature = $this->toBase64($request->file('signature'));
 
         // Generate data for pdf here
         $pdfData = [
@@ -143,7 +143,7 @@ class MailController extends Controller
             'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$dataKependudukan->marital_status],
             'occupation' => $dataKependudukan->occupation,
             'keterangan_surat' => $request->post('keterangan_surat'),
-            'signature' => $base64Signature,
+            // 'signature' => $base64Signature,
             'owner_house_name' => $request->post('owner_house_name'),
         ];
 
@@ -153,7 +153,7 @@ class MailController extends Controller
         // Storing the data
         $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
         Storage::put('public/pdf/' . $fileName, $pdf->output());
-        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName . '.pdf');
+        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName);
         $insertedEntryMail->save();
 
         return redirect()->route('portal.pengajuan-surat.index');
@@ -233,7 +233,7 @@ class MailController extends Controller
         // Storing the data
         $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
         Storage::put('public/pdf/' . $fileName, $pdf->output());
-        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName . '.pdf');
+        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName);
         $insertedEntryMail->save();
 
         return redirect()->route('portal.pengajuan-surat.index');
@@ -309,7 +309,7 @@ class MailController extends Controller
         // Storing the data
         $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
         Storage::put('public/pdf/' . $fileName, $pdf->output());
-        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName . '.pdf');
+        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName);
         $insertedEntryMail->save();
 
         return redirect()->route('portal.pengajuan-surat.index');
@@ -332,8 +332,8 @@ class MailController extends Controller
         }
         // Storing the data
         $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
-        Storage::put('public/pdf/' . $fileName, $request->file('document'));
-        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName . '.pdf');
+        $request->file('document')->storeAs('public/pdf', $fileName);
+        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName);
         $insertedEntryMail->save();
 
         return redirect()->route('portal.pengajuan-surat.index');
