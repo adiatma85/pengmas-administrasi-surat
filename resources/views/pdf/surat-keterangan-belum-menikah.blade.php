@@ -131,7 +131,7 @@
             </td>
             <td>:</td>
             <td width="350">
-                Ini alamat asal
+                {{$original_address}}
             </td>
         </tr>
         <tr>
@@ -177,7 +177,7 @@
         <tr>
             <td width="125"></td>
             <td>
-                a. yang bersangkutan di atas WARGA RT 04/RW 12 yang beralamat di: <br>{ini nanti alamat}
+                a. yang bersangkutan di atas <b> WARGA RT 04/RW 12 </b> yang beralamat di:  {{$domicile_address}}<br>
             </td>
         </tr>
         <tr>
@@ -191,8 +191,8 @@
     {{-- Content Keterangan surat --}}
     <table align="center" border="0" style="margin-top: 2em;">
         <tr>
-            <td>
-                <b>Surat Keterangan ini <br> digunakan untuk</b>
+            <td width="250">
+                <b>Surat Keterangan ini digunakan untuk</b>
             </td>
             <td>:</td>
             <td width="350">

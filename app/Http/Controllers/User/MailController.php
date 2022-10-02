@@ -124,6 +124,7 @@ class MailController extends Controller
             'keterangan_surat' => $request->post('keterangan_surat'),
             'domicile_status' => $request->post('domicile_status'),
             'owner_house_name' => $request->post('owner_house_name'),
+            'domicile_address' => $request->post('domicile_address'),
 
             // Add on
             'entry_mail_id' => $insertedEntryMail->id,
@@ -145,6 +146,8 @@ class MailController extends Controller
             'keterangan_surat' => $request->post('keterangan_surat'),
             // 'signature' => $base64Signature,
             'owner_house_name' => $request->post('owner_house_name'),
+            'domicile_status' => $request->post('domicile_status'),
+            'domicile_address' => $request->post('domicile_address'),
         ];
 
         // Generate PDF here
@@ -275,6 +278,8 @@ class MailController extends Controller
             // Keterangan surat
             'keterangan_surat' => $request->post('keterangan_surat'),
             'alamat_orang_tua' => $request->post('alamat_orang_tua'),
+            'original_address' => $request->post('original_address'),
+            'domicile_address' => $request->post('domicile_address'),
 
             // Add on
             'entry_mail_id' => $insertedEntryMail->id,
@@ -301,6 +306,8 @@ class MailController extends Controller
 
             // Alamat Orang Tua
             'alamat_orang_tua' => $request->post('alamat_orang_tua'),
+            'original_address' => $request->post('original_address'),
+            'domicile_address' => $request->post('domicile_address'),
         ];
 
         // Generate PDf here

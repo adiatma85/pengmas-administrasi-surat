@@ -190,6 +190,18 @@
             function appendForSuratBelumMenikah(){
                 let arrayAppendElement = [
                     {
+                        label: "Alamat Asal",
+                        valueName: "original_address",
+                        htmlId: "original_address",
+                        fieldTyoe: "text",
+                    },
+                    {
+                        label: "Alamat Domisili",
+                        valueName: "domicile_address",
+                        htmlId: "domicile_address",
+                        fieldTyoe: "text",
+                    },
+                    {
                         label: "Alamat Orang Tua",
                         valueName: "alamat_orang_tua",
                         htmlId: "alamat_orang_tua",
@@ -225,6 +237,12 @@
                             "Kontrak",
                             'Rumah Saudara',
                         ],
+                    },
+                    {
+                        label: "Alamat Domisili",
+                        valueName: "domicile_address",
+                        htmlId: "domicile_address",
+                        fieldTyoe: "text",
                     },
                     {
                         label: "Nama Pemilik Rumah",

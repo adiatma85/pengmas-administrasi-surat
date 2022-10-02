@@ -140,7 +140,26 @@
         <tr>
             <td>
                 Keterangan yang bersangkutan di atas, benar-benar <b> berdomisili </b> di Wilayah kami, 
-                <br> <b> Kost / Kontrak / Rumah Saudara / </b> yang beralamat di :
+                <br> <b> 
+                    @if ($domicile_status == 'KOST')
+                        Kost
+                    @else
+                        <s>Kost</s>
+                    @endif
+                    /
+                    @if ($domicile_status == 'KONTRAK')
+                        Kontrak
+                    @else
+                        <s>Kontrak</s>
+                    @endif
+                    /
+                    @if ($domicile_status == 'RUMAH_SAUDARA')
+                        Rumah Saudara 
+                    @else
+                        <s>Rumah Saudara</s>
+                    @endif
+                    / 
+                </b> yang beralamat di : {{$domicile_address}}
                 <br>
             </td>
         </tr>

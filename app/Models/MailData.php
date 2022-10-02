@@ -73,6 +73,8 @@ class MailData extends Model
         'owner_house_name',
         'base_64_owner_house_signature',
         'alamat_orang_tua',
+        'domicile_address',
+        'original_address',
     ];
 
     protected $dates = [
