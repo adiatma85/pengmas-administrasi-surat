@@ -89,14 +89,14 @@
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
                     {{-- @can('entry_mail_access') --}}
-                        <li class="c-sidebar-nav-item">
+                        {{-- <li class="c-sidebar-nav-item">
                             <a href="{{ route("admin.entry-mails.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/entry-mails") || request()->is("admin/entry-mails/*") ? "active" : "" }}">
                                 <i class="fa-fw fas fa-envelope c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.entryMail.title') }}
                             </a>
-                        </li>
+                        </li> --}}
                     {{-- @endcan --}}
                     {{-- @can('pengajuan_surat_access') --}}
                         <li class="c-sidebar-nav-item">
