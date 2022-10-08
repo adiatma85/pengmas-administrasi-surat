@@ -97,8 +97,41 @@ class GeneratePdfApiController extends Controller
         return $this->successResponse('success generate pdf', $data);
     }
 
-    public function editSuratDomisili(Request $request, $entryMailId){
-        
+    public function uploadSuratDomisili(Request $request){
+        $user = User::find($this->extractUserIdFromToken());
+        $dataKependudukan = $user->kependudukan;
+
+        if(!$dataKependudukan){
+            // Change this to return route or return view instead
+            return $this->notFoundFailResponse();
+        }
+
+        // Dimasukan dulu ke entry_mail terlebih dahulu
+        $entryMailInsert = [
+            'title' => $this->generateTitle('KETERANGAN_DOMISILI', $dataKependudukan->fullname),
+            'type' => 'KETERANGAN_DOMISILI',
+            'user_id' => $user->id,
+            'file_path' => $this->generateTitle('KETERANGAN_DOMISILI', $dataKependudukan->fullname),
+        ];
+        $insertedEntryMail = EntryMail::create($entryMailInsert);
+
+        // Ini nerima file langsung gk sih
+        $document = $request->file('document');
+        if (!$document) {
+            return $this->badRequestFailResponse(null);
+        }
+
+        // Storing the data
+        $fileName = $entryMailInsert['title'] . '-' . $insertedEntryMail->id . '.pdf';
+        $request->file('document')->storeAs('public/pdf', $fileName);
+        $insertedEntryMail->file_path = asset('storage/pdf/' . $fileName);
+        $insertedEntryMail->save();
+
+        $data = [
+             'url_link' => asset('storage/pdf/' . $insertedEntryMail->title . '-' . $insertedEntryMail->id . '.pdf'),
+        ];
+
+        return $this->successResponse('success storing pdf', $data);
     }
 
     public function generateSuratKeteranganBelumMenikah(Request $request){
@@ -282,6 +315,7 @@ class GeneratePdfApiController extends Controller
             'title' => $this->generateTitle('PERSETUJUAN_TETANGGA', $dataKependudukan->fullname),
             'type' => 'PERSETUJUAN_TETANGGA',
             'user_id' => $user->id,
+            'file_path' => $this->generateTitle('PERSETUJUAN_TETANGGA', $dataKependudukan->fullname),
         ];
         $insertedEntryMail = EntryMail::create($entryMailInsert);
 

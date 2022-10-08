@@ -48,6 +48,9 @@ Route::prefix('v1')->as('v1.')->group(function (){
         // Generate Surat Domisili
         Route::post('/generate/surat-domisili', [ApiUserGeneratePdf::class, 'generateSuratDomisili']);
 
+        // Upload Surat Domisili
+        Route::post('/upload/surat-domisili', [ApiUserGeneratePdf::class, 'uploadSuratDomisili']);
+
         // Generate Surat Pengantar Nikah
         Route::post('/generate/surat-pengantar-nikah', [ApiUserGeneratePdf::class, 'generateSuratPengantarNikah']);
 
