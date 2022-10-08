@@ -207,6 +207,14 @@
                                 <span class="help-block">{{ trans('cruds.kependudukan.fields.occupation_helper') }}</span>
                             </div>
                             <div class="form-group">
+                                <label class="required" for="phone_number">{{ trans('cruds.kependudukan.fields.phone_number') }}</label>
+                                <input class="form-control {{ $errors->has('phone_number') ? 'is-invalid' : '' }}" type="text" name="phone_number" id="phone_number" value="{{ old('phone_number', '') }}" required>
+                                @if($errors->has('phone_number'))
+                                    <span class="text-danger">{{ $errors->first('phone_number') }}</span>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.kependudukan.fields.phone_number_helper') }}</span>
+                            </div>
+                            <div class="form-group">
                                 <label class="required" for="father_name">{{ trans('cruds.kependudukan.fields.father_name') }}</label>
                                 <input class="form-control {{ $errors->has('father_name') ? 'is-invalid' : '' }}" type="text" name="father_name" id="father_name" value="{{ old('father_name', '') }}" required>
                                 @if($errors->has('father_name'))
@@ -216,7 +224,12 @@
                             </div>
                             <div class="form-group">
                                 <label class="required" for="father_religion">{{ trans('cruds.kependudukan.fields.father_religion') }}</label>
-                                <input class="form-control {{ $errors->has('father_religion') ? 'is-invalid' : '' }}" type="text" name="father_religion" id="father_religion" value="{{ old('father_religion', '') }}" required>
+                                <select class="form-control {{ $errors->has('father_religion') ? 'is-invalid' : '' }}" name="father_religion" id="father_religion" required>
+                                    <option value disabled {{ old('father_religion', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                                    @foreach(App\Models\Kependudukan::RELIGION_SELECT as $key => $label)
+                                        <option value="{{ $key }}" {{ old('father_religion', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
+                                </select>
                                 @if($errors->has('father_religion'))
                                     <span class="text-danger">{{ $errors->first('father_religion') }}</span>
                                 @endif
@@ -240,7 +253,12 @@
                             </div>
                             <div class="form-group">
                                 <label class="required" for="mother_religion">{{ trans('cruds.kependudukan.fields.mother_religion') }}</label>
-                                <input class="form-control {{ $errors->has('mother_religion') ? 'is-invalid' : '' }}" type="text" name="mother_religion" id="mother_religion" value="{{ old('mother_religion', '') }}" required>
+                                <select class="form-control {{ $errors->has('mother_religion') ? 'is-invalid' : '' }}" name="mother_religion" id="mother_religion" required>
+                                    <option value disabled {{ old('mother_religion', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                                    @foreach(App\Models\Kependudukan::RELIGION_SELECT as $key => $label)
+                                        <option value="{{ $key }}" {{ old('mother_religion', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
+                                </select>
                                 @if($errors->has('mother_religion'))
                                     <span class="text-danger">{{ $errors->first('mother_religion') }}</span>
                                 @endif
@@ -407,6 +425,12 @@
                 label: "Profesi",
                 valueName: "occupation1[]",
                 htmlId: "occupation1",
+                fieldTyoe: "text",
+            },
+            {
+                label: "Nomor Telepon",
+                valueName: "phone_number1[]",
+                htmlId: "phone_number1",
                 fieldTyoe: "text",
             },
             {

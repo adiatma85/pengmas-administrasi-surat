@@ -83,6 +83,7 @@ class Kependudukan extends Model
         'father_occupation',
         'mother_religion',
         'mother_occupation',
+        'phone_number',
     ];
 
     public function getBirthdateAttribute($value)

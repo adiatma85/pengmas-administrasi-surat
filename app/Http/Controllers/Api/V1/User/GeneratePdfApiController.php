@@ -74,6 +74,7 @@ class GeneratePdfApiController extends Controller
             'occupation' => $dataKependudukan->occupation,
             'keterangan_surat' => $request->post('keterangan_surat'),
             // 'signature' => $base64Signature,
+            'domicile_status' => $request->post('domicile_status'),
             'owner_house_name' => $request->post('owner_house_name'),
         ];
 

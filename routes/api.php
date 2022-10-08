@@ -42,6 +42,9 @@ Route::prefix('v1')->as('v1.')->group(function (){
 
     // Group with sanctum
     Route::middleware('auth:sanctum')->group(function () {
+
+        Route::get('/self-information', [ApiAuthController::class, 'selfInformation']);
+
         // Generate Surat Domisili
         Route::post('/generate/surat-domisili', [ApiUserGeneratePdf::class, 'generateSuratDomisili']);
 

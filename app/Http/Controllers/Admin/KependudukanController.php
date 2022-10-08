@@ -81,6 +81,7 @@ class KependudukanController extends Controller
             'father_occupation' => $request->father_occupation,
             'mother_religion' => $request->mother_religion,
             'mother_occupation' => $request->mother_occupation,
+            'phone_number' => $request->phone_number,
         ];
 
         $insertedHeadFam = Kependudukan::create($headFam);
@@ -121,10 +122,11 @@ class KependudukanController extends Controller
                 'family_id' => $familyId,
                 'user_id' => $registeredUser->id,
                 // Add on
-            'father_religion' => $request->father_religion1[$i],
-            'father_occupation' => $request->father_occupation1[$i],
-            'mother_religion' => $request->mother_religion1[$i],
-            'mother_occupation' => $request->mother_occupation1[$i],
+                'father_religion' => $request->father_religion1[$i],
+                'father_occupation' => $request->father_occupation1[$i],
+                'mother_religion' => $request->mother_religion1[$i],
+                'mother_occupation' => $request->mother_occupation1[$i],
+                'phone_number' => $request->phone_number1[$i],
             ];
 
             $insertedHeadFam = Kependudukan::create($anggotaFam);

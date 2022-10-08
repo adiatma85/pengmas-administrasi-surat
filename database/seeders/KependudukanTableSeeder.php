@@ -31,7 +31,12 @@ class KependudukanTableSeeder extends Seeder
                 'disease' => 'Tidak ada penyakit',
 
                 // Add on
-                'user_id' => 3
+                'user_id' => 3,
+                // Ayah
+                'father_religion' => 'ISLAM',
+                'father_occupation' => 'Pengrajin',
+                'mother_religion' => 'ISLAM',
+                'mother_occupation' => 'Pengrajin',
             ]
         ];
 
