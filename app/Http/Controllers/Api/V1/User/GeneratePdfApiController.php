@@ -32,27 +32,29 @@ class GeneratePdfApiController extends Controller
             'title' => $this->generateTitle('KETERANGAN_DOMISILI', $dataKependudukan->fullname),
             'type' => 'KETERANGAN_DOMISILI',
             'user_id' => $user->id,
+            'file_path' => $this->generateTitle('KETERANGAN_DOMISILI', $dataKependudukan->fullname),
         ];
         $insertedEntryMail = EntryMail::create($entryMailInsert);
      
         // Memasukkan data detail mail
         $mailDataInsert = [
-            'fullname' => $dataKependudukan->fullname,
-            'nik' => $dataKependudukan->nik,
-            'birthdate' => $dataKependudukan->birthdate,
-            'birthplace' => $dataKependudukan->birthplace,
-            'gender' => $dataKependudukan->gender,
-            'religion' => $dataKependudukan->religion,
-            'marital_status' => $dataKependudukan->marital_status,
-            'latest_education' => $dataKependudukan->latest_education,
-            'occupation' => $dataKependudukan->occupation,
-            'father_name' => $dataKependudukan->father_name,
-            'mother_name' => $dataKependudukan->mother_name,
-            'disease' => $dataKependudukan->disease,
+            'fullname' => $dataKependudukan->fullname ?? "",
+            'nik' => $dataKependudukan->nik ?? "",
+            'birthdate' => $dataKependudukan->birthdate ?? "",
+            'birthplace' => $dataKependudukan->birthplace ?? "",
+            'gender' => $dataKependudukan->gender ?? "",
+            'religion' => $dataKependudukan->religion ?? "",
+            'marital_status' => $dataKependudukan->marital_status ?? "",
+            'latest_education' => $dataKependudukan->latest_education ?? "",
+            'occupation' => $dataKependudukan->occupation ?? "",
+            'father_name' => $dataKependudukan->father_name ?? "",
+            'mother_name' => $dataKependudukan->mother_name ?? "",
+            'disease' => $dataKependudukan->disease ?? "",
             // Special Attribute
-            'keterangan_surat' => $request->post('keterangan_surat'),
-            'domicile_status' => $request->post('domicile_status'),
-            'owner_house_name' => $request->post('owner_house_name'),
+            'keterangan_surat' => $request->post('keterangan_surat') ?? "",
+            'domicile_status' => $request->post('domicile_status') ?? "",
+            'owner_house_name' => $request->post('owner_house_name') ?? "",
+            'domicile_address' => $request->post('domicile_address') ?? "",
 
             // Add on
             'entry_mail_id' => $insertedEntryMail->id,
@@ -64,18 +66,19 @@ class GeneratePdfApiController extends Controller
 
         // Generate data for pdf here
         $pdfData = [
-            'fullname' => $dataKependudukan->fullname,
-            'nik' => $dataKependudukan->nik,
-            'birthdate' => $dataKependudukan->birthdate,
-            'birthplace' => $dataKependudukan->birthplace,
-            'gender' => Kependudukan::GENDER_SELECT[$dataKependudukan->gender],
-            'religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->religion],
-            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$dataKependudukan->marital_status],
-            'occupation' => $dataKependudukan->occupation,
-            'keterangan_surat' => $request->post('keterangan_surat'),
+            'fullname' => $dataKependudukan->fullname ?? "",
+            'nik' => $dataKependudukan->nik ?? "",
+            'birthdate' => $dataKependudukan->birthdate ?? "",
+            'birthplace' => $dataKependudukan->birthplace ?? "",
+            'gender' => Kependudukan::GENDER_SELECT[$dataKependudukan->gender] ?? "",
+            'religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->religion] ?? "",
+            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$dataKependudukan->marital_status] ?? "",
+            'occupation' => $dataKependudukan->occupation ?? "",
+            'keterangan_surat' => $request->post('keterangan_surat') ?? "",
             // 'signature' => $base64Signature,
-            'domicile_status' => $request->post('domicile_status'),
-            'owner_house_name' => $request->post('owner_house_name'),
+            'domicile_status' => $request->post('domicile_status') ?? "",
+            'owner_house_name' => $request->post('owner_house_name') ?? "",
+            'domicile_address' => $request->post('domicile_address') ?? "",
         ];
 
         // Generate PDF here
@@ -94,8 +97,8 @@ class GeneratePdfApiController extends Controller
         return $this->successResponse('success generate pdf', $data);
     }
 
-    public function editSuratDomisili(Request $request){
-
+    public function editSuratDomisili(Request $request, $entryMailId){
+        
     }
 
     public function generateSuratKeteranganBelumMenikah(Request $request){
@@ -112,52 +115,57 @@ class GeneratePdfApiController extends Controller
             'title' => $this->generateTitle('KETERANGAN_BELUM_MENIKAH', $dataKependudukan->fullname),
             'type' => 'KETERANGAN_BELUM_MENIKAH',
             'user_id' => $user->id,
+            'file_path' => $this->generateTitle('KETERANGAN_BELUM_MENIKAH', $dataKependudukan->fullname),
         ];
         $insertedEntryMail = EntryMail::create($entryMailInsert);
 
         // Memasukkan data detail mail
         $mailDataInsert = [
-            'fullname' => $dataKependudukan->fullname,
-            'nik' => $dataKependudukan->nik,
-            'birthdate' => $dataKependudukan->birthdate,
-            'birthplace' => $dataKependudukan->birthplace,
-            'gender' => $dataKependudukan->gender,
-            'religion' => $dataKependudukan->religion,
-            'marital_status' => $dataKependudukan->marital_status,
-            'latest_education' => $dataKependudukan->latest_education,
-            'occupation' => $dataKependudukan->occupation,
-            'father_name' => $dataKependudukan->father_name,
-            'mother_name' => $dataKependudukan->mother_name,
-            'disease' => $dataKependudukan->disease,
+            'fullname' => $dataKependudukan->fullname ?? "",
+            'nik' => $dataKependudukan->nik ?? "",
+            'birthdate' => $dataKependudukan->birthdate ?? "",
+            'birthplace' => $dataKependudukan->birthplace ?? "",
+            'gender' => $dataKependudukan->gender ?? "",
+            'religion' => $dataKependudukan->religion ?? "",
+            'marital_status' => $dataKependudukan->marital_status ?? "",
+            'latest_education' => $dataKependudukan->latest_education ?? "",
+            'occupation' => $dataKependudukan->occupation ?? "",
+            'father_name' => $dataKependudukan->father_name ?? "",
+            'mother_name' => $dataKependudukan->mother_name ?? "",
+            'disease' => $dataKependudukan->disease ?? "",
 
             // Keterangan surat
-            'keterangan_surat' => $request->post('keterangan_surat'),
-            'alamat_orang_tua' => $request->post('alamat_orang_tua'),
+            'keterangan_surat' => $request->post('keterangan_surat') ?? "",
+            'alamat_orang_tua' => $request->post('alamat_orang_tua') ?? "",
 
             // Add on
             'entry_mail_id' => $insertedEntryMail->id,
+            'original_address' => $request->post('original_address') ?? "",
+            'domicile_address' => $request->post('domicile_address') ?? "",
         ];
         $insertedMailData = MailData::create($mailDataInsert);
 
         // Generate data for pdf here
         $pdfData = [
-            'fullname' => $dataKependudukan->fullname,
-            'nik' => $dataKependudukan->nik,
-            'birthdate' => $dataKependudukan->birthdate,
-            'birthplace' => $dataKependudukan->birthplace,
-            'gender' => Kependudukan::GENDER_SELECT[$dataKependudukan->gender],
-            'religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->religion],
-            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$dataKependudukan->marital_status],
-            'latest_education' => Kependudukan::LATEST_EDUCATION_SELECT[$dataKependudukan->latest_education],
-            'occupation' => $dataKependudukan->occupation,
-            'father_name' => $dataKependudukan->father_name,
-            'mother_name' => $dataKependudukan->mother_name,
+            'fullname' => $dataKependudukan->fullname ?? "",
+            'nik' => $dataKependudukan->nik ?? "",
+            'birthdate' => $dataKependudukan->birthdate ?? "",
+            'birthplace' => $dataKependudukan->birthplace ?? "",
+            'gender' => Kependudukan::GENDER_SELECT[$dataKependudukan->gender] ?? "",
+            'religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->religion] ?? "",
+            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$dataKependudukan->marital_status] ?? "",
+            'latest_education' => Kependudukan::LATEST_EDUCATION_SELECT[$dataKependudukan->latest_education] ?? "",
+            'occupation' => $dataKependudukan->occupation ?? "",
+            'father_name' => $dataKependudukan->father_name ?? "",
+            'mother_name' => $dataKependudukan->mother_name ?? "",
 
             // Keterangan surat
-            'keterangan_surat' => $request->post('keterangan_surat'),
+            'keterangan_surat' => $request->post('keterangan_surat') ?? "",
 
             // Alamat Orang Tua
-            'alamat_orang_tua' => $request->post('alamat_orang_tua'),
+            'alamat_orang_tua' => $request->post('alamat_orang_tua') ?? "",
+            'original_address' => $request->post('original_address') ?? "",
+            'domicile_address' => $request->post('domicile_address') ?? "",
         ];
 
         // Generate PDf here
@@ -188,34 +196,35 @@ class GeneratePdfApiController extends Controller
             'title' => $this->generateTitle('PENGANTAR_SURAT_NIKAH', $dataKependudukan->fullname),
             'type' => 'PENGANTAR_SURAT_NIKAH',
             'user_id' => $user->id,
+            'file_path' => $this->generateTitle('PENGANTAR_SURAT_NIKAH', $dataKependudukan->fullname),
         ];
         $insertedEntryMail = EntryMail::create($entryMailInsert);
 
         // Memasukkan data detail mail
         $mailDataInsert = [
-            'fullname' => $dataKependudukan->fullname,
-            'nik' => $dataKependudukan->nik,
-            'birthdate' => $dataKependudukan->birthdate,
-            'birthplace' => $dataKependudukan->birthplace,
-            'gender' => $dataKependudukan->gender,
-            'religion' => $dataKependudukan->religion,
-            'marital_status' => $dataKependudukan->marital_status,
-            'latest_education' => $dataKependudukan->latest_education,
-            'occupation' => $dataKependudukan->occupation,
+            'fullname' => $dataKependudukan->fullname ?? "",
+            'nik' => $dataKependudukan->nik ?? "",
+            'birthdate' => $dataKependudukan->birthdate ?? "",
+            'birthplace' => $dataKependudukan->birthplace ?? "",
+            'gender' => $dataKependudukan->gender ?? "",
+            'religion' => $dataKependudukan->religion ?? "",
+            'marital_status' => $dataKependudukan->marital_status ?? "",
+            'latest_education' => $dataKependudukan->latest_education ?? "",
+            'occupation' => $dataKependudukan->occupation ?? "",
             // Ayah
-            'father_name' => $dataKependudukan->father_name,
-            'father_religion' => $dataKependudukan->father_religion,
-            'father_occupation' => $dataKependudukan->father_occupation,
+            'father_name' => $dataKependudukan->father_name ?? "",
+            'father_religion' => $dataKependudukan->father_religion ?? "",
+            'father_occupation' => $dataKependudukan->father_occupation ?? "",
             'father_marital_status' => 'KAWIN',
-            'father_address' => $request->post('father_address'),
+            'father_address' => $request->post('father_address') ?? "",
             // Ibu
-            'mother_name' => $dataKependudukan->mother_name,
-            'mother_religion' => $dataKependudukan->mother_religion,
-            'mother_occupation' => $dataKependudukan->mother_occupation,
+            'mother_name' => $dataKependudukan->mother_name ?? "",
+            'mother_religion' => $dataKependudukan->mother_religion ?? "",
+            'mother_occupation' => $dataKependudukan->mother_occupation ?? "",
             'mother_marital_status' => 'KAWIN',
-            'mother_address' => $request->post('mother_address'),
+            'mother_address' => $request->post('mother_address') ?? "",
             
-            'disease' => $dataKependudukan->disease,
+            'disease' => $dataKependudukan->disease ?? "",
 
             // Add on
             'entry_mail_id' => $insertedEntryMail->id,
@@ -224,25 +233,25 @@ class GeneratePdfApiController extends Controller
 
         // Generate data for pdf here
         $pdfData = [
-            'fullname' => $dataKependudukan->fullname,
-            'gender' => Kependudukan::GENDER_SELECT[$dataKependudukan->gender],
-            'birthdate' => $dataKependudukan->birthdate,
-            'birthplace' => $dataKependudukan->birthplace,
-            'religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->religion],
-            'occupation' => $dataKependudukan->occupation,
-            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$dataKependudukan->marital_status],
+            'fullname' => $dataKependudukan->fullname ?? "",
+            'gender' => Kependudukan::GENDER_SELECT[$dataKependudukan->gender] ?? "",
+            'birthdate' => $dataKependudukan->birthdate ?? "",
+            'birthplace' => $dataKependudukan->birthplace ?? "",
+            'religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->religion] ?? "",
+            'occupation' => $dataKependudukan->occupation ?? "",
+            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$dataKependudukan->marital_status] ?? "",
             // Ayah
-            'father_name' => $dataKependudukan->father_name,
-            'father_religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->father_religion],
-            'father_occupation' => $dataKependudukan->father_occupation,
-            'father_marital_status' => Kependudukan::MARITAL_STATUS_SELECT['KAWIN'],
-            'father_address' => $request->post('father_address'),
+            'father_name' => $dataKependudukan->father_name ?? "",
+            'father_religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->father_religion] ?? "",
+            'father_occupation' => $dataKependudukan->father_occupation ?? "",
+            'father_marital_status' => Kependudukan::MARITAL_STATUS_SELECT['KAWIN'] ?? "",
+            'father_address' => $request->post('father_address') ?? "",
             // Ibu
-            'mother_name' => $dataKependudukan->mother_name,
-            'mother_religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->mother_religion],
-            'mother_occupation' => $dataKependudukan->mother_occupation,
-            'mother_marital_status' => Kependudukan::MARITAL_STATUS_SELECT['KAWIN'],
-            'mother_address' => $request->post('mother_address'),
+            'mother_name' => $dataKependudukan->mother_name ?? "",
+            'mother_religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->mother_religion] ?? "",
+            'mother_occupation' => $dataKependudukan->mother_occupation ?? "",
+            'mother_marital_status' => Kependudukan::MARITAL_STATUS_SELECT['KAWIN'] ?? "",
+            'mother_address' => $request->post('mother_address') ?? "",
         ];
 
         // Generate PDF here

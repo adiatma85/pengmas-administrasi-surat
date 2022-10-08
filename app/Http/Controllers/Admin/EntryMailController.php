@@ -151,23 +151,24 @@ class EntryMailController extends Controller
 
         // Generate data for pdf here
         $pdfData = [
-            'fullname' => $mailData->fullname,
-            'nik' => $mailData->nik,
-            'birthdate' => $mailData->birthdate,
-            'birthplace' => $mailData->birthplace,
-            'gender' => Kependudukan::GENDER_SELECT[$mailData->gender],
-            'religion' => Kependudukan::RELIGION_SELECT[$mailData->religion],
-            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->marital_status],
-            'latest_education' => Kependudukan::LATEST_EDUCATION_SELECT[$mailData->latest_education],
-            'occupation' => $mailData->occupation,
-            'father_name' => $mailData->father_name,
-            'mother_name' => $mailData->mother_name,
+            'fullname' => $mailData->fullname ?? "",
+            'nik' => $mailData->nik ?? "",
+            'birthdate' => $mailData->birthdate ?? "",
+            'birthplace' => $mailData->birthplace ?? "",
+            'gender' => Kependudukan::GENDER_SELECT[$mailData->gender] ?? "",
+            'religion' => Kependudukan::RELIGION_SELECT[$mailData->religion] ?? "",
+            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->marital_status] ?? "",
+            'latest_education' => Kependudukan::LATEST_EDUCATION_SELECT[$mailData->latest_education] ?? "",
+            'occupation' => $mailData->occupation ?? "",
+            'father_name' => $mailData->father_name ?? "",
+            'mother_name' => $mailData->mother_name ?? "",
 
             // Keterangan surat
-            'keterangan_surat' => $mailData->keterangan_surat,
+            'keterangan_surat' => $mailData->keterangan_surat ?? "",
 
             // Alamat Orang Tua
-            'alamat_orang_tua' => $mailData->alamat_orang_tua,
+            'alamat_orang_tua' => $mailData->alamat_orang_tua ?? "",
+            'original_address' => $mailData->original_address ?? "",
 
             // Trigger for penandatanganan
             'ketua_rt_signature' => Auth::user()->img_signature,
@@ -188,20 +189,22 @@ class EntryMailController extends Controller
 
         // Generate data for pdf here
         $pdfData = [
-            'fullname' => $mailData->fullname,
-            'nik' => $mailData->nik,
-            'birthdate' => $mailData->birthdate,
-            'birthplace' => $mailData->birthplace,
-            'gender' => Kependudukan::GENDER_SELECT[$mailData->gender],
-            'religion' => Kependudukan::RELIGION_SELECT[$mailData->religion],
-            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->marital_status],
-            'occupation' => $mailData->occupation,
-            'keterangan_surat' => $mailData->keterangan_surat,
-            'signature' => $base64Signature,
-            'owner_house_name' => $mailData->owner_house_name,
+            'fullname' => $mailData->fullname ?? "",
+            'nik' => $mailData->nik ?? "",
+            'birthdate' => $mailData->birthdate ?? "",
+            'birthplace' => $mailData->birthplace ?? "",
+            'gender' => Kependudukan::GENDER_SELECT[$mailData->gender] ?? "",
+            'religion' => Kependudukan::RELIGION_SELECT[$mailData->religion] ?? "",
+            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->marital_status] ?? "",
+            'occupation' => $mailData->occupation ?? "",
+            'keterangan_surat' => $mailData->keterangan_surat ?? "",
+            // 'signature' => $base64Signature ?? "",
+            'owner_house_name' => $mailData->owner_house_name ?? "",
+            'domicile_address' => $mailData->domicile_address ?? "",
+            'domicile_status' => $mailData->domicile_status ?? "",
 
             // Trigger for penandatanganan
-            'ketua_rt_signature' => Auth::user()->img_signature,
+            'ketua_rt_signature' => Auth::user()->img_signature ?? "",
         ];
 
         // Generate PDF here
@@ -217,25 +220,25 @@ class EntryMailController extends Controller
 
         // Generate data for pdf here
         $pdfData = [
-            'fullname' => $mailData->fullname,
-            'gender' => Kependudukan::GENDER_SELECT[$mailData->gender],
-            'birthdate' => $mailData->birthdate,
-            'birthplace' => $mailData->birthplace,
-            'religion' => Kependudukan::RELIGION_SELECT[$mailData->religion],
-            'occupation' => $mailData->occupation,
-            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->marital_status],
+            'fullname' => $mailData->fullname ?? "",
+            'gender' => Kependudukan::GENDER_SELECT[$mailData->gender] ?? "",
+            'birthdate' => $mailData->birthdate ?? "",
+            'birthplace' => $mailData->birthplace ?? "",
+            'religion' => Kependudukan::RELIGION_SELECT[$mailData->religion] ?? "",
+            'occupation' => $mailData->occupation ?? "",
+            'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->marital_status] ?? "",
             // Ayah
-            'father_name' => $mailData->father_name,
-            'father_religion' => Kependudukan::RELIGION_SELECT[$mailData->father_religion],
-            'father_occupation' => $mailData->father_occupation,
-            'father_marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->father_marital_status],
-            'father_address' => $mailData->father_address,
+            'father_name' => $mailData->father_name ?? "",
+            'father_religion' => Kependudukan::RELIGION_SELECT[$mailData->father_religion] ?? "",
+            'father_occupation' => $mailData->father_occupation ?? "",
+            'father_marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->father_marital_status] ?? "",
+            'father_address' => $mailData->father_address ?? "",
             // Ibu
-            'mother_name' => $mailData->mother_name,
-            'mother_religion' => Kependudukan::RELIGION_SELECT[$mailData->mother_religion],
-            'mother_occupation' => $mailData->mother_occupation,
-            'mother_marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->mother_marital_status],
-            'mother_address' => $mailData->mother_address,
+            'mother_name' => $mailData->mother_name ?? "",
+            'mother_religion' => Kependudukan::RELIGION_SELECT[$mailData->mother_religion] ?? "",
+            'mother_occupation' => $mailData->mother_occupation ?? "",
+            'mother_marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$mailData->mother_marital_status] ?? "",
+            'mother_address' => $mailData->mother_address ?? "",
 
             // Trigger for penandatanganan
             'ketua_rt_signature' => Auth::user()->img_signature,

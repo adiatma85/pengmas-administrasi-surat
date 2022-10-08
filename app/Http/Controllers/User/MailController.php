@@ -34,7 +34,7 @@ class MailController extends Controller
                 $entryMail['file_link'] = $entryMail->mail->original_url;
             } elseif($entryMail->file_path) {
                 $prefixPath = 'storage/pdf/';
-                $entryMail['file_link'] = asset($prefixPath . $entryMail->title . '-' . $entryMail->id . '.pdf');
+                $entryMail['file_link'] = asset($prefixPath . $entryMail->title . '-' . $entryMail->detail->id . '.pdf');
             } else {
                 $entryMail = '#';
             }
