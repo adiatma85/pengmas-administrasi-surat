@@ -76,6 +76,11 @@ class KependudukanController extends Controller
             // Foreign keys
             'family_id' => $insertedFamily->id,
             'user_id' => $registeredUser->id,
+            // Add on
+            'father_religion' => $request->father_religion,
+            'father_occupation' => $request->father_occupation,
+            'mother_religion' => $request->mother_religion,
+            'mother_occupation' => $request->mother_occupation,
         ];
 
         $insertedHeadFam = Kependudukan::create($headFam);
@@ -115,6 +120,11 @@ class KependudukanController extends Controller
                 // Foreign keys
                 'family_id' => $familyId,
                 'user_id' => $registeredUser->id,
+                // Add on
+            'father_religion' => $request->father_religion1[$i],
+            'father_occupation' => $request->father_occupation1[$i],
+            'mother_religion' => $request->mother_religion1[$i],
+            'mother_occupation' => $request->mother_occupation1[$i],
             ];
 
             $insertedHeadFam = Kependudukan::create($anggotaFam);

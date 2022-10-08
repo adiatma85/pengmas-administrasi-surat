@@ -215,12 +215,44 @@
                                 <span class="help-block">{{ trans('cruds.kependudukan.fields.father_name_helper') }}</span>
                             </div>
                             <div class="form-group">
+                                <label class="required" for="father_religion">{{ trans('cruds.kependudukan.fields.father_religion') }}</label>
+                                <input class="form-control {{ $errors->has('father_religion') ? 'is-invalid' : '' }}" type="text" name="father_religion" id="father_religion" value="{{ old('father_religion', '') }}" required>
+                                @if($errors->has('father_religion'))
+                                    <span class="text-danger">{{ $errors->first('father_religion') }}</span>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.kependudukan.fields.father_religion_helper') }}</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="father_occupation">{{ trans('cruds.kependudukan.fields.father_occupation') }}</label>
+                                <input class="form-control {{ $errors->has('father_occupation') ? 'is-invalid' : '' }}" type="text" name="father_occupation" id="father_occupation" value="{{ old('father_occupation', '') }}" required>
+                                @if($errors->has('father_occupation'))
+                                    <span class="text-danger">{{ $errors->first('father_occupation') }}</span>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.kependudukan.fields.father_occupation_helper') }}</span>
+                            </div>
+                            <div class="form-group">
                                 <label class="required" for="mother_name">{{ trans('cruds.kependudukan.fields.mother_name') }}</label>
                                 <input class="form-control {{ $errors->has('mother_name') ? 'is-invalid' : '' }}" type="text" name="mother_name" id="mother_name" value="{{ old('mother_name', '') }}" required>
                                 @if($errors->has('mother_name'))
                                     <span class="text-danger">{{ $errors->first('mother_name') }}</span>
                                 @endif
                                 <span class="help-block">{{ trans('cruds.kependudukan.fields.mother_name_helper') }}</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="mother_religion">{{ trans('cruds.kependudukan.fields.mother_religion') }}</label>
+                                <input class="form-control {{ $errors->has('mother_religion') ? 'is-invalid' : '' }}" type="text" name="mother_religion" id="mother_religion" value="{{ old('mother_religion', '') }}" required>
+                                @if($errors->has('mother_religion'))
+                                    <span class="text-danger">{{ $errors->first('mother_religion') }}</span>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.kependudukan.fields.mother_religion_helper') }}</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="required" for="mother_occupation">{{ trans('cruds.kependudukan.fields.mother_occupation') }}</label>
+                                <input class="form-control {{ $errors->has('mother_occupation') ? 'is-invalid' : '' }}" type="text" name="mother_occupation" id="mother_occupation" value="{{ old('mother_occupation', '') }}" required>
+                                @if($errors->has('mother_occupation'))
+                                    <span class="text-danger">{{ $errors->first('mother_occupation') }}</span>
+                                @endif
+                                <span class="help-block">{{ trans('cruds.kependudukan.fields.mother_occupation_helper') }}</span>
                             </div>
                             <div class="form-group">
                                 <label class="required" for="disease">{{ trans('cruds.kependudukan.fields.disease') }}</label>
@@ -384,9 +416,69 @@
                 fieldTyoe: "text",
             },
             {
+                label: "Agama Ayah",
+                valueName: "father_religion1[]",
+                htmlId: "father_religion1",
+                fieldTyoe: "select",
+                optionValue: [
+                    "ISLAM",
+                    'KRISTEN_PROTESTAN',
+                    'KRISTEN_KATHOLIK',
+                    'HINDHU',
+                    'BUDHA',
+                    'KONGHUCU',
+                    'KEPERCAYAAN_LAIN',
+                ],
+                optionLabel: [
+                    "Islam",
+                    "Kristen Protestan",
+                    'Kristen Katholik',
+                    'Hindhu',
+                    'Budha',
+                    'Konghucu',
+                    'Kepercayaan Lain',
+                ],
+            },
+            {
+                label: "Profesi Ayah",
+                valueName: "father_occupation1[]",
+                htmlId: "father_occupation1",
+                fieldTyoe: "text",
+            },
+            {
                 label: "Nama Ibu",
                 valueName: "mother_name1[]",
                 htmlId: "mother_name1",
+                fieldTyoe: "text",
+            },
+            {
+                label: "Agama Ibu",
+                valueName: "mother_religion1[]",
+                htmlId: "mother_religion1",
+                fieldTyoe: "select",
+                optionValue: [
+                    "ISLAM",
+                    'KRISTEN_PROTESTAN',
+                    'KRISTEN_KATHOLIK',
+                    'HINDHU',
+                    'BUDHA',
+                    'KONGHUCU',
+                    'KEPERCAYAAN_LAIN',
+                ],
+                optionLabel: [
+                    "Islam",
+                    "Kristen Protestan",
+                    'Kristen Katholik',
+                    'Hindhu',
+                    'Budha',
+                    'Konghucu',
+                    'Kepercayaan Lain',
+                ],
+            },
+            {
+                label: "Profesi Ibu",
+                valueName: "mother_occupation1[]",
+                htmlId: "mother_occupation1",
                 fieldTyoe: "text",
             },
             {

@@ -203,15 +203,15 @@ class GeneratePdfApiController extends Controller
             'occupation' => $dataKependudukan->occupation,
             // Ayah
             'father_name' => $dataKependudukan->father_name,
-            'father_religion' => $request->post('father_religion'),
-            'father_occupation' => $request->post('father_occupation'),
-            'mother_marital_status' => $request->post('mother_marital_status'),
+            'father_religion' => $dataKependudukan->father_religion,
+            'father_occupation' => $dataKependudukan->father_occupation,
+            'father_marital_status' => 'KAWIN',
             'father_address' => $request->post('father_address'),
             // Ibu
             'mother_name' => $dataKependudukan->mother_name,
-            'mother_religion' => $request->post('mother_religion'),
-            'mother_occupation' => $request->post('mother_occupation'),
-            'mother_marital_status' => $request->post('mother_marital_status'),
+            'mother_religion' => $dataKependudukan->mother_religion,
+            'mother_occupation' => $dataKependudukan->mother_occupation,
+            'mother_marital_status' => 'KAWIN',
             'mother_address' => $request->post('mother_address'),
             
             'disease' => $dataKependudukan->disease,
@@ -232,15 +232,15 @@ class GeneratePdfApiController extends Controller
             'marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$dataKependudukan->marital_status],
             // Ayah
             'father_name' => $dataKependudukan->father_name,
-            'father_religion' => Kependudukan::RELIGION_SELECT[$request->post('father_religion')],
-            'father_occupation' => $request->post('father_occupation'),
-            'father_marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$request->post('father_marital_status')],
+            'father_religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->father_religion],
+            'father_occupation' => $dataKependudukan->father_occupation,
+            'father_marital_status' => Kependudukan::MARITAL_STATUS_SELECT['KAWIN'],
             'father_address' => $request->post('father_address'),
             // Ibu
             'mother_name' => $dataKependudukan->mother_name,
-            'mother_religion' => Kependudukan::RELIGION_SELECT[$request->post('mother_religion')],
-            'mother_occupation' => $request->post('mother_occupation'),
-            'mother_marital_status' => Kependudukan::MARITAL_STATUS_SELECT[$request->post('mother_marital_status')],
+            'mother_religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->mother_religion],
+            'mother_occupation' => $dataKependudukan->mother_occupation,
+            'mother_marital_status' => Kependudukan::MARITAL_STATUS_SELECT['KAWIN'],
             'mother_address' => $request->post('mother_address'),
         ];
 

@@ -115,7 +115,11 @@ return [
             'kecamatan' => 'Kecamatan',
             'city' => 'Kota/Kabupaten',
             'province' => 'Provinsi',
-            'status_kependudukan' => "Status Kependudukan"
+            'status_kependudukan' => "Status Kependudukan",
+            'father_religion' => "Agama Ayah",
+            'father_occupation' => "Profesi Ayah",
+            'mother_religion' => "Agama Ibu",
+            'mother_occupation' => "Profesi Ibu",
         ],
     ],
     'suratMenyurat' => [

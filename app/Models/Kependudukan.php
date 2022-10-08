@@ -79,6 +79,10 @@ class Kependudukan extends Model
         // Add on
         'user_id',
         'family_id',
+        'father_religion',
+        'father_occupation',
+        'mother_religion',
+        'mother_occupation',
     ];
 
     public function getBirthdateAttribute($value)
