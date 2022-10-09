@@ -53,10 +53,10 @@ class AuthApiController extends Controller
         }
 
         $value = [
-            'name' => $dataKependudukan->name ?? "",
+            'name' => $dataKependudukan->fullname ?? "",
             'nik' => $dataKependudukan->nik ?? "",
-            'address' => $dataKependudukan->address ?? "",
-            'phone_number' => $dataKependudukan->phone_number ?? "",
+            'address' => $dataKependudukan->address ?? "Jl. Srikandi no 7, Malang",
+            'phone_number' => $dataKependudukan->phone_number ?? "081217131455",
             'religion' => Kependudukan::RELIGION_SELECT[$dataKependudukan->religion] ?? "",
             'gender' => Kependudukan::GENDER_SELECT[$dataKependudukan->gender] ?? "",
             'birthplace' => $dataKependudukan->birthplace ?? "",
