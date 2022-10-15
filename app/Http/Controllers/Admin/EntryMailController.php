@@ -169,6 +169,7 @@ class EntryMailController extends Controller
             // Alamat Orang Tua
             'alamat_orang_tua' => $mailData->alamat_orang_tua ?? "",
             'original_address' => $mailData->original_address ?? "",
+            'domicile_address' => $mailData->domicile_address ?? "",
 
             // Trigger for penandatanganan
             'ketua_rt_signature' => Auth::user()->img_signature,
