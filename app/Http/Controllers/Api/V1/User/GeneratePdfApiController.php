@@ -18,6 +18,37 @@ class GeneratePdfApiController extends Controller
 
     use ResponseTrait;
 
+    public function indexSurat(Request $request){
+        $user = User::find($this->extractUserIdFromToken());
+        $entryMails = EntryMail::where('user_id', $user->id)->get();
+        $returnValue = [];
+
+        foreach ($entryMails as $entryMail) {
+            $val = [
+                'title' => $entryMail->title,
+                'type' => $entryMail->type,
+                'status' => $entryMail->status,
+                'created_at' => $entryMail->created_at,
+            ];
+            
+            if ($entryMail->mail) {
+                $val['file_link'] = $entryMail->mail->original_url;
+            } elseif($entryMail->detail){
+                $prefixPath = 'storage/pdf/';
+                $val['file_link'] = asset($prefixPath . $entryMail->title . '-' . $entryMail->detail->id . '.pdf');
+            } elseif($entryMail->file_path) {
+                $prefixPath = 'storage/pdf/';
+                $val['file_link'] = asset($prefixPath . $entryMail->title . '-' . $entryMail->id . '.pdf');
+            } else {
+                $val = '#';
+            }
+
+            array_push($returnValue, $val);
+        }
+
+        return $this->successResponse('success fetching data', $returnValue);
+    }
+
     public function generateSuratDomisili(Request $request){
         $user = User::find($this->extractUserIdFromToken());
         $dataKependudukan = $user->kependudukan;

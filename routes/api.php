@@ -45,6 +45,9 @@ Route::prefix('v1')->as('v1.')->group(function (){
 
         Route::get('/self-information', [ApiAuthController::class, 'selfInformation']);
 
+        // Index Surat
+        Route::get('/surat/index', [ApiUserGeneratePdf::class, 'indexSurat']);
+
         // Generate Surat Domisili
         Route::post('/generate/surat-domisili', [ApiUserGeneratePdf::class, 'generateSuratDomisili']);
 
