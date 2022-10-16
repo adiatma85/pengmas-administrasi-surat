@@ -38,6 +38,9 @@
                             Tautan File
                         </th>
                         <th>
+                            Alasan Penolakan
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -65,6 +68,9 @@
                                     <option value="{{ $item }}">{{ $item }}</option>
                                 @endforeach
                             </select>
+                        </td>
+                        <td>
+                            {{-- <input class="search" type="text" placeholder="{{ trans('global.search') }}"> --}}
                         </td>
                         <td>
                             {{-- <input class="search" type="text" placeholder="{{ trans('global.search') }}"> --}}
@@ -101,6 +107,9 @@
                                 </a>
                             </td>
                             <td>
+                                {{ $entryMail->reject_reason ?? '-'}}    
+                            </td>
+                            <td>
                                 {{-- @can('entry_mail_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.entry-mails.show', $entryMail->id) }}">
                                         {{ trans('global.view') }}
@@ -126,10 +135,37 @@
 
                                 @can('reject_mail_entry')
                                     @if ($entryMail->status == "PROSES")
-                                        <form action="{{ route('admin.entry-mails.mailReject', $entryMail->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                        {{-- <form action="{{ route('admin.entry-mails.mailReject', $entryMail->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="submit" class="btn btn-xs btn-danger" value="Tolak">
-                                        </form>
+                                        </form> --}}
+                                        <div type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#exampleModal-{{$entryMail->id}}">Tolak</div>
+                                        {{-- Modal --}}
+                                        <div class="modal fade" id="exampleModal-{{$entryMail->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">Penolakan Surat</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <form action="{{ route('admin.entry-mails.mailReject', $entryMail->id) }}" method="POST">
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <div class="form-group">
+                                                        <label for="message-text" class="col-form-label">Alasan Penolakan Surat:</label>
+                                                        <textarea class="form-control" id="message-text" name="reject_reason"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                      <button type="submit" class="btn btn-primary">Kirim</button>
+                                                    </div>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
                                     @endif
                                 @endcan
 

@@ -25,10 +25,11 @@ class GeneratePdfApiController extends Controller
 
         foreach ($entryMails as $entryMail) {
             $val = [
-                'title' => $entryMail->title,
-                'type' => $entryMail->type,
-                'status' => $entryMail->status,
-                'created_at' => $entryMail->created_at,
+                'title' => $entryMail->title ?? '',
+                'type' => $entryMail->type ?? '',
+                'status' => $entryMail->status ?? '',
+                'created_at' => $entryMail->created_at ?? '',
+                'reject_reason' => $entryMail->reject_reason ?? '',
             ];
             
             if ($entryMail->mail) {

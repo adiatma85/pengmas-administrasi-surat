@@ -257,6 +257,7 @@ class EntryMailController extends Controller
         $entryMail = EntryMail::where('id', $entryMailId)
             ->update([
                 'status' => 'DITOLAK',
+                'reject_reason' => $request->post('reject_reason', ""),
             ]);
         
         return back();

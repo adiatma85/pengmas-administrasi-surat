@@ -52,6 +52,7 @@ class EntryMail extends Model implements HasMedia
         // Add on
         'user_id',
         'file_path',
+        'reject_reason',
     ];
 
     public function registerMediaConversions(Media $media = null): void
