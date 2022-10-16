@@ -264,50 +264,7 @@
             // Surat pengantar nikah
             function appendSuratPengantarNikah() {
                 let arrayAppendElement = [
-                    {
-                        label: "Agama Ayah",
-                        valueName: "father_religion",
-                        htmlId: "father_religion",
-                        fieldTyoe: "select",
-                        optionValue: [
-                            "ISLAM",
-                            'KRISTEN_PROTESTAN',
-                            'KRISTEN_KATHOLIK',
-                            'HINDHU',
-                            'BUDHA',
-                            'KONGHUCU',
-                            'KEPERCAYAAN_LAIN',
-                        ],
-                        optionLabel: [
-                            "Islam",
-                            "Kristen Protestan",
-                            'Kristen Katholik',
-                            'Hindhu',
-                            'Budha',
-                            'Konghucu',
-                            'Kepercayaan Lain',
-                        ],
-                    },
-                    {
-                        label: "Pekerjaan Ayah",
-                        valueName: "father_occupation",
-                        htmlId: "father_occupation",
-                        fieldTyoe: "text",
-                    },
-                    {
-                        label: "Status Perkawinan Ayah",
-                        valueName: "father_marital_status",
-                        htmlId: "father_marital_status",
-                        fieldTyoe: "select",
-                        optionValue: [
-                            "KAWIN",
-                            'BELUM_KAWIN',
-                        ],
-                        optionLabel: [
-                            "Kawin",
-                            "Belum Kawin",
-                        ],
-                    },
+                    // Ayah
                     {
                         label: "Alamat Domisili Ayah",
                         valueName: "father_address",
@@ -316,50 +273,6 @@
                     },
 
                     // Ibu
-                    {
-                        label: "Agama Ibu",
-                        valueName: "mother_religion",
-                        htmlId: "mother_religion",
-                        fieldTyoe: "select",
-                        optionValue: [
-                            "ISLAM",
-                            'KRISTEN_PROTESTAN',
-                            'KRISTEN_KATHOLIK',
-                            'HINDHU',
-                            'BUDHA',
-                            'KONGHUCU',
-                            'KEPERCAYAAN_LAIN',
-                        ],
-                        optionLabel: [
-                            "Islam",
-                            "Kristen Protestan",
-                            'Kristen Katholik',
-                            'Hindhu',
-                            'Budha',
-                            'Konghucu',
-                            'Kepercayaan Lain',
-                        ],
-                    },
-                    {
-                        label: "Pekerjaan Ibu",
-                        valueName: "mother_occupation",
-                        htmlId: "mother_occupation",
-                        fieldTyoe: "text",
-                    },
-                    {
-                        label: "Status Perkawinan Ibu",
-                        valueName: "mother_marital_status",
-                        htmlId: "mother_marital_status",
-                        fieldTyoe: "select",
-                        optionValue: [
-                            "KAWIN",
-                            'BELUM_KAWIN',
-                        ],
-                        optionLabel: [
-                            "Kawin",
-                            "Belum Kawin",
-                        ],
-                    },
                     {
                         label: "Alamat Domisili Ibu",
                         valueName: "mother_address",

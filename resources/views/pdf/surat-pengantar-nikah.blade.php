@@ -32,9 +32,9 @@
     <table align="center">
         <tr>
             <td align="center">
-                <font size="6">Surat Pengantar Nikah</font><br>
+                <font size="5">Surat Pengantar Nikah</font><br>
                  <!-- {{-- Need to fix down this  --}} -->
-                <font size="4">Surat No: /RT 04/RW 12/ /20</font><br>
+                <font size="3">Surat No: /RT 04/RW 12/ /20</font><br>
             </td>
         </tr>
         <tr>
@@ -253,7 +253,7 @@
     </table>
 
     <!-- {{-- Content surat bagian tanda tangan --}} -->
-    <table align="center" border="0" style="margin-top: 1em; margin-bottom: 3em;">
+    <table align="center" border="0">
         <tr>
             <td align="center" width="250">Pemohon</td>
             <td align="center" width="250">Mengetahui</td>
