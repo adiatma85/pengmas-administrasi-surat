@@ -19,7 +19,8 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    // 'allowed_origins' => ['*'],
+    'allowed_origins' => ['https://webrt-git-dev-satriobayu.vercel.app'],
 
     'allowed_origins_patterns' => [],
 

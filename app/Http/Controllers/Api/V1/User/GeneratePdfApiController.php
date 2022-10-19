@@ -34,12 +34,12 @@ class GeneratePdfApiController extends Controller
             
             if ($entryMail->mail) {
                 $val['file_link'] = $entryMail->mail->original_url;
-            } elseif($entryMail->detail){
+            } elseif ($entryMail->detail){
                 $prefixPath = 'storage/pdf/';
                 $val['file_link'] = asset($prefixPath . $entryMail->title . '-' . $entryMail->id . '.pdf');
-            } elseif($entryMail->file_path) {
-                $prefixPath = 'storage/pdf/';
-                $val['file_link'] = asset($prefixPath . $entryMail->title . '-' . $entryMail->id . '.pdf');
+            } elseif ($entryMail->file_path) {
+                // $prefixPath = 'storage/pdf/';
+                $val['file_link'] = $entryMail->file_path;
             } else {
                 $val = '#';
             }
