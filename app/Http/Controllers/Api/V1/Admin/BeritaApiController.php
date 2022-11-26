@@ -18,7 +18,7 @@ class BeritaApiController extends Controller
 
     public function index()
     {
-        abort_if(Gate::denies('beritum_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('beritum_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return new BeritumResource(Beritum::all());
     }
@@ -38,7 +38,7 @@ class BeritaApiController extends Controller
 
     public function show(Beritum $beritum)
     {
-        abort_if(Gate::denies('beritum_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('beritum_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return new BeritumResource($beritum);
     }
@@ -65,7 +65,7 @@ class BeritaApiController extends Controller
 
     public function destroy(Beritum $beritum)
     {
-        abort_if(Gate::denies('beritum_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('beritum_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $beritum->delete();
 

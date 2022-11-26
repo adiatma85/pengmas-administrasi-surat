@@ -389,5 +389,5 @@ class GeneratePdfApiController extends Controller
         $base64ImgString = "data:image/jpeg;base64," . base64_encode($imageContents);
         return $base64ImgString;
         
-}
+    }
 }

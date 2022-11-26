@@ -19,8 +19,11 @@ class Kependudukan extends Model
     ];
 
     public const MARITAL_STATUS_SELECT = [
-        'KAWIN'       => 'Kawin',
-        'BELUM_KAWIN' => 'Belum Kawin',
+        'KAWIN'             => 'Kawin',
+        'KAWIN_TERCATAT'    => 'Kawin Tercatat',
+        'BELUM_KAWIN'       => 'Belum Kawin',
+        'CERAI_HIDUP'       => 'Cerai Hidup',
+        'CERAI_MATI'        => 'Cerai Mati',
     ];
 
     public const RELIGION_SELECT = [
@@ -34,14 +37,14 @@ class Kependudukan extends Model
     ];
 
     public const LATEST_EDUCATION_SELECT = [
-        'SD'               => 'SD/Sederajat',
-        'SLTP'             => 'SMP/SLTP Sederajat',
-        'SLTA'             => 'SMA/SLTA Sederajat',
-        'D3'               => 'Diploma III',
-        'S1'               => 'Diploma IV / S1 Sederajat',
-        'S2'               => 'S2',
-        'S3'               => 'S3',
-        'TIDAK_BERSEKOLAH' => 'Tidak Bersekolah',
+        'SD'               => 'Tamat SD/Sederajat',
+        'SLTP'             => 'Tamat SMP/SLTP Sederajat',
+        'SLTA'             => 'Tamat SMA/SLTA Sederajat',
+        'D3'               => 'Akademi/Diploma-III/Sarjana Muda',
+        'S1'               => 'Diploma IV/Strata-I Sederajat',
+        'S2'               => 'Strata-II',
+        'S3'               => 'Strata-III',
+        'TIDAK_BERSEKOLAH' => 'Tidak/Belum Bersekolah',
     ];
 
     public const STATUS_KEPENDUDUKAN_SELECT = [

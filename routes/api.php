@@ -21,46 +21,33 @@ use App\Http\Controllers\Api\V1\User\PengumumanApiController as ApiUserPengumuma
 use App\Http\Controllers\Api\V1\User\RuleApiController as ApiUserPeraturanController;
 use App\Http\Controllers\Api\V1\User\GeneratePdfApiController as ApiUserGeneratePdf;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
+// Removed 'auth.sanctum' for testing the performance testing
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => []], function () {
+    // Permissions
+    Route::apiResource('permissions', 'PermissionsApiController');
 
-Route::prefix('v1')->as('v1.')->group(function (){
+    // Roles
+    Route::apiResource('roles', 'RolesApiController');
 
-    // Login
-    Route::post('/auth/login', [ApiAuthController::class, 'login']);
+    // Users
+    Route::apiResource('users', 'UsersApiController');
+
+    // Kependudukan
+    Route::apiResource('kependudukans', 'KependudukanApiController');
+
+    // Entry Mail
+    Route::post('entry-mails/media', 'EntryMailApiController@storeMedia')->name('entry-mails.storeMedia');
+    Route::apiResource('entry-mails', 'EntryMailApiController');
 
     // Berita
-    Route::apiResource('berita', ApiUserBeritaController::class);
+    Route::post('berita/media', 'BeritaApiController@storeMedia')->name('berita.storeMedia');
+    Route::apiResource('berita', 'BeritaApiController');
 
     // Pengumuman
-    Route::apiResource('pengumuman', ApiUserPengumumanController::class);
+    Route::post('pengumumen/media', 'PengumumanApiController@storeMedia')->name('pengumumen.storeMedia');
+    Route::apiResource('pengumumen', 'PengumumanApiController');
 
-    // Peraturan
-    Route::apiResource('peraturan', ApiUserPeraturanController::class);
-
-    // Group with sanctum
-    Route::middleware('auth:sanctum')->group(function () {
-
-        Route::get('/self-information', [ApiAuthController::class, 'selfInformation']);
-
-        // Index Surat
-        Route::get('/surat/index', [ApiUserGeneratePdf::class, 'indexSurat']);
-
-        // Generate Surat Domisili
-        Route::post('/generate/surat-domisili', [ApiUserGeneratePdf::class, 'generateSuratDomisili']);
-
-        // Upload Surat Domisili
-        Route::post('/upload/surat-domisili', [ApiUserGeneratePdf::class, 'uploadSuratDomisili']);
-
-        // Generate Surat Pengantar Nikah
-        Route::post('/generate/surat-pengantar-nikah', [ApiUserGeneratePdf::class, 'generateSuratPengantarNikah']);
-
-        // Generate Surat Keterangan Belum Menikah
-        Route::post('/generate/surat-keterangan-belum-nikah', [ApiUserGeneratePdf::class, 'generateSuratKeteranganBelumMenikah']);
-
-        // Generate Surat Persetujuan Tetangga
-        Route::post('/generate/surat-persetujuan-tetangga', [ApiUserGeneratePdf::class, 'generateSuratPersetujuanTetangga']);
-    });
+    // Rule
+    Route::apiResource('rules', 'RuleApiController');
 });
