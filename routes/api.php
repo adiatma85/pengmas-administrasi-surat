@@ -14,40 +14,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Controller Import (User)
-use App\Http\Controllers\Api\V1\User\AuthApiController as ApiAuthController;
-use App\Http\Controllers\Api\V1\User\BeritaApiController as ApiUserBeritaController;
-use App\Http\Controllers\Api\V1\User\PengumumanApiController as ApiUserPengumumanController;
-use App\Http\Controllers\Api\V1\User\RuleApiController as ApiUserPeraturanController;
-use App\Http\Controllers\Api\V1\User\GeneratePdfApiController as ApiUserGeneratePdf;
+// Controller Import (Admin)
+use App\Http\Controllers\Api\V1\Admin\PermissionsApiController as ApiAdminPermissionController;
+use App\Http\Controllers\Api\V1\Admin\RolesApiController as ApiAdminRoleController;
+use App\Http\Controllers\Api\V1\Admin\BeritaApiController as ApiAdminBeritaController;
+use App\Http\Controllers\Api\V1\Admin\UsersApiController as ApiAdminUserController;
+use App\Http\Controllers\Api\V1\Admin\KependudukanApiController as ApiAdminKependudukanController;
+use App\Http\Controllers\Api\V1\Admin\EntryMailApiController as ApiAdminEntryMailController;
+use App\Http\Controllers\Api\V1\Admin\PengumumanApiController as ApiAdminPengumumanController;
+use App\Http\Controllers\Api\V1\Admin\RuleApiController as ApiAdminRuleController;
+
 
 
 // Removed 'auth.sanctum' for testing the performance testing
-Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => []], function () {
+Route::prefix('v1')->group(function (){
     // Permissions
-    Route::apiResource('permissions', 'PermissionsApiController');
+    Route::apiResource('permissions', ApiAdminPermissionController::class);
 
     // Roles
-    Route::apiResource('roles', 'RolesApiController');
+    Route::apiResource('roles', ApiAdminRoleController::class);
 
     // Users
-    Route::apiResource('users', 'UsersApiController');
+    Route::apiResource('users', ApiAdminUserController::class);
 
     // Kependudukan
-    Route::apiResource('kependudukans', 'KependudukanApiController');
+    Route::apiResource('kependudukans', ApiAdminKependudukanController::class);
 
     // Entry Mail
-    Route::post('entry-mails/media', 'EntryMailApiController@storeMedia')->name('entry-mails.storeMedia');
-    Route::apiResource('entry-mails', 'EntryMailApiController');
+    Route::apiResource('entry-mails', ApiAdminEntryMailController::class);
 
     // Berita
-    Route::post('berita/media', 'BeritaApiController@storeMedia')->name('berita.storeMedia');
-    Route::apiResource('berita', 'BeritaApiController');
+    Route::apiResource('berita', ApiAdminBeritaController::class);
 
     // Pengumuman
-    Route::post('pengumumen/media', 'PengumumanApiController@storeMedia')->name('pengumumen.storeMedia');
-    Route::apiResource('pengumumen', 'PengumumanApiController');
+    Route::apiResource('pengumuman', ApiAdminPengumumanController::class);
 
     // Rule
-    Route::apiResource('rules', 'RuleApiController');
+    Route::apiResource('rules', ApiAdminRuleController::class);
 });

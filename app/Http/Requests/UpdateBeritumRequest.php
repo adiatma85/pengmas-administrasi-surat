@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class UpdateBeritumRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('beritum_edit');
-    }
+    // public function authorize()
+    // {
+    //     return Gate::allows('beritum_edit');
+    // }
 
     public function rules()
     {

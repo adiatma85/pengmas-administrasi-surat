@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class StoreKependudukanRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('kependudukan_create');
-    }
+    // public function authorize()
+    // {
+    //     return Gate::allows('kependudukan_create');
+    // }
 
     public function rules()
     {

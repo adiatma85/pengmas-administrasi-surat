@@ -10,14 +10,19 @@ use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\Traits\ResponseTrait;
 
 class UsersApiController extends Controller
 {
+
+    use ResponseTrait;
+
     public function index()
     {
         // abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new UserResource(User::with(['roles'])->get());
+        $resource = new UserResource(User::with(['roles'])->get());
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function store(StoreUserRequest $request)
@@ -25,16 +30,16 @@ class UsersApiController extends Controller
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
 
-        return (new UserResource($user))
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        $resource = new UserResource($user);
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function show(User $user)
     {
         // abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new UserResource($user->load(['roles']));
+        $resource = new UserResource($user->load(['roles']));
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function update(UpdateUserRequest $request, User $user)
@@ -42,9 +47,8 @@ class UsersApiController extends Controller
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
 
-        return (new UserResource($user))
-            ->response()
-            ->setStatusCode(Response::HTTP_ACCEPTED);
+        $resource = new UserResource($user);
+        return $this->successResponse("success updating data", $resource);
     }
 
     public function destroy(User $user)

@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class StoreUserRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('user_create');
-    }
+    // public function authorize()
+    // {
+    //     return Gate::allows('user_create');
+    // }
 
     public function rules()
     {

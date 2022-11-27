@@ -9,57 +9,57 @@ use Illuminate\Http\Response;
 
 class UpdateKependudukanRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('kependudukan_edit');
-    }
+    // public function authorize()
+    // {
+    //     return Gate::allows('kependudukan_edit');
+    // }
 
     public function rules()
     {
         return [
             'fullname' => [
                 'string',
-                'required',
+                // 'required',
             ],
             'nik' => [
                 'string',
-                'required',
+                // 'required',
             ],
             'birthdate' => [
-                'required',
+                // 'required',
                 'date_format:' . config('panel.date_format'),
             ],
             'birthplace' => [
                 'string',
-                'required',
+                // 'required',
             ],
             'gender' => [
-                'required',
+                // 'required',
             ],
             'religion' => [
-                'required',
+                // 'required',
             ],
             'marital_status' => [
-                'required',
+                // 'required',
             ],
             'latest_education' => [
-                'required',
+                // 'required',
             ],
             'occupation' => [
                 'string',
-                'required',
+                // 'required',
             ],
             'father_name' => [
                 'string',
-                'required',
+                // 'required',
             ],
             'mother_name' => [
                 'string',
-                'required',
+                // 'required',
             ],
             'disease' => [
                 'string',
-                'required',
+                // 'required',
             ],
         ];
     }

@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class StoreEntryMailRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('entry_mail_create');
-    }
+    // public function authorize()
+    // {
+    //     return Gate::allows('entry_mail_create');
+    // }
 
     public function rules()
     {

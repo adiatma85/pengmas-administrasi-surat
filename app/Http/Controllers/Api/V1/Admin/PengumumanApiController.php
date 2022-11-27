@@ -11,16 +11,19 @@ use App\Models\Pengumuman;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\Traits\ResponseTrait;
 
 class PengumumanApiController extends Controller
 {
     use MediaUploadingTrait;
+    use ResponseTrait;
 
     public function index()
     {
         // abort_if(Gate::denies('pengumuman_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PengumumanResource(Pengumuman::all());
+        $resource = new PengumumanResource(Pengumuman::all());
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function store(StorePengumumanRequest $request)
@@ -31,16 +34,16 @@ class PengumumanApiController extends Controller
             $pengumuman->addMedia(storage_path('tmp/uploads/' . basename($request->input('image'))))->toMediaCollection('image');
         }
 
-        return (new PengumumanResource($pengumuman))
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        $resource = new PengumumanResource($pengumuman);
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function show(Pengumuman $pengumuman)
     {
         // abort_if(Gate::denies('pengumuman_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PengumumanResource($pengumuman);
+        $resource = new PengumumanResource($pengumuman);
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function update(UpdatePengumumanRequest $request, Pengumuman $pengumuman)
@@ -58,9 +61,8 @@ class PengumumanApiController extends Controller
             $pengumuman->image->delete();
         }
 
-        return (new PengumumanResource($pengumuman))
-            ->response()
-            ->setStatusCode(Response::HTTP_ACCEPTED);
+        $resource = new PengumumanResource($pengumuman);
+        return $this->successResponse("success updating data", $resource);
     }
 
     public function destroy(Pengumuman $pengumuman)

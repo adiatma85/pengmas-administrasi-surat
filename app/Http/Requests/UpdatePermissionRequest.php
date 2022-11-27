@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class UpdatePermissionRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('permission_edit');
-    }
+    // public function authorize()
+    // {
+    //     return Gate::allows('permission_edit');
+    // }
 
     public function rules()
     {

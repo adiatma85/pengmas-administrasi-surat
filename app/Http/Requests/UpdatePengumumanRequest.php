@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class UpdatePengumumanRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('pengumuman_edit');
-    }
+    // public function authorize()
+    // {
+    //     return Gate::allows('pengumuman_edit');
+    // }
 
     public function rules()
     {

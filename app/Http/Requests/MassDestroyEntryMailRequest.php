@@ -11,9 +11,9 @@ class MassDestroyEntryMailRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(Gate::denies('entry_mail_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('entry_mail_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return true;
+        // return true;
     }
 
     public function rules()

@@ -10,39 +10,43 @@ use App\Models\Permission;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\Traits\ResponseTrait;
 
 class PermissionsApiController extends Controller
 {
+
+    use ResponseTrait;
+
     public function index()
     {
         // abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PermissionResource(Permission::all());
+        $resource = new PermissionResource(Permission::all());
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function store(StorePermissionRequest $request)
     {
         $permission = Permission::create($request->all());
 
-        return (new PermissionResource($permission))
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        $resource = new PermissionResource($permission);
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function show(Permission $permission)
     {
         // abort_if(Gate::denies('permission_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PermissionResource($permission);
+        $resource = new PermissionResource($permission);
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function update(UpdatePermissionRequest $request, Permission $permission)
     {
         $permission->update($request->all());
 
-        return (new PermissionResource($permission))
-            ->response()
-            ->setStatusCode(Response::HTTP_ACCEPTED);
+        $resource = new PermissionResource($permission);
+        return $this->successResponse("success updating data", $resource);
     }
 
     public function destroy(Permission $permission)

@@ -11,16 +11,19 @@ use App\Models\EntryMail;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\Traits\ResponseTrait;
 
 class EntryMailApiController extends Controller
 {
     use MediaUploadingTrait;
+    use ResponseTrait;
 
     public function index()
     {
         // abort_if(Gate::denies('entry_mail_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new EntryMailResource(EntryMail::all());
+        $resource = new EntryMailResource(EntryMail::all());
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function store(StoreEntryMailRequest $request)
@@ -31,16 +34,16 @@ class EntryMailApiController extends Controller
             $entryMail->addMedia(storage_path('tmp/uploads/' . basename($request->input('mail'))))->toMediaCollection('mail');
         }
 
-        return (new EntryMailResource($entryMail))
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        $resource = new EntryMailResource($entryMail);
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function show(EntryMail $entryMail)
     {
         // abort_if(Gate::denies('entry_mail_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new EntryMailResource($entryMail);
+        $resource = new EntryMailResource($entryMail);
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function update(UpdateEntryMailRequest $request, EntryMail $entryMail)
@@ -58,9 +61,8 @@ class EntryMailApiController extends Controller
             $entryMail->mail->delete();
         }
 
-        return (new EntryMailResource($entryMail))
-            ->response()
-            ->setStatusCode(Response::HTTP_ACCEPTED);
+        $resource = new EntryMailResource($entryMail);
+        return $this->successResponse("success updating data", $resource);
     }
 
     public function destroy(EntryMail $entryMail)

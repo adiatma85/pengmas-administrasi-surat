@@ -10,14 +10,19 @@ use App\Models\Role;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\Traits\ResponseTrait;
 
 class RolesApiController extends Controller
 {
+
+    use ResponseTrait;
+
     public function index()
     {
         // abort_if(Gate::denies('role_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new RoleResource(Role::with(['permissions'])->get());
+        $resource = new RoleResource(Role::with(['permissions'])->get());
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function store(StoreRoleRequest $request)
@@ -25,16 +30,16 @@ class RolesApiController extends Controller
         $role = Role::create($request->all());
         $role->permissions()->sync($request->input('permissions', []));
 
-        return (new RoleResource($role))
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        $resource = new RoleResource($role);
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function show(Role $role)
     {
         // abort_if(Gate::denies('role_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new RoleResource($role->load(['permissions']));
+        $resource = new RoleResource($role->load(['permissions']));
+        return $this->successResponse("success fetching data", $resource);
     }
 
     public function update(UpdateRoleRequest $request, Role $role)
@@ -42,9 +47,8 @@ class RolesApiController extends Controller
         $role->update($request->all());
         $role->permissions()->sync($request->input('permissions', []));
 
-        return (new RoleResource($role))
-            ->response()
-            ->setStatusCode(Response::HTTP_ACCEPTED);
+        $resource = new RoleResource($role);
+        return $this->successResponse("success updating data", $resource);
     }
 
     public function destroy(Role $role)

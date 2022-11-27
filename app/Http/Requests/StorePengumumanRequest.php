@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class StorePengumumanRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('pengumuman_create');
-    }
+    // public function authorize()
+    // {
+    //     return Gate::allows('pengumuman_create');
+    // }
 
     public function rules()
     {

@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class UpdateTagRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('tag_edit');
-    }
+    // public function authorize()
+    // {
+    //     return Gate::allows('tag_edit');
+    // }
 
     public function rules()
     {

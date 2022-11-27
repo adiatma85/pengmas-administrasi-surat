@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class UpdateEntryMailRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('entry_mail_edit');
-    }
+    // public function authorize()
+    // {
+    //     return Gate::allows('entry_mail_edit');
+    // }
 
     public function rules()
     {
@@ -22,7 +22,8 @@ class UpdateEntryMailRequest extends FormRequest
                 'nullable',
             ],
             'type' => [
-                'required',
+                'string',
+                // 'required',
             ],
         ];
     }

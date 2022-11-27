@@ -9,12 +9,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MassDestroyRuleRequest extends FormRequest
 {
-    public function authorize()
-    {
-        abort_if(Gate::denies('rule_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    // public function authorize()
+    // {
+    //     abort_if(Gate::denies('rule_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return true;
-    }
+    //     return true;
+    // }
 
     public function rules()
     {

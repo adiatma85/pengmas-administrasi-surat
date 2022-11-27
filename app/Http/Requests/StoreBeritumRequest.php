@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class StoreBeritumRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('beritum_create');
-    }
+    // public function authorize()
+    // {
+    //     // return Gate::allows('beritum_create');
+    // }
 
     public function rules()
     {

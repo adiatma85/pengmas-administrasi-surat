@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class StoreRoleRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('role_create');
-    }
+    // public function authorize()
+    // {
+    //     return Gate::allows('role_create');
+    // }
 
     public function rules()
     {

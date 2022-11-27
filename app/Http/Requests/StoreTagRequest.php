@@ -9,10 +9,10 @@ use Illuminate\Http\Response;
 
 class StoreTagRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return Gate::allows('tag_create');
-    }
+    // public function authorize()
+    // {
+    //     return Gate::allows('tag_create');
+    // }
 
     public function rules()
     {

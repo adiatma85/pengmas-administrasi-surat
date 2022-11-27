@@ -14,12 +14,12 @@ class UpdateProfileRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
-        abort_if(Gate::denies('profile_password_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    // public function authorize()
+    // {
+    //     abort_if(Gate::denies('profile_password_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return true;
-    }
+    //     return true;
+    // }
 
     /**
      * Get the validation rules that apply to the request.

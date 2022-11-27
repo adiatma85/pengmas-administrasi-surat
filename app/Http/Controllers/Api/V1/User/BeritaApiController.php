@@ -5,26 +5,14 @@ namespace App\Http\Controllers\Api\V1\User;
 use App\Http\Controllers\Controller;
 use App\Models\Beritum;
 use App\Http\Controllers\Traits\ResponseTrait;
+use App\Http\Requests\StoreBeritumRequest;
+use App\Http\Requests\UpdateBeritumRequest;
+use App\Http\Resources\BeritumResource;
 
 class BeritaApiController extends Controller
 {
 
     use ResponseTrait;
-
-     /**
-     * @OA\Get(
-     *      path="/berita",
-     *      operationId="getProjectsList",
-     *      tags={"Berita"},
-     *      summary="Get list of Berita",
-     *      description="Returns list of Berita",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Berita")
-     *       ),
-     *     )
-     */
 
     public function index()
     {
@@ -70,5 +58,5 @@ class BeritaApiController extends Controller
 
         return $this->successResponse("success fetching data", $returnValue);
     }
-
+    
 }
