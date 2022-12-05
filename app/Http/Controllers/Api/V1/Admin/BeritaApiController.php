@@ -65,11 +65,14 @@ class BeritaApiController extends Controller
         return $this->successResponse("success updating data", $resource);
     }
 
-    public function destroy(Beritum $beritum)
+    public function destroy($beritaId)
     {
         // abort_if(Gate::denies('beritum_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $beritum->delete();
+        // $beritum->delete();
+
+        // Random delete
+        Beritum::inRandomOrder()->limit(1)->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

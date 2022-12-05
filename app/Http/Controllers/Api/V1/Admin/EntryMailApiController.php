@@ -65,11 +65,13 @@ class EntryMailApiController extends Controller
         return $this->successResponse("success updating data", $resource);
     }
 
-    public function destroy(EntryMail $entryMail)
+    public function destroy($entryMailIdl)
     {
         // abort_if(Gate::denies('entry_mail_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $entryMail->delete();
+        // $entryMail->delete();
+        // Random delete
+        EntryMail::inRandomOrder()->limit(1)->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

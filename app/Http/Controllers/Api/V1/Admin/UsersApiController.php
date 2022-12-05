@@ -51,11 +51,13 @@ class UsersApiController extends Controller
         return $this->successResponse("success updating data", $resource);
     }
 
-    public function destroy(User $user)
+    public function destroy($userId)
     {
         // abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->delete();
+        // $user->delete();
+        // Random delete
+        User::inRandomOrder()->limit(1)->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

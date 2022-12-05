@@ -49,11 +49,13 @@ class KependudukanApiController extends Controller
         return $this->successResponse("success updating data", $resource);
     }
 
-    public function destroy(Kependudukan $kependudukan)
+    public function destroy($kependudukanId)
     {
         // abort_if(Gate::denies('kependudukan_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $kependudukan->delete();
+        // $kependudukan->delete();
+        // Random delete
+        Kependudukan::inRandomOrder()->limit(1)->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

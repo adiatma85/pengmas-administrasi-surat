@@ -65,11 +65,13 @@ class PengumumanApiController extends Controller
         return $this->successResponse("success updating data", $resource);
     }
 
-    public function destroy(Pengumuman $pengumuman)
+    public function destroy($pengumumanId)
     {
         // abort_if(Gate::denies('pengumuman_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $pengumuman->delete();
+        // $pengumuman->delete();
+        // Random delete
+        Pengumuman::inRandomOrder()->limit(1)->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

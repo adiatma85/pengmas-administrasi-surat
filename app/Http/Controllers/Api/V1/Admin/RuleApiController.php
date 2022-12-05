@@ -49,11 +49,13 @@ class RuleApiController extends Controller
         return $this->successResponse("success updating data", $resource);
     }
 
-    public function destroy(Rule $rule)
+    public function destroy($ruleId)
     {
         // abort_if(Gate::denies('rule_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $rule->delete();
+        // $rule->delete();
+        // Random delete
+        Rule::inRandomOrder()->limit(1)->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

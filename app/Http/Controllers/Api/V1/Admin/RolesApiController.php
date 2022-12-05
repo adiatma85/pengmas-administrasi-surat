@@ -51,11 +51,13 @@ class RolesApiController extends Controller
         return $this->successResponse("success updating data", $resource);
     }
 
-    public function destroy(Role $role)
+    public function destroy($roleId)
     {
         // abort_if(Gate::denies('role_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $role->delete();
+        // $role->delete();
+        // Random delete
+        Role::inRandomOrder()->limit(1)->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }

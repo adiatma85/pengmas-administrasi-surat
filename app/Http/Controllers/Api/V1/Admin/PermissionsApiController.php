@@ -49,11 +49,13 @@ class PermissionsApiController extends Controller
         return $this->successResponse("success updating data", $resource);
     }
 
-    public function destroy(Permission $permission)
+    public function destroy($permissionId)
     {
         // abort_if(Gate::denies('permission_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $permission->delete();
+        // $permission->delete();
+        // Random delete
+        Permission::inRandomOrder()->limit(1)->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
