@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-strecth
+FROM php:8.1--fpm-stretch
 
 # Enable zip
 RUN apt-get install -y \
