@@ -1,8 +1,8 @@
-FROM php:8.1-fpm-alpine
+FROM php:8.1-fpm-strecth
 
 # Enable zip
-RUN apk add \
-        libzip \
+RUN apt-get install -y \
+        libzip-dev \
         zip \
   && docker-php-ext-install zip
 
