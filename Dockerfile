@@ -1,5 +1,9 @@
 FROM php:8.1-fpm-alpine
 
+RUN docker-php-source extract &&\
+    docker-php-ext-enable zip &&\
+    docker-php-ext-enable exif
+
 RUN apk add --no-cache nginx wget
 
 RUN mkdir -p /run/nginx
