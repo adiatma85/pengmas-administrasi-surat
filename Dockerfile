@@ -1,7 +1,10 @@
 FROM php:8.1-fpm-alpine
 
 # Enable zip
-RUN docker-php-ext-install zip
+RUN apk add \
+        libzip \
+        zip \
+  && docker-php-ext-install zip
 
 # Enable exif
 RUN docker-php-ext-install exif
