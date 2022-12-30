@@ -1,8 +1,13 @@
 FROM php:8.1-fpm-alpine
 
-RUN docker-php-source extract &&\
-    docker-php-ext-enable zip &&\
-    docker-php-ext-enable exif
+# Enable zip
+RUN apt-get install -y \
+        libzip-dev \
+        zip \
+  && docker-php-ext-install zip
+
+# Enable exif
+RUN docker-php-ext-install exif
 
 RUN apk add --no-cache nginx wget
 
