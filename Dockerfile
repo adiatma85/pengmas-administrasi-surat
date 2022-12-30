@@ -1,9 +1,8 @@
-FROM php:8.1--fpm-stretch
+FROM php:8.1.11-fpm-alpine
 
 # Enable zip
-RUN apt-get install -y \
-        libzip-dev \
-        zip \
+RUN apk add --no-cache zip libzip-dev \
+  && docker-php-ext-configure zip \
   && docker-php-ext-install zip
 
 # Enable exif
