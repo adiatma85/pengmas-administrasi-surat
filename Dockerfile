@@ -8,6 +8,9 @@ RUN apk add --no-cache zip libzip-dev \
 # Enable exif
 RUN docker-php-ext-install exif
 
+# Enable PDO and PDO MYSQL
+RUN docker-php-ext-install pdo pdo_mysql
+
 RUN apk add --no-cache nginx wget
 
 RUN mkdir -p /run/nginx
